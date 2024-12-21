@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
 import { FloatingDock } from "@/components/ui/floating-dock";
-import { FaHome } from "react-icons/fa";
+import { items } from "@/constants";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -20,8 +20,6 @@ export const metadata: Metadata = {
 };
 
 
-
-
 export default function RootLayout({
   children,
 }: Readonly<{
@@ -32,12 +30,8 @@ export default function RootLayout({
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
-        <FloatingDock items={[{
-          title: "Home",
-          href: "/",
-          icon: <FaHome />,
-        },]} />
-        <div className="min-h-screen bg-background text-foreground pt-[20px]">
+        <div className="min-h-screen bg-background text-foreground">
+          <div className="md:mt-20"><FloatingDock items={items} desktopClassName="w-fit bg-card" mobileClassName="w-fit p-5" /></div>
           {children}
         </div>
       </body>
