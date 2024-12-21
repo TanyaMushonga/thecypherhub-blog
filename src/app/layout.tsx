@@ -31,7 +31,9 @@ export default function RootLayout({
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
         <div className="min-h-screen bg-background text-foreground">
-          <div className="md:mt-20"><FloatingDock items={items} desktopClassName="w-fit bg-card" mobileClassName="w-fit p-5" /></div>
+          <div className="flex flex-col items-center pt-5 md:text-3xl text-xl font-semibold md:font-bold border-b-accent border-b-2 pb-4"><h1 className="text-white">The Dev Cycle Newsletter</h1></div>
+          <div className="md:mt-5">
+            <FloatingDock items={items} desktopClassName="w-fit bg-card" mobileClassName="w-fit p-5" /></div>
           {children}
         </div>
       </body>
