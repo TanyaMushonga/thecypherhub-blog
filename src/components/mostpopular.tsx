@@ -1,14 +1,19 @@
 "use client";
 import Image from "next/image";
 import Link from "next/link";
-import React from "react";
+import React, { useState } from "react";
 import { useRouter } from "next/navigation";
+import { LuPin } from "react-icons/lu";
+import { formatDate } from "@/lib/utils";
+import { IoShareOutline } from "react-icons/io5";
+import MostPopularSkeleton from "./mostPopularSkeleton";
 
 function Mostpopular() {
   const router = useRouter();
+  const [loading, setLoading] = useState(false);
   return (
     <div
-      className="md:flex flex-col hidden gap-4"
+      className="lg:flex flex-col hidden gap-4 mb-4"
       onClick={() => {
         router.push("read/2");
       }}
@@ -20,60 +25,34 @@ function Mostpopular() {
         </Link>
       </div>
       <div className="flex flex-row gap-4">
-        <div className="bg-card w-1/3 p-4 rounded-lg flex flex-row cursor-pointer">
-          <div className="flex flex-col">
-            <p className="text-white text-md font-bold line-clamp-2">
-              How instagram was able to handle 20 million messages per day...
-            </p>
-            <p className="text-slate-300 text-sm line-clamp-1">
-              #1: learn more - whatsapp engineering concepts{" "}
-            </p>
+        {loading ? (
+          <MostPopularSkeleton />
+        ) : (
+          <div className="bg-card w-1/3 p-4 rounded-lg flex flex-row cursor-pointer gap-2">
+            <div className="flex flex-col">
+              <p className="text-white text-md font-bold line-clamp-2">
+                How instagram was able to handle 20 million messages per day...
+              </p>
+              <div className="flex flex-row items-center justify-between">
+                <div className="flex flex-row items-center">
+                  <LuPin className="text-slate-300 mr-2" />{" "}
+                  <p className="text-white">
+                    {formatDate(new Date(2024, 11, 2))}
+                  </p>
+                </div>
+                <IoShareOutline className="text-slate-300 w-6 h-6" />
+              </div>
+            </div>
+            <Image
+              src={"/blog_covers/devops.webp"}
+              width={120}
+              height={50}
+              alt="article cover"
+              objectFit="cover"
+              className="rounded-md"
+            />
           </div>
-          <Image
-            src={"/blog_covers/devops.webp"}
-            width={120}
-            height={50}
-            alt="article cover"
-            objectFit="cover"
-            className="rounded-md"
-          />
-        </div>
-        <div className="bg-card w-1/3 p-4 rounded-lg flex flex-row">
-          <div className="flex flex-col">
-            <p className="text-white text-md font-bold line-clamp-2">
-              How instagram was able to handle 20 million messages per day...
-            </p>
-            <p className="text-slate-300 text-sm line-clamp-1">
-              #1: learn more - whatsapp engineering concepts{" "}
-            </p>
-          </div>
-          <Image
-            src={"/blog_covers/devops.webp"}
-            width={120}
-            height={50}
-            alt="article cover"
-            objectFit="cover"
-            className="rounded-md"
-          />
-        </div>
-        <div className="bg-card w-1/3 p-4 rounded-lg flex flex-row">
-          <div className="flex flex-col">
-            <p className="text-white text-md font-bold line-clamp-2">
-              How instagram was able to handle 20 million messages per day...
-            </p>
-            <p className="text-slate-300 text-sm line-clamp-1">
-              #1: learn more - whatsapp engineering concepts{" "}
-            </p>
-          </div>
-          <Image
-            src={"/blog_covers/devops.webp"}
-            width={120}
-            height={50}
-            alt="article cover"
-            objectFit="cover"
-            className="rounded-md"
-          />
-        </div>
+        )}
       </div>
     </div>
   );
