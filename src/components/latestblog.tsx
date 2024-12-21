@@ -1,3 +1,4 @@
+"use client";
 import Image from "next/image";
 import React from "react";
 import { MdTimer } from "react-icons/md";
@@ -5,10 +6,17 @@ import { LuPin } from "react-icons/lu";
 import { formatDate } from "@/lib/utils";
 import { BsDot } from "react-icons/bs";
 import Link from "next/link";
+import { useRouter } from "next/navigation";
 
 function Latestblog() {
+  const router = useRouter();
   return (
-    <div className="flex md:flex-row flex-col gap-5 items-center border-b-2 border-accent pb-5">
+    <div
+      className="flex md:flex-row flex-col gap-5 items-center pb-5"
+      onClick={() => {
+        router.push("/read/1");
+      }}
+    >
       <Image
         src="/blog_covers/codebuild.jpg"
         width={600}
