@@ -71,9 +71,9 @@ function page() {
             ))}
           </div>
           <BackgroundBeams />
-          <Related />
-          <SUbscribe />
         </TracingBeam>
+        <Related />
+        <SUbscribe />
       </div>
     </BackgroundBeamsWithCollision>
   );
