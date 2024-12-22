@@ -8,6 +8,9 @@ import { LuPin } from "react-icons/lu";
 import { MdTimer } from "react-icons/md";
 import { BackgroundBeamsWithCollision } from "@/components/ui/background-beams-with-collision";
 import CopyLink from "@/components/copyLink";
+import { BackgroundBeams } from "@/components/ui/background-beams";
+import SUbscribe from "@/components/SUbscribe";
+import Related from "@/components/related";
 
 function page() {
   return (
@@ -67,6 +70,9 @@ function page() {
               </div>
             ))}
           </div>
+          <BackgroundBeams />
+          <Related />
+          <SUbscribe />
         </TracingBeam>
       </div>
     </BackgroundBeamsWithCollision>
