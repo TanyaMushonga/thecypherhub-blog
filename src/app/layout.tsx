@@ -3,6 +3,7 @@ import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
 import { FloatingDock } from "@/components/ui/floating-dock";
 import { items } from "@/constants";
+import  { Toaster } from "react-hot-toast";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -50,6 +51,7 @@ export default function RootLayout({
             />
           </div>
           {children}
+          <Toaster />
         </div>
       </body>
     </html>
