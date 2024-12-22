@@ -5,7 +5,6 @@ import React, { useState } from "react";
 import { useRouter } from "next/navigation";
 import { LuPin } from "react-icons/lu";
 import { formatDate } from "@/lib/utils";
-import { IoShareOutline } from "react-icons/io5";
 import MostPopularSkeleton from "./mostPopularSkeleton";
 
 function Mostpopular() {
@@ -40,7 +39,6 @@ function Mostpopular() {
                     {formatDate(new Date(2024, 11, 2))}
                   </p>
                 </div>
-                <IoShareOutline className="text-slate-300 w-6 h-6" />
               </div>
             </div>
             <Image
