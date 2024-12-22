@@ -1,3 +1,4 @@
+"use client";
 import { formatDate } from "@/lib/utils";
 import Image from "next/image";
 import React from "react";
@@ -22,7 +23,7 @@ function Article() {
         className="rounded-md"
       />
       <div className="flex flex-col gap-2">
-        <h1 className="text-white text-xl font-bold line-clamp-1">
+        <h1 className="text-white text-xl font-bold line-clamp-1 mt-1">
           Infrastructure as code
         </h1>
         <p className="text-slate-300 line-clamp-1">
@@ -34,7 +35,6 @@ function Article() {
           <p className="text-slate-300">{formatDate(new Date(2024, 11, 8))}</p>
         </div>
       </div>
-   
     </div>
   );
 }
