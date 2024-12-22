@@ -1,14 +1,21 @@
 "use client";
 import React, { useState } from "react";
 import { SkeletonCard } from "./blogSkeleton";
+import Article from "./article";
 
 function ArticleLists() {
- // const [articles, setArticles] = useState([]);
+  // const [articles, setArticles] = useState([]);
   const [loading, setLoading] = useState(false);
 
   return (
     <div className="w-full h-full p-4">
-      {loading ? <SkeletonCard /> : <div>Articles</div>}
+      {loading ? (
+        <SkeletonCard />
+      ) : (
+        <div>
+          <Article />
+        </div>
+      )}
     </div>
   );
 }
