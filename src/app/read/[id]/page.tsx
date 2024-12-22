@@ -4,11 +4,6 @@ import React from "react";
 import { dummyContent } from "@/constants";
 import { formatDate } from "@/lib/utils";
 import Link from "next/link";
-import {
-  Popover,
-  PopoverContent,
-  PopoverTrigger,
-} from "@/components/ui/popover";
 import { IoIosLink } from "react-icons/io";
 import { LuPin } from "react-icons/lu";
 import { MdTimer } from "react-icons/md";
