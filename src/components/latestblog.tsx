@@ -8,6 +8,7 @@ import { BsDot } from "react-icons/bs";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import LatestSkeleton from "./latestSkeleton";
+import MyProfile from "./myProfile";
 
 function Latestblog() {
   const router = useRouter();
@@ -18,7 +19,7 @@ function Latestblog() {
         <LatestSkeleton />
       ) : (
         <div
-          className="flex md:flex-row flex-col gap-5 items-center pb-5"
+          className="flex md:flex-row flex-col gap-5 items-center pb-5 cursor-pointer"
           onClick={() => {
             router.push("/read/1");
           }}
@@ -45,17 +46,12 @@ function Latestblog() {
             </div>
             <div className="flex flex-row items-center md:justify-center">
               <LuPin className="text-slate-300 mr-2" />{" "}
-              <p className="text-slate-300">{formatDate(new Date(2024, 11, 2))}</p>
+              <p className="text-slate-300">
+                {formatDate(new Date(2024, 11, 2))}
+              </p>
               <div className="flex flex-row items-center md:justify-center">
                 <BsDot className="text-slate-300" />
-                <Link
-                  href={"https://tanya-mushonga.vercel.app/"}
-                  className="text-slate-300 cursor-pointer hover:underline"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                >
-                  TanyaMushonga
-                </Link>
+                <MyProfile />
               </div>
             </div>
           </div>
