@@ -20,7 +20,7 @@ function Article({ blog }: { blog: Article }) {
     <div
       className="flex flex-col w-full relative cursor-pointer"
       onClick={() => {
-        router.push(`/blog/${blog.id}`);
+        router.push(`/read/${blog.id}`);
       }}
     >
       <Image
