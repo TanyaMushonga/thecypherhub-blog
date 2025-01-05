@@ -24,7 +24,7 @@ function Article({ blog }: { blog: Article }) {
       }}
     >
       <Image
-        src={blog?.coverImgUrl || '/blog_covers/codebuild.jpg'}
+        src={blog?.coverImgUrl || "/blog_covers/codebuild.jpg"}
         width={340}
         height={200}
         alt="blog cover"
