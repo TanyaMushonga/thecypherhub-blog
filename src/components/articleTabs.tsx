@@ -18,13 +18,13 @@ function ArticleTabs() {
           </TabsTrigger>
         </TabsList>
         <TabsContent value="system_design">
-          <ArticleLists />
+          <ArticleLists value="system_design"  />
         </TabsContent>
         <TabsContent value="devops">
-          <ArticleLists />
+          <ArticleLists value="devops"/>
         </TabsContent>
         <TabsContent value="all">
-          <ArticleLists />
+          <ArticleLists value="all" />
         </TabsContent>
       </Tabs>
     </div>
