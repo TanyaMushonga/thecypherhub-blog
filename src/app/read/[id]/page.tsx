@@ -1,3 +1,4 @@
+'use client';
 import { TracingBeam } from "@/components/ui/tracing-beam";
 import Image from "next/image";
 import React from "react";
@@ -12,6 +13,8 @@ import SUbscribe from "@/components/SUbscribe";
 import Related from "@/components/related";
 
 function page() {
+
+  
   return (
     <BackgroundBeamsWithCollision>
       <div className="xl:w-1/2 w-full mx-auto p-5 flex flex-col gap-5 mt-5">
