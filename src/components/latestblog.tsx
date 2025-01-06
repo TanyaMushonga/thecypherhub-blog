@@ -29,7 +29,6 @@ function Latestblog() {
             width={600}
             height={200}
             alt="latest bog"
-            objectFit="cover"
             className="rounded-md"
           />
           <div className="flex flex-col md:text-center gap-2">
