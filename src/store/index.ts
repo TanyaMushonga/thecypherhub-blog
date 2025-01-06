@@ -7,6 +7,7 @@ interface Article {
   description: string;
   category: string;
   createdAt: string;
+  content: string
 }
 
 export const useArticle = create<ArticleStore>((set) => ({
@@ -17,6 +18,7 @@ export const useArticle = create<ArticleStore>((set) => ({
     description: "",
     category: "",
     createdAt: "",
+    content: ""
   },
   setBlog: (blog: Article) => set({ blog }),
 }));
