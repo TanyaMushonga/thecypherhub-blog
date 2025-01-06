@@ -13,6 +13,7 @@ interface Article {
   description: string;
   category: string;
   createdAt: string;
+  content: string;
 }
 
 function Article({ blog }: { blog: Article }) {
