@@ -46,7 +46,6 @@ function Mostpopular() {
               width={120}
               height={50}
               alt="article cover"
-              objectFit="cover"
               className="rounded-md"
             />
           </div>
