@@ -5,6 +5,7 @@ declare interface Article {
   description: string;
   category: string;
   createdAt: string;
+  content: string;
 }
 
 declare interface ArticleStore {
