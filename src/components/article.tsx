@@ -4,6 +4,7 @@ import Image from "next/image";
 import React from "react";
 import { useRouter } from "next/navigation";
 import { BsDot } from "react-icons/bs";
+import { useArticle } from "@/store";
 
 interface Article {
   id: string;
@@ -16,21 +17,24 @@ interface Article {
 
 function Article({ blog }: { blog: Article }) {
   const router = useRouter();
+  const setBlog = useArticle((state) => state.setBlog);
   return (
     <div
       className="flex flex-col w-full relative cursor-pointer"
       onClick={() => {
+        setBlog(blog);
         router.push(`/read/${blog.id}`);
       }}
     >
-      <Image
-        src={blog?.coverImgUrl || "/blog_covers/codebuild.jpg"}
-        width={340}
-        height={200}
-        alt="blog cover"
-        objectFit="cover"
-        className="rounded-md"
-      />
+      <div className="w-auto h-auto">
+        <Image
+          src={blog?.coverImgUrl || "/blog_covers/codebuild.jpg"}
+          width={340}
+          height={200}
+          alt="blog cover"
+          className="rounded-md"
+        />
+      </div>
       <div className="flex flex-col gap-2">
         <h1 className="text-white text-xl font-bold line-clamp-1 mt-1">
           {blog?.title}
