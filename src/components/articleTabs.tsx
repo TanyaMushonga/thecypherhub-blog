@@ -5,7 +5,7 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 function ArticleTabs() {
   return (
     <div>
-      <Tabs defaultValue="system_design" className="w-full">
+      <Tabs defaultValue="all" className="w-full">
         <TabsList>
           <TabsTrigger value="all">
             <p className="text-white">All</p>
