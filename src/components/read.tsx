@@ -8,9 +8,27 @@ import { LuPin } from "react-icons/lu";
 import { MdTimer } from "react-icons/md";
 import CopyLink from "@/components/copyLink";
 import { useArticle } from "@/store";
+import { useParams } from "next/navigation";
+import axios from "axios";
 
 function Read() {
   const blog = useArticle((state) => state.blog);
+  const { id } = useParams();
+
+  const fetchBlog = async () => {
+    try {
+      const response = await axios.get(
+        `${ process.env.NEXT_PUBLIC_API_URL}/blog`,
+        {
+          headers: {
+            "Content-Type": "application/json",
+          },
+        }
+      );
+    } catch (error) {
+      console.log(error);
+    }
+  };
 
   return (
     <TracingBeam className="">
