@@ -5,6 +5,8 @@ const nextConfig: NextConfig = {
   images: {
     domains: ["my-s3-bucket-for-files.s3.us-east-1.amazonaws.com"],
   },
+  experimental: {
+  },
 };
 
 export default nextConfig;
