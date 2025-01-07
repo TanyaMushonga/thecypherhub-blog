@@ -1,8 +1,7 @@
 "use client";
-import React, { useEffect } from "react";
+import React from "react";
 import { TracingBeam } from "@/components/ui/tracing-beam";
 import Image from "next/image";
-import { dummyContent } from "@/constants";
 import { formatDate } from "@/lib/utils";
 import Link from "next/link";
 import { LuPin } from "react-icons/lu";
@@ -13,12 +12,8 @@ import { useArticle } from "@/store";
 function Read() {
   const blog = useArticle((state) => state.blog);
 
-  useEffect(() => {
-    console.log("blog---->", blog);
-  }, [blog]);
-
   return (
-    <TracingBeam className="px-6">
+    <TracingBeam className="">
       <div className="max-w-2xl mx-auto antialiased pt-4 relative">
         <div className="mb-10">
           <div className="text-sm  prose prose-sm dark:prose-invert text-white">
@@ -40,12 +35,12 @@ function Read() {
               </p>
               <div className="flex md:flex-row flex-col md:items-center gap-2 mb-5 justify-between">
                 <div className="flex flex-row items-center gap-4">
-                  <div className="flex flex-row items-center">
-                    <MdTimer className="text-slate-300 mr-2" />{" "}
+                  <div className="flex flex-row items-center ">
+                    <MdTimer className="text-slate-300 mr-2" />
                     <p className="text-slate-300">4 min read</p>
                   </div>
                   <div className="flex flex-row items-center">
-                    <LuPin className="text-slate-300 mr-2" />{" "}
+                    <LuPin className="text-slate-300 mr-2" />
                     <p className="text-slate-300">
                       {formatDate(new Date(blog?.createdAt))}
                     </p>
