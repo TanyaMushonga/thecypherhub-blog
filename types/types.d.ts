@@ -12,5 +12,3 @@ declare interface ArticleStore {
   blog: Article[];
   setBlog: (blog: Article[]) => void;
 }
-
-
