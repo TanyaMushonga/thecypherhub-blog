@@ -7,13 +7,12 @@ import Link from "next/link";
 import { LuPin } from "react-icons/lu";
 import { MdTimer } from "react-icons/md";
 import CopyLink from "@/components/copyLink";
-import { useArticle } from "@/store";
 import { useParams } from "next/navigation";
 import axios from "axios";
 import ReadSkeleton from "./readSkeleton";
 
 function Read() {
-  const blog = useArticle((state) => state.blog);
+ 
   const { id } = useParams();
   const [loading, setLoading] = useState(false);
   const [article, setArticle] = useState<Article | null>(null);
