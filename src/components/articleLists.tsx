@@ -5,6 +5,7 @@ import Lottie from "lottie-react";
 import empty from "@/lottie/empty.json";
 import { SkeletonCard } from "./blogSkeleton";
 import Article from "./article";
+import { useArticle } from "@/store";
 
 interface blog {
   id: string;
@@ -19,6 +20,7 @@ interface blog {
 function ArticleLists({ value }: { value: string }) {
   const [articles, setArticles] = useState<blog[]>([]);
   const [loading, setLoading] = useState(false);
+  const setBlogs = useArticle((state) => state.setBlog);
 
   const fetchArticles = async () => {
     try {
@@ -38,6 +40,7 @@ function ArticleLists({ value }: { value: string }) {
         return article.category === value;
       });
       setArticles(data);
+      setBlogs(data);
       setLoading(false);
     } catch (error) {
       console.log(error);
