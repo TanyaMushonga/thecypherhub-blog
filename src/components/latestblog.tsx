@@ -5,7 +5,6 @@ import { MdTimer } from "react-icons/md";
 import { LuPin } from "react-icons/lu";
 import { formatDate } from "@/lib/utils";
 import { BsDot } from "react-icons/bs";
-import Link from "next/link";
 import { useRouter } from "next/navigation";
 import LatestSkeleton from "./latestSkeleton";
 import MyProfile from "./myProfile";
