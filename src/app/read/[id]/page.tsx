@@ -1,6 +1,6 @@
 import React from "react";
 import { BackgroundBeamsWithCollision } from "@/components/ui/background-beams-with-collision";
-import SUbscribe from "@/components/SUbscribe";
+import SUbscribe from "@/components/Subscribe";
 import Related from "@/components/related";
 import Read from "@/components/read";
 
