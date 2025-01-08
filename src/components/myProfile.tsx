@@ -22,6 +22,7 @@ function MyProfile() {
               alt="my profile"
               objectFit="cover"
               className="rounded-full"
+              priority
             />
           </div>
           <div className="flex flex-col items-start">
