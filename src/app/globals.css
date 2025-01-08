@@ -80,32 +80,50 @@ body {
 .no-visible-scrollbar::-webkit-scrollbar {
   display: none;
 }
-
-
-.prose {
+.p.prose {
   white-space: pre-line; /* Preserve white spaces and line breaks */
+  font-size: 1.125rem; /* Base font size for prose content */
+  line-height: 1.75; /* Increase line height for prose content */
 }
 
-.prose ul,
-.prose ol {
+.prose ul {
+  list-style-type: disc; /* Ensure bullets are shown for unordered lists */
   padding-left: 1.5rem; /* Indentation for lists */
   margin-bottom: 1rem; /* Space between lists and other elements */
+  font-size: 1.125rem; /* Increase font size for list items */
+  line-height: 1.75; /* Increase line height for list items */
+}
+
+.prose ol {
+  list-style-type: decimal; /* Ensure numbers are shown for ordered lists */
+  padding-left: 1.5rem; /* Indentation for lists */
+  margin-bottom: 1rem; /* Space between lists and other elements */
+  font-size: 1.125rem; /* Increase font size for list items */
+  line-height: 1.75; /* Increase line height for list items */
 }
 
 .prose li {
   margin-bottom: 0.5rem; /* Space between list items */
+  font-size: 1.125rem; /* Increase font size for list items */
+  line-height: 1.75; /* Increase line height for list items */
 }
 
 .prose p {
   margin-bottom: 1rem; /* Space between paragraphs */
+  font-size: 1.125rem; /* Increase font size for paragraphs */
+  line-height: 1.75; /* Increase line height for paragraphs */
 }
 
 .prose h3,
 .prose h4 {
   margin-top: 1.5rem; /* Space above headings */
   margin-bottom: 1rem; /* Space below headings */
+  font-size: 1.25rem; /* Increase font size for headings */
+  line-height: 1.75; /* Increase line height for headings */
 }
 
 .prose strong {
   font-weight: bold; /* Bold text for strong elements */
+  font-size: 1.125rem; /* Increase font size for strong elements */
+  line-height: 1.75; /* Increase line height for strong elements */
 }
