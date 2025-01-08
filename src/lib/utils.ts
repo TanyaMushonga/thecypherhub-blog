@@ -31,3 +31,11 @@ export const formatDate = (createdAt: Date) => {
     return "Just now";
   }
 };
+
+export const getRandomArticles = (
+  articles: Article[],
+  count: number
+): Article[] => {
+  const shuffled = articles.sort(() => 0.5 - Math.random());
+  return shuffled.slice(0, count);
+};
