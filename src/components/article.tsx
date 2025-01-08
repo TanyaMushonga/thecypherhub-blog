@@ -4,7 +4,6 @@ import Image from "next/image";
 import React from "react";
 import { useRouter } from "next/navigation";
 import { BsDot } from "react-icons/bs";
-import { useArticle } from "@/store";
 
 interface Article {
   id: string;
@@ -18,12 +17,11 @@ interface Article {
 
 function Article({ blog }: { blog: Article }) {
   const router = useRouter();
-  const setBlog = useArticle((state) => state.setBlog);
+
   return (
     <div
       className="flex flex-col w-full relative cursor-pointer"
       onClick={() => {
-        setBlog(blog);
         router.push(`/read/${blog.id}`);
       }}
     >
