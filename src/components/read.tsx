@@ -50,13 +50,14 @@ function Read() {
             <ReadSkeleton />
           ) : (
             <div className="text-sm prose prose-sm dark:prose-invert text-white">
-              {blog?.coverImgUrl && (
+              {article?.coverImgUrl && (
                 <Image
                   src={article?.coverImgUrl || "/blog_covers/codebuild.jpg"}
                   alt="blog thumbnail"
                   height="1000"
                   width="1000"
                   className="rounded-lg mb-5 object-cover"
+                  priority
                 />
               )}
               <div className="flex flex-col gap-2">
