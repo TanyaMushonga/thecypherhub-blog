@@ -10,6 +10,7 @@ import CopyLink from "@/components/copyLink";
 import { useArticle } from "@/store";
 import { useParams } from "next/navigation";
 import axios from "axios";
+import ReadSkeleton from "./readSkeleton";
 
 function Read() {
   const blog = useArticle((state) => state.blog);
@@ -46,7 +47,7 @@ function Read() {
       <div className="max-w-2xl mx-auto antialiased pt-4 relative">
         <div className="mb-10">
           {loading ? (
-            <div>Loading...</div>
+            <ReadSkeleton />
           ) : (
             <div className="text-sm prose prose-sm dark:prose-invert text-white">
               {blog?.coverImgUrl && (
@@ -74,7 +75,8 @@ function Read() {
                     <div className="flex flex-row items-center">
                       <LuPin className="text-slate-300 mr-2" />
                       <p className="text-slate-300">
-                        {article?.createdAt && formatDate(new Date(article.createdAt))}
+                        {article?.createdAt &&
+                          formatDate(new Date(article.createdAt))}
                       </p>
                     </div>
                   </div>
