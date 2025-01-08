@@ -1,6 +1,6 @@
 "use client";
 import Image from "next/image";
-import React, { useState } from "react";
+import React from "react";
 import { MdTimer } from "react-icons/md";
 import { LuPin } from "react-icons/lu";
 import { formatDate } from "@/lib/utils";
