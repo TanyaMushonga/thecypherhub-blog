@@ -18,12 +18,15 @@ interface Article {
 function Article({ blog }: { blog: Article }) {
   const router = useRouter();
 
+  const handleClick = () => {
+    window.scrollTo({ top: 0, behavior: "smooth" });
+    router.push(`/read/${blog.id}`);
+  };
+
   return (
     <div
       className="flex flex-col w-full relative cursor-pointer"
-      onClick={() => {
-        router.push(`/read/${blog.id}`);
-      }}
+      onClick={handleClick}
     >
       <div className="w-auto h-auto">
         <Image
