@@ -9,6 +9,8 @@ declare interface Article {
 }
 
 declare interface ArticleStore {
-  blog: Article;
-  setBlog: (blog: Article) => void;
+  blog: Article[];
+  setBlog: (blog: Article[]) => void;
 }
+
+
