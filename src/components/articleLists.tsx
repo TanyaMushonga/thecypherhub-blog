@@ -1,56 +1,12 @@
 "use client";
-import axios from "axios";
-import React, { useState, useEffect } from "react";
 import Lottie from "lottie-react";
 import empty from "@/lottie/empty.json";
 import { SkeletonCard } from "./blogSkeleton";
 import Article from "./article";
-import { useArticle } from "@/store";
-
-interface blog {
-  id: string;
-  coverImgUrl: string;
-  title: string;
-  description: string;
-  category: string;
-  createdAt: string;
-  content: string;
-}
+import { useFetchArticles } from "@/hooks/useFetchBlogs";
 
 function ArticleLists({ value }: { value: string }) {
-  const [articles, setArticles] = useState<blog[]>([]);
-  const [loading, setLoading] = useState(false);
-  const setBlogs = useArticle((state) => state.setBlog);
-
-  const fetchArticles = async () => {
-    try {
-      setLoading(true);
-      const response = await axios.get(
-        process.env.NEXT_PUBLIC_API_URL + "/blog",
-        {
-          headers: {
-            "Content-Type": "application/json",
-          },
-        }
-      );
-      const data = response.data.filter((article: blog) => {
-        if (value === "all") {
-          return article;
-        }
-        return article.category === value;
-      });
-      setArticles(data);
-      setBlogs(data);
-      setLoading(false);
-    } catch (error) {
-      console.log(error);
-    } finally {
-      setLoading(false);
-    }
-  };
-  useEffect(() => {
-    fetchArticles();
-  }, []);
+  const { articles, loading, refetch } = useFetchArticles(value);
 
   return (
     <div className="w-full h-full p-4">
@@ -74,7 +30,7 @@ function ArticleLists({ value }: { value: string }) {
                 Seams like there is nothing here yet, try to refresh
               </p>
               <button
-                onClick={fetchArticles}
+                onClick={refetch}
                 className="px-6 py-2 bg-transparent border border-blue-500 dark:border-white dark:text-white text-blue-500 rounded-lg font-bold transform hover:-translate-y-1 transition duration-400"
               >
                 Refresh
