@@ -4,9 +4,11 @@ import empty from "@/lottie/empty.json";
 import { SkeletonCard } from "./blogSkeleton";
 import Article from "./article";
 import { useFetchArticles } from "@/hooks/useFetchBlogs";
+import { useRouter } from "next/navigation";
 
 function ArticleLists({ value }: { value: string }) {
   const { articles, loading, refetch } = useFetchArticles(value);
+  const router = useRouter();
 
   return (
     <div className="w-full h-full p-4">
@@ -15,11 +17,23 @@ function ArticleLists({ value }: { value: string }) {
       ) : (
         <>
           {articles.length > 0 ? (
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4 md:gap-8">
-              {articles.map((article) => (
-                <Article key={article.id} blog={article} />
-              ))}
-            </div>
+            <>
+              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4 md:gap-8">
+                {articles.slice(0, 13).map((article) => (
+                  <Article key={article.id} blog={article} />
+                ))}
+              </div>
+              <div className="mt-5">
+                <button
+                  onClick={() => {
+                    router.push(`/all`);
+                  }}
+                  className="px-8 py-1  border-2 border-slate-50 dark:border-white uppercase bg-white text-black transition duration-200 text-sm "
+                >
+                  View all
+                </button>
+              </div>
+            </>
           ) : (
             <div className="w-full h-full flex flex-col gap-3 justify-center items-center">
               <Lottie animationData={empty} loop={true} />
