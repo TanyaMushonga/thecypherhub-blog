@@ -8,7 +8,7 @@ function Related() {
   return (
     <div className="w-full border-t-2  border-slate-500 p-5">
       <h1 className="text-white font-bold text-xl">Explore related posts</h1>
-      <div className="w-full h-full mt-4">
+      <div className="w-full h-full mt-4 flex md:flex-row flex-col gap-5 overflow-auto">
         {blogs.slice(1, 4).map((blog) => (
           <Article key={blog.id} blog={blog} />
         ))}
