@@ -18,10 +18,10 @@ function ArticleTabs() {
           </TabsTrigger>
         </TabsList>
         <TabsContent value="system_design">
-          <ArticleLists value="system-design"  />
+          <ArticleLists value="system-design" />
         </TabsContent>
         <TabsContent value="devops">
-          <ArticleLists value="devops"/>
+          <ArticleLists value="devops" />
         </TabsContent>
         <TabsContent value="all">
           <ArticleLists value="all" />
