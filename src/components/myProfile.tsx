@@ -20,9 +20,8 @@ function MyProfile() {
               width={40}
               height={30}
               alt="my profile"
-              objectFit="cover"
               className="rounded-full"
-              priority
+              loading="lazy"
             />
           </div>
           <div className="flex flex-col items-start">
