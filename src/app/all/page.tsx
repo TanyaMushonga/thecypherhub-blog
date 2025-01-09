@@ -1,9 +1,12 @@
-import React from 'react'
+import AllArticles from "@/components/allArticles";
+import React from "react";
 
 function page() {
   return (
-    <div>page</div>
-  )
+    <div>
+      <AllArticles />
+    </div>
+  );
 }
 
-export default page
+export default page;
