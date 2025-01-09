@@ -22,11 +22,11 @@ export const formatDate = (createdAt: Date) => {
       day: "numeric",
     });
   } else if (timeDifferenceInDays === 1) {
-    return "1d";
+    return "1 day ago";
   } else if (timeDifferenceInHours >= 1) {
-    return `${timeDifferenceInHours}h`;
+    return `${timeDifferenceInHours} hr ago`;
   } else if (timeDifferenceInMinutes >= 1) {
-    return `${timeDifferenceInMinutes}m`;
+    return `${timeDifferenceInMinutes} mins ago`;
   } else {
     return "Just now";
   }
