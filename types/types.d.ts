@@ -6,6 +6,7 @@ declare interface Article {
   category: string;
   createdAt: string;
   content: string;
+  readTime: string;
 }
 
 declare interface ArticleStore {
