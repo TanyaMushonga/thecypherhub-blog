@@ -59,7 +59,7 @@ function Read() {
                 />
               )}
               <div className="flex flex-col gap-2">
-              <h1 className="text-white md:text-3xl font-bold text-xl">
+                <h1 className="text-white md:text-3xl font-bold text-xl">
                   {article?.title}
                 </h1>
                 <p className="text-slate-300 md:text-xl text-lg line-clamp-2">
@@ -69,7 +69,9 @@ function Read() {
                   <div className="flex flex-row items-center gap-4">
                     <div className="flex flex-row items-center ">
                       <MdTimer className="text-slate-300 mr-2 text-lg" />
-                      <p className="text-slate-300 text-lg">4 min read</p>
+                      <p className="text-slate-300 text-lg">
+                        {article?.readTime}
+                      </p>
                     </div>
                     <div className="flex flex-row items-center">
                       <LuPin className="text-slate-300 mr-2 text-lg" />
