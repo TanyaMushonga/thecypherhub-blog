@@ -43,7 +43,7 @@ function Latestblog() {
             <div className="flex flex-row items-center gap-2 md:justify-center">
               {" "}
               <MdTimer className="text-slate-300" />{" "}
-              <p className="text-slate-300">4 min read</p>
+              <p className="text-slate-300">{articles[0]?.readTime}</p>
             </div>
             <div className="flex flex-row items-center md:justify-center">
               <LuPin className="text-slate-300 mr-2" />{" "}
