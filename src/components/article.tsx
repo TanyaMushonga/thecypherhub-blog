@@ -5,8 +5,6 @@ import React from "react";
 import { useRouter } from "next/navigation";
 import { BsDot } from "react-icons/bs";
 
-
-
 function Article({ blog }: { blog: Article }) {
   const router = useRouter();
 
