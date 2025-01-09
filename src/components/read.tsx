@@ -63,7 +63,7 @@ function Read() {
                 <h1 className="text-white md:text-3xl font-bold text-xl">
                   {article?.title}
                 </h1>
-                <p className="text-slate-300 md:text-xl text-lg">
+                <p className="text-slate-300 md:text-xl text-lg line-clamp-2">
                   {article?.description}
                 </p>
                 <div className="flex md:flex-row flex-col md:items-center gap-2 mb-5 justify-between">
