@@ -7,7 +7,7 @@ import Link from "next/link";
 import { LuPin } from "react-icons/lu";
 import { MdTimer } from "react-icons/md";
 import CopyLink from "@/components/copyLink";
-import { useParams } from "next/navigation";
+import { notFound, useParams } from "next/navigation";
 import axios from "axios";
 import ReadSkeleton from "./readSkeleton";
 
@@ -30,7 +30,11 @@ function Read() {
         );
         setArticle(response?.data);
         setLoading(false);
-      } catch (error) {
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+      } catch (error: any) {
+        if (error.response.data.status === 404) {
+          notFound();
+        }
         console.log(error);
       } finally {
         setLoading(false);
