@@ -1,24 +1,21 @@
 import type { Metadata } from "next";
-import { Geist, Roboto_Mono } from "next/font/google";
 import "./globals.css";
 import { FloatingDock } from "@/components/ui/floating-dock";
 import { items } from "@/constants";
 import { Toaster } from "react-hot-toast";
+import { Inter } from "next/font/google";
 
-const geistSans = Geist({
-  variable: "--font-geist-sans",
-  subsets: ["latin"],
-});
-
-const robotoMono = Roboto_Mono({
-  variable: "--font-roboto-mono",
-  subsets: ["latin"],
-});
-
+const inter = Inter({ subsets: ["latin"] });
 export const metadata: Metadata = {
-  title: "The dev cycle newsletter",
+  title: {
+    template: "%s - The dev cycle newsletter",
+    default: "The dev cycle newsletter",
+  },
   description:
     "This is a newsletter for developers who want to stay updated with the latest trends in the tech industry.",
+  twitter: {
+    card: "summary_large_image",
+  },
 };
 
 export default function RootLayout({
@@ -28,9 +25,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body
-        className={`${geistSans.variable} ${robotoMono.variable} antialiased`}
-      >
+      <body className={`${inter.className} antialiased`}>
         <div className="min-h-screen bg-background text-foreground">
           <div className="flex flex-col items-center pt-5 md:text-3xl text-xl font-semibold md:font-bold border-b-accent border-b-2 pb-4">
             <h1 className="text-white">
