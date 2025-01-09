@@ -12,7 +12,6 @@ import axios from "axios";
 import ReadSkeleton from "./readSkeleton";
 
 function Read() {
- 
   const { id } = useParams();
   const [loading, setLoading] = useState(false);
   const [article, setArticle] = useState<Article | null>(null);
@@ -48,7 +47,7 @@ function Read() {
           {loading ? (
             <ReadSkeleton />
           ) : (
-            <div className="text-sm prose prose-sm dark:prose-invert text-white">
+            <div className="text-sm  dark:prose-invert text-white">
               {article?.coverImgUrl && (
                 <Image
                   src={article?.coverImgUrl || "/blog_covers/codebuild.jpg"}
@@ -60,7 +59,7 @@ function Read() {
                 />
               )}
               <div className="flex flex-col gap-2">
-                <h1 className="text-white md:text-3xl font-bold text-xl">
+              <h1 className="text-white md:text-3xl font-bold text-xl">
                   {article?.title}
                 </h1>
                 <p className="text-slate-300 md:text-xl text-lg line-clamp-2">
@@ -69,12 +68,12 @@ function Read() {
                 <div className="flex md:flex-row flex-col md:items-center gap-2 mb-5 justify-between">
                   <div className="flex flex-row items-center gap-4">
                     <div className="flex flex-row items-center ">
-                      <MdTimer className="text-slate-300 mr-2" />
-                      <p className="text-slate-300">4 min read</p>
+                      <MdTimer className="text-slate-300 mr-2 text-lg" />
+                      <p className="text-slate-300 text-lg">4 min read</p>
                     </div>
                     <div className="flex flex-row items-center">
-                      <LuPin className="text-slate-300 mr-2" />
-                      <p className="text-slate-300">
+                      <LuPin className="text-slate-300 mr-2 text-lg" />
+                      <p className="text-slate-300 text-lg">
                         {article?.createdAt &&
                           formatDate(new Date(article.createdAt))}
                       </p>
@@ -83,7 +82,7 @@ function Read() {
                   <div className="flex flex-row items-center md:justify-center">
                     <Link
                       href={"https://tanya-mushonga.vercel.app/"}
-                      className="text-slate-300 cursor-pointer hover:underline mr-5"
+                      className="text-slate-300 cursor-pointer hover:underline mr-5 text-lg"
                       target="_blank"
                       rel="noopener noreferrer"
                     >
