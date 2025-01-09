@@ -5,15 +5,7 @@ import React from "react";
 import { useRouter } from "next/navigation";
 import { BsDot } from "react-icons/bs";
 
-interface Article {
-  id: string;
-  coverImgUrl: string;
-  title: string;
-  description: string;
-  category: string;
-  createdAt: string;
-  content: string;
-}
+
 
 function Article({ blog }: { blog: Article }) {
   const router = useRouter();
@@ -44,7 +36,7 @@ function Article({ blog }: { blog: Article }) {
         </h1>
         <p className="text-slate-300 line-clamp-1">{blog?.description}</p>
         <div className="flex flex-row items-center gap-2">
-          <p className="text-slate-300">4 min read</p>
+          <p className="text-slate-300">{blog?.readTime}</p>
           <BsDot className="text-slate-300" />
           <p className="text-slate-300">
             {formatDate(new Date(blog?.createdAt))}
