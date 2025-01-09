@@ -35,10 +35,10 @@ function Latestblog() {
           />
           <div className="flex flex-col md:text-center gap-2 w-full">
             <h1 className="text-white md:text-3xl font-bold text-xl">
-             {articles[0]?.title}
+              {articles[0]?.title}
             </h1>
             <p className="text-slate-300 md:text-xl text-lg line-clamp-2">
-            {articles[0]?.description}
+              {articles[0]?.description}
             </p>
             <div className="flex flex-row items-center gap-2 md:justify-center">
               {" "}
