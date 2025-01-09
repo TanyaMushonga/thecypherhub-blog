@@ -36,6 +36,7 @@ function SUbscribe() {
       }
       setLoading(false);
       setEmail("");
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     } catch (error: any) {
       if (error.response) {
         setErrors(error.response.data.error);
