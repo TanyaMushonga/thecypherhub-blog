@@ -23,16 +23,18 @@ function ArticleLists({ value }: { value: string }) {
                   <Article key={article.id} blog={article} />
                 ))}
               </div>
-              <div className="mt-5">
-                <button
-                  onClick={() => {
-                    router.push(`/all`);
-                  }}
-                  className="px-8 py-1  border-2 border-slate-50 dark:border-white uppercase bg-white text-black transition duration-200 text-sm "
-                >
-                  View all
-                </button>
-              </div>
+              {articles.length > 13 && (
+                <div className="mt-5">
+                  <button
+                    onClick={() => {
+                      router.push(`/all`);
+                    }}
+                    className="px-8 py-1  border-2 border-slate-50 dark:border-white uppercase bg-white text-black transition duration-200 text-sm "
+                  >
+                    View all
+                  </button>
+                </div>
+              )}
             </>
           ) : (
             <div className="w-full h-full flex flex-col gap-3 justify-center items-center">
