@@ -26,7 +26,7 @@ function Mostpopular() {
           <>
             {getRandomArticles(articles, 3).map((article) => (
               <div
-                className="bg-card w-1/3 p-4 rounded-lg flex flex-row cursor-pointer gap-2"
+                className="bg-card w-1/3 p-4 rounded-lg flex flex-row justify-between cursor-pointer gap-2"
                 key={article?.id}
                 onClick={() => {
                   router.push(`/read/${article?.id}`);
