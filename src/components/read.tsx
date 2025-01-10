@@ -28,12 +28,15 @@ function Read() {
             },
           }
         );
+
         setArticle(response?.data);
         setLoading(false);
-      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any
       } catch (error: any) {
-        if (error.response.data.status === 404) {
-          notFound();
+        if (error.response) {
+          if (error.response.status === 404) {
+            notFound();
+          }
         }
         console.log(error);
       } finally {
