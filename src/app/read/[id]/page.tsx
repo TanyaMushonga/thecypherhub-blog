@@ -6,11 +6,7 @@ import Read from "@/components/read";
 import { Metadata } from "next";
 import axios from "axios";
 
-type PageProps = {
-  params: {
-    id: string;
-  };
-};
+type Params = Promise<{ id: string[] }>;
 
 export async function generateStaticParams() {
   const response = await axios.get(`${process.env.NEXT_PUBLIC_API_URL}/blog`, {
@@ -24,7 +20,11 @@ export async function generateStaticParams() {
   return articles.map(({ id }) => ({ params: { id } }));
 }
 
-export async function generateMetadata({ params }: PageProps): Promise<Metadata> {
+export async function generateMetadata({
+  params,
+}: {
+  params: Params;
+}): Promise<Metadata> {
   const { id } = await params;
 
   try {
