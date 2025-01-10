@@ -10,6 +10,7 @@ export const useArticle = create<ArticleStore>((set) => ({
       category: "",
       createdAt: "",
       content: "",
+      readTime: ""
     },
   ],
   setBlog: (blog: Article[]) => set({ blog }),
