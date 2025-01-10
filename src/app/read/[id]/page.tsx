@@ -4,20 +4,17 @@ import SUbscribe from "@/components/Subscribe";
 import Related from "@/components/related";
 import Read from "@/components/read";
 import { Metadata } from "next";
-import axios from "axios";
 
 type Params = Promise<{ id: string[] }>;
 
 export async function generateStaticParams() {
-  const response = await axios.get(`${process.env.NEXT_PUBLIC_API_URL}/blog`, {
-    headers: {
-      "Content-Type": "application/json",
-    },
-  });
+  const blogs = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/blog`).then(
+    (res) => res.json()
+  );
 
-  const articles: Article[] = response?.data;
-
-  return articles.map(({ id }) => ({ params: { id } }));
+  return blogs.map((post: Article) => ({
+    id: post.id,
+  }));
 }
 
 export async function generateMetadata({
@@ -28,16 +25,9 @@ export async function generateMetadata({
   const { id } = await params;
 
   try {
-    const response = await axios.get(
-      `${process.env.NEXT_PUBLIC_API_URL}/blog/${id}`,
-      {
-        headers: {
-          "Content-Type": "application/json",
-        },
-      }
-    );
-
-    const article = response?.data;
+    const article = await fetch(
+      `${process.env.NEXT_PUBLIC_API_URL}/blog/${id}`
+    ).then((res) => res.json());
 
     return {
       title: article?.title,
@@ -46,9 +36,9 @@ export async function generateMetadata({
         images: [
           {
             url: article?.coverImgUrl,
-            width: 800,
-            height: 600,
             alt: article?.title,
+            width: 1200,
+            height: 630,
           },
         ],
       },
