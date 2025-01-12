@@ -1,7 +1,7 @@
 "use client";
 
 import React, { useState } from "react";
-import ArticleLists from "./articleLists";
+// import ArticleLists from "./articleLists";
 
 function ArticleTabs() {
   const [activeTab, setActiveTab] = useState("all");
@@ -40,9 +40,9 @@ function ArticleTabs() {
 
       {/* Tabs Content */}
       <div className="mt-4 min-h-[70vh] bg-card rounded-md p-4">
-        {activeTab === "all" && <ArticleLists value="all" />}
+        {/* {activeTab === "all" && <ArticleLists value="all" />}
         {activeTab === "system_design" && <ArticleLists value="system-design" />}
-        {activeTab === "devops" && <ArticleLists value="devops" />}
+        {activeTab === "devops" && <ArticleLists value="devops" />} */}
       </div>
     </div>
   );
