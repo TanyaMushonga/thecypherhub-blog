@@ -11,9 +11,9 @@ function Article({ blog }: { blog: Article }) {
 
   const handleClick = () => {
     // Ensure window.scrollTo only runs in the browser environment
-    // if (typeof window !== "undefined") {
-    //   window.scrollTo({ top: 0, behavior: "smooth" });
-    // }
+    if (typeof window !== "undefined") {
+      window.scrollTo({ top: 0, behavior: "smooth" });
+    }
     router.push(`/read/${blog.id}`);
   };
 

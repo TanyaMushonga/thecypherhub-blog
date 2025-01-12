@@ -6,7 +6,6 @@ import { IoIosLink } from "react-icons/io";
 function CopyLink() {
   const copyToClipboard = () => {
     const currentUrl = window.location.href;
-    console.log("clieck");
     navigator.clipboard
       .writeText(currentUrl)
       .then(() => {

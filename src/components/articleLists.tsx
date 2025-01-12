@@ -2,7 +2,7 @@
 import Lottie from "lottie-react";
 import empty from "@/lottie/empty.json";
 import { SkeletonCard } from "./blogSkeleton";
-import Article from "./article";
+// import Article from "./article";
 import { useFetchArticles } from "@/hooks/useFetchBlogs";
 import { useRouter } from "next/navigation";
 
@@ -19,9 +19,9 @@ function ArticleLists({ value }: { value: string }) {
           {articles.length > 0 ? (
             <>
               <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4 md:gap-8">
-                {articles.slice(0, 13).map((article) => (
-                  <Article key={article.id} blog={article} />
-                ))}
+                {/* {articles.slice(0, 13).map((article) => (
+                 <Article key={article.id} blog={article} />
+                ))} */}
               </div>
               {articles.length > 13 && (
                 <div className="mt-5">
