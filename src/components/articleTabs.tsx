@@ -1,5 +1,5 @@
 import React from "react";
-// import ArticleLists from "./articleLists";
+import ArticleLists from "./articleLists";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 
 function ArticleTabs() {
@@ -18,13 +18,13 @@ function ArticleTabs() {
           </TabsTrigger>
         </TabsList>
         <TabsContent value="system_design">
-          {/* <ArticleLists value="system-design" /> */}
+          <ArticleLists value="system-design" />
         </TabsContent>
         <TabsContent value="devops">
-          {/* <ArticleLists value="devops" /> */}
+          <ArticleLists value="devops" />
         </TabsContent>
         <TabsContent value="all">
-          {/* <ArticleLists value="all" /> */}
+          <ArticleLists value="all" />
         </TabsContent>
       </Tabs>
     </div>

@@ -1,4 +1,5 @@
 "use client";
+
 import { formatDate } from "@/lib/utils";
 import Image from "next/image";
 import React from "react";
@@ -9,7 +10,10 @@ function Article({ blog }: { blog: Article }) {
   const router = useRouter();
 
   const handleClick = () => {
-    window.scrollTo({ top: 0, behavior: "smooth" });
+    // Ensure window.scrollTo only runs in the browser environment
+    if (typeof window !== "undefined") {
+      window.scrollTo({ top: 0, behavior: "smooth" });
+    }
     router.push(`/read/${blog.id}`);
   };
 
