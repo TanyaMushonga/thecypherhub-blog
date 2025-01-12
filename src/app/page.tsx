@@ -1,4 +1,4 @@
-"use client";
+
 import ArticleTabs from "@/components/articleTabs";
 import Latestblog from "@/components/latestblog";
 import Mostpopular from "@/components/mostpopular";
