@@ -12,6 +12,12 @@ export async function generateStaticParams() {
     (res) => res.json()
   );
 
+  if (!blogs) {
+    return {
+      notFound: true,
+    };
+  }
+
   return blogs.map((post: Article) => ({
     id: post.id,
   }));
@@ -28,6 +34,13 @@ export async function generateMetadata({
     const article = await fetch(
       `${process.env.NEXT_PUBLIC_API_URL}/blog/${id}`
     ).then((res) => res.json());
+
+    if (!article) {
+      return {
+        title: "Error",
+        description: "An error occurred while fetching metadata.",
+      };
+    }
 
     return {
       title: article?.title,
@@ -51,7 +64,7 @@ export async function generateMetadata({
     };
   }
 }
-function Page() {
+function page() {
   return (
     <BackgroundBeamsWithCollision>
       <div className="xl:w-1/2 w-full mx-auto p-5 flex flex-col gap-5 mt-5">
@@ -63,4 +76,4 @@ function Page() {
   );
 }
 
-export default Page;
+export default page;
