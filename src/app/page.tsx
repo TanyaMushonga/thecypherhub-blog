@@ -1,7 +1,14 @@
-import ArticleTabs from "@/components/articleTabs";
-import Latestblog from "@/components/latestblog";
-import Mostpopular from "@/components/mostpopular";
-// import { BackgroundBeamsWithCollision } from "@/components/ui/background-beams-with-collision";
+import dynamic from "next/dynamic";
+
+const ArticleTabs = dynamic(() => import("@/components/articleTabs"), {
+  ssr: false,
+});
+const Latestblog = dynamic(() => import("@/components/latestblog"), {
+  ssr: false,
+});
+const Mostpopular = dynamic(() => import("@/components/mostpopular"), {
+  ssr: false,
+});
 
 export default function page() {
   return (
