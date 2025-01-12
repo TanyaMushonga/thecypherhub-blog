@@ -1,5 +1,5 @@
 "use client";
-import ArticleTabs from "@/components/articleTabs";
+// import ArticleTabs from "@/components/articleTabs";
 import Latestblog from "@/components/latestblog";
 import Mostpopular from "@/components/mostpopular";
 import { BackgroundBeamsWithCollision } from "@/components/ui/background-beams-with-collision";
@@ -11,7 +11,7 @@ export default function Home() {
         <div className="xl:w-3/4 w-full mx-auto p-5 flex flex-col gap-5">
           <Latestblog />
           <Mostpopular />
-          <ArticleTabs />
+          {/* <ArticleTabs /> */}
         </div>
       </div>
     </BackgroundBeamsWithCollision>
