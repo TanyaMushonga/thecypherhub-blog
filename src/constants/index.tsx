@@ -1,34 +1,29 @@
-import { FaHome } from "react-icons/fa";
+
 import { IoTerminal } from "react-icons/io5";
 import { IoLogoLinkedin } from "react-icons/io5";
 import { FaGithub } from "react-icons/fa";
 import { FaMedium } from "react-icons/fa";
 
-export const items = [
+export const Navitems = [
   {
-    title: "Home",
-    href: "/",
-    icon: <FaHome />,
+    name: "Portfolio",
+    link: "https://tanya-mushonga.vercel.app/",
+    icon: <IoTerminal className="text-white w-10 h-10" />,
   },
   {
-    title: "Portfolio",
-    href: "https://tanya-mushonga.vercel.app/",
-    icon: <IoTerminal />,
+    name: "LinkedIn",
+    link: "https://www.linkedin.com/in/tanyaradzwa-t-mushonga-b23745209/",
+    icon: <IoLogoLinkedin className="text-white w-10 h-10"/>,
   },
   {
-    title: "LinkedIn",
-    href: "https://www.linkedin.com/in/tanyaradzwa-t-mushonga-b23745209/",
-    icon: <IoLogoLinkedin />,
+    name: "GitHub",
+    link: "https://github.com/TanyaMushonga",
+    icon: <FaGithub className="text-white w-10 h-10"/>,
   },
   {
-    title: "GitHub",
-    href: "https://github.com/TanyaMushonga",
-    icon: <FaGithub />,
-  },
-  {
-    title: "Medium",
-    href: "https://medium.com/@tanyaradzwatmushonga",
-    icon: <FaMedium />,
+    name: "Medium",
+    link: "https://medium.com/@tanyaradzwatmushonga",
+    icon: <FaMedium className="text-white w-10 h-10"/>,
   },
 ];
 

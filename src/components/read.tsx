@@ -48,7 +48,7 @@ function Read() {
   }, [id]);
 
   return (
-    <TracingBeam className="">
+    <TracingBeam>
       <div className="max-w-2xl mx-auto antialiased pt-4 relative">
         <div className="mb-10">
           {loading ? (
