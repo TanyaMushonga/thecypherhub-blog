@@ -1,9 +1,9 @@
 import type { Metadata } from "next";
 import "./globals.css";
-import { FloatingDock } from "@/components/ui/floating-dock";
-import { items } from "@/constants";
 import { Toaster } from "react-hot-toast";
 import { Inter } from "next/font/google";
+import NavBar from "@/components/NavBar";
+import Footer from "@/components/footer";
 
 const inter = Inter({ subsets: ["latin"] });
 export const metadata: Metadata = {
@@ -16,7 +16,7 @@ export const metadata: Metadata = {
   twitter: {
     card: "summary_large_image",
   },
- metadataBase: new URL(process.env.NEXT_PUBLIC_BASE_URL!),
+  metadataBase: new URL(process.env.NEXT_PUBLIC_BASE_URL!),
 };
 
 export default function RootLayout({
@@ -28,27 +28,10 @@ export default function RootLayout({
     <html lang="en">
       <body className={`${inter.className} antialiased`}>
         <div className="min-h-screen bg-background text-foreground">
-          <div className="flex flex-col items-center pt-5 md:text-3xl text-xl font-semibold md:font-bold border-b-accent border-b-2 pb-4">
-            <h1 className="text-white">
-              <div className="relative mx-auto inline-block w-max [filter:drop-shadow(0px_1px_3px_rgba(27,_37,_80,_0.14))]">
-                <div className="absolute left-0 top-[1px] bg-clip-text bg-no-repeat text-transparent bg-gradient-to-r py-4 from-purple-600 via-violet-500 to-blue-100 [text-shadow:0_0_rgba(0,0,0,0.1)]">
-                  <span className=""> The Dev Cycle Newsletter.</span>
-                </div>
-                <div className="relative bg-clip-text text-transparent bg-no-repeat bg-gradient-to-r from-purple-700 via-violet-500 to-blue-100 py-4">
-                  <span className=""> The Dev Cycle Newsletter.</span>
-                </div>
-              </div>
-            </h1>
-          </div>
-          <div className="md:mt-5">
-            <FloatingDock
-              items={items}
-              desktopClassName="w-fit bg-card"
-              mobileClassName="w-fit p-5"
-            />
-          </div>
-          {children}
+          <NavBar />
+          <div className="pt-10"> {children}</div>
           <Toaster />
+          <Footer />
         </div>
       </body>
     </html>
