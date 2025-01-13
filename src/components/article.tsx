@@ -29,7 +29,8 @@ function Article({ blog }: { blog: Article }) {
           height={200}
           alt="blog cover"
           className="rounded-md"
-      
+          priority
+          unoptimized={true}
         />
       </div>
       <div className="flex flex-col gap-2">
