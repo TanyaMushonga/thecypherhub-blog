@@ -7,7 +7,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   const blogEntries: MetadataRoute.Sitemap = data.map(({ id }) => ({
     url: `${process.env.NEXT_PUBLIC_BASE_URL}/read/${id}`,
     lastModified: new Date().toISOString(),
-    priority: 0.8,
+: 0.8,
   }));
 
   return [

@@ -62,7 +62,6 @@ function Read() {
                   height="1000"
                   width="1000"
                   className="rounded-lg mb-5 object-cover"
-                  priority
                 />
               )}
               <div className="flex flex-col gap-2">
