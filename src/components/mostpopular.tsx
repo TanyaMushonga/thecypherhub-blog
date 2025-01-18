@@ -52,7 +52,7 @@ function Mostpopular() {
                   alt="article cover"
                   className="rounded-md"
                   priority
-                  unoptimized={true}
+                 
                 />
               </div>
             ))}
