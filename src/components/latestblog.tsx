@@ -32,7 +32,7 @@ function Latestblog() {
             alt="latest bog"
             className="rounded-md"
             priority
-            unoptimized={true}
+          
           />
           <div className="flex flex-col md:text-center gap-2 w-full">
             <h1 className="text-white md:text-3xl font-bold text-xl">
