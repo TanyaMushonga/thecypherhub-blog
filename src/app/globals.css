@@ -104,187 +104,132 @@ body {
 
 .p.prose {
   white-space: pre-line;
-  /* Preserve white spaces and line breaks */
   font-size: 1.125rem;
-  /* Base font size for prose content */
   line-height: 1.75;
-  /* Increase line height for prose content */
 }
 
 .prose ul {
   list-style-type: disc;
-  /* Ensure bullets are shown for unordered lists */
   padding-left: 1.5rem;
-  /* Indentation for lists */
   margin-bottom: 1rem;
-  /* Space between lists and other elements */
   font-size: 1.125rem;
-  /* Increase font size for list items */
   line-height: 1.75;
-  /* Increase line height for list items */
 }
 
 .prose ol {
   list-style-type: decimal;
-  /* Ensure numbers are shown for ordered lists */
   padding-left: 1.5rem;
-  /* Indentation for lists */
   margin-bottom: 1rem;
-  /* Space between lists and other elements */
   font-size: 1.125rem;
-  /* Increase font size for list items */
   line-height: 1.75;
-  /* Increase line height for list items */
 }
 
 .prose li {
   margin-bottom: 0.5rem;
-  /* Space between list items */
   font-size: 1.125rem;
-  /* Increase font size for list items */
   line-height: 1.75;
-  /* Increase line height for list items */
 }
 
 .prose p {
   margin-bottom: 1rem;
-  /* Space between paragraphs */
   font-size: 1.125rem;
-  /* Increase font size for paragraphs */
   line-height: 1.75;
-  /* Increase line height for paragraphs */
 }
 
 .prose h3,
 .prose h4 {
   margin-top: 1.5rem;
-  /* Space above headings */
   margin-bottom: 1rem;
-  /* Space below headings */
   font-size: 1.25rem;
-  /* Increase font size for headings */
   line-height: 1.75;
-  /* Increase line height for headings */
 }
 
 .prose strong {
   font-weight: bold;
-  /* Bold text for strong elements */
   font-size: 1.125rem;
-  /* Increase font size for strong elements */
   line-height: 1.75;
-  /* Increase line height for strong elements */
 }
 
 .prose a {
   text-decoration: underline;
-  /* Underline text for links */
   font-size: 1.125rem;
-  /* Increase font size for links */
   line-height: 1.75;
-  /* Increase line height for links */
 }
 
 .prose pre {
-  background-color: rgb(0, 0, 51);
-  /* Background color for code blocks */
-  padding: 1rem;
-  /* Padding inside code blocks */
+  background-color: rgb(2, 14, 53);
+  padding: .5rem 1rem;
   border-radius: 0.5rem;
-  /* Rounded corners for code blocks */
   overflow-x: auto;
-  /* Horizontal scrolling for long code lines */
   font-size: 1rem;
-  /* Base font size for code blocks */
   line-height: 1.5;
-  /* Line height for code blocks */
   margin-bottom: 1.5rem;
-  /* Space below code blocks */
   color: rgb(255, 255, 255);
-  /* Text color for code blocks */
+
 }
 
 .prose code {
-  background-color: rgb(0, 0, 77);
-  /* Background color for inline code */
   padding: 0.25rem 0.5rem;
-  /* Padding inside inline code */
   border-radius: 0.5rem;
-  /* Rounded corners for inline code */
   font-size: 0.875rem;
-  /* Font size for inline code */
   line-height: 1.5;
-  /* Line height for inline code */
   color: rgb(255, 255, 255);
-  /* Text color for inline code */
+
 }
 
-/* Syntax highlighting */
-.prose code[class*="language-"],
-.prose pre[class*="language-"] {
-  color: rgb(10, 10, 10);
-  /* Default text color for code */
+.prose table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-bottom: 1.5rem;
+  font-size: 1.125rem;
+  line-height: 1.75;
+  background-color: rgb(18, 27, 66);
+  color: rgb(255, 255, 255);
 }
 
-.prose .token.comment,
-.prose .token.prolog,
-.prose .token.doctype,
-.prose .token.cdata {
-  color: rgb(122, 122, 122);
-  /* Color for comments and similar tokens */
+.prose th,
+.prose td {
+  border-radius: 10px;
+  border: 2px solid rgb(28, 23, 97); 
+  padding: 0.5rem 0.6rem 0rem 0.6rem;
+  text-align: left;
 }
 
-.prose .token.punctuation {
-  color: rgb(10, 10, 10);
-  /* Color for punctuation */
+.prose th {
+  background-color: rgb(4, 4, 22); 
+  color: white; 
+  font-weight: bold;
 }
 
-.prose .token.property,
-.prose .token.tag,
-.prose .token.boolean,
-.prose .token.number,
-.prose .token.constant,
-.prose .token.symbol,
-.prose .token.deleted {
-  color: rgb(255, 0, 0);
-  /* Color for properties, tags, booleans, etc. */
+
+.prose .selectedCell:after {
+  background: gray;
+  content: "";
+  left: 0;
+  right: 0;
+  top: 0;
+  bottom: 0;
+  pointer-events: none;
+  position: absolute;
+  z-index: 2;
 }
 
-.prose .token.selector,
-.prose .token.attr-name,
-.prose .token.string,
-.prose .token.char,
-.prose .token.builtin,
-.prose .token.inserted {
-  color: rgb(110, 188, 168);
-  /* Color for selectors, attributes, strings, etc. */
+.prose .column-resize-handle {
+  background-color: purple;
+  bottom: -2px;
+  pointer-events: none;
+  position: absolute;
+  right: -2px;
+  top: 0;
+  width: 4px;
 }
 
-.prose .token.operator,
-.prose .token.entity,
-.prose .token.url,
-.prose .token.language-css .token.string,
-.prose .token.style,
-.prose .token.variable {
-  color: rgb(50, 94, 61);
-  /* Color for operators, entities, URLs, etc. */
+.prose .tableWrapper {
+  margin: 1.5rem 0;
+  overflow-x: auto;
 }
 
-.prose .token.atrule,
-.prose .token.attr-value,
-.prose .token.function,
-.prose .token.class-name {
-  color: rgb(44, 128, 128);
-  /* Color for at-rules, attribute values, functions, etc. */
-}
-
-.prose .token.keyword {
-  color: rgb(0, 0, 128);
-  /* Color for keywords */
-}
-
-.prose .token.regex,
-.prose .token.important {
-  color: rgb(0, 128, 128);
-  /* Color for regex and important tokens */
+.prose.resize-cursor {
+  cursor: ew-resize;
+  cursor: col-resize;
 }
