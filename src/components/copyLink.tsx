@@ -9,7 +9,7 @@ function CopyLink() {
     navigator.clipboard
       .writeText(currentUrl)
       .then(() => {
-        toast("Link copied to clipboard!");
+        toast.success("Link copied to clipboard!");
       })
       .catch((err) => {
         console.error("Failed to copy: ", err);

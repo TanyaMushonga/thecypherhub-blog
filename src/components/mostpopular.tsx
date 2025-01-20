@@ -51,6 +51,8 @@ function Mostpopular() {
                   height={50}
                   alt="article cover"
                   className="rounded-md"
+                  priority
+                 
                 />
               </div>
             ))}

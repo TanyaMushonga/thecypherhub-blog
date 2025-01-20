@@ -8,63 +8,84 @@ body {
 
 @layer base {
   :root {
-    --background: 210 100% 10%; /* Dark blue background */
+    --background: 210 100% 10%;
+    /* Dark blue background */
     --foreground: 240 10% 3.9%;
-    --card: 210 100% 15%; /* Slightly lighter dark blue */
+    --card: 210 100% 15%;
+    /* Slightly lighter dark blue */
     --card-foreground: 240 10% 3.9%;
     --popover: 210 100% 15%;
     --popover-foreground: 240 10% 3.9%;
-    --primary: 210 100% 20%; /* Primary dark blue */
+    --primary: 210 100% 20%;
+    /* Primary dark blue */
     --primary-foreground: 0 0% 98%;
-    --secondary: 210 100% 25%; /* Secondary dark blue */
+    --secondary: 210 100% 25%;
+    /* Secondary dark blue */
     --secondary-foreground: 240 5.9% 10%;
-    --muted: 210 100% 30%; /* Muted dark blue */
+    --muted: 210 100% 30%;
+    /* Muted dark blue */
     --muted-foreground: 240 3.8% 46.1%;
-    --accent: 210 100% 35%; /* Accent dark blue */
+    --accent: 210 100% 35%;
+    /* Accent dark blue */
     --accent-foreground: 240 5.9% 10%;
     --destructive: 0 84.2% 60.2%;
     --destructive-foreground: 0 0% 98%;
-    --border: 210 100% 40%; /* Border dark blue */
+    --border: 210 100% 40%;
+    /* Border dark blue */
     --input: 210 100% 40%;
-    --ring: 210 100% 45%; /* Ring dark blue */
-    --chart-1: 210 100% 50%; /* Chart dark blue */
+    --ring: 210 100% 45%;
+    /* Ring dark blue */
+    --chart-1: 210 100% 50%;
+    /* Chart dark blue */
     --chart-2: 173 58% 39%;
     --chart-3: 197 37% 24%;
     --chart-4: 43 74% 66%;
     --chart-5: 27 87% 67%;
     --radius: 0.5rem;
   }
+
   .dark {
-    --background: 210 100% 5%; /* Darker blue background */
+    --background: 210 100% 5%;
+    /* Darker blue background */
     --foreground: 0 0% 98%;
-    --card: 210 100% 10%; /* Slightly lighter darker blue */
+    --card: 210 100% 10%;
+    /* Slightly lighter darker blue */
     --card-foreground: 0 0% 98%;
     --popover: 210 100% 10%;
     --popover-foreground: 0 0% 98%;
-    --primary: 210 100% 15%; /* Primary darker blue */
+    --primary: 210 100% 15%;
+    /* Primary darker blue */
     --primary-foreground: 240 5.9% 10%;
-    --secondary: 210 100% 20%; /* Secondary darker blue */
+    --secondary: 210 100% 20%;
+    /* Secondary darker blue */
     --secondary-foreground: 0 0% 98%;
-    --muted: 210 100% 25%; /* Muted darker blue */
+    --muted: 210 100% 25%;
+    /* Muted darker blue */
     --muted-foreground: 240 5% 64.9%;
-    --accent: 210 100% 30%; /* Accent darker blue */
+    --accent: 210 100% 30%;
+    /* Accent darker blue */
     --accent-foreground: 0 0% 98%;
     --destructive: 0 62.8% 30.6%;
     --destructive-foreground: 0 0% 98%;
-    --border: 210 100% 35%; /* Border darker blue */
+    --border: 210 100% 35%;
+    /* Border darker blue */
     --input: 210 100% 35%;
-    --ring: 210 100% 40%; /* Ring darker blue */
-    --chart-1: 210 100% 45%; /* Chart darker blue */
+    --ring: 210 100% 40%;
+    /* Ring darker blue */
+    --chart-1: 210 100% 45%;
+    /* Chart darker blue */
     --chart-2: 160 60% 45%;
     --chart-3: 30 80% 55%;
     --chart-4: 280 65% 60%;
     --chart-5: 340 75% 55%;
   }
 }
+
 @layer base {
   * {
     @apply border-border;
   }
+
   body {
     @apply bg-background text-foreground;
   }
@@ -80,50 +101,135 @@ body {
 .no-visible-scrollbar::-webkit-scrollbar {
   display: none;
 }
+
 .p.prose {
-  white-space: pre-line; /* Preserve white spaces and line breaks */
-  font-size: 1.125rem; /* Base font size for prose content */
-  line-height: 1.75; /* Increase line height for prose content */
+  white-space: pre-line;
+  font-size: 1.125rem;
+  line-height: 1.75;
 }
 
 .prose ul {
-  list-style-type: disc; /* Ensure bullets are shown for unordered lists */
-  padding-left: 1.5rem; /* Indentation for lists */
-  margin-bottom: 1rem; /* Space between lists and other elements */
-  font-size: 1.125rem; /* Increase font size for list items */
-  line-height: 1.75; /* Increase line height for list items */
+  list-style-type: disc;
+  padding-left: 1.5rem;
+  margin-bottom: 1rem;
+  font-size: 1.125rem;
+  line-height: 1.75;
 }
 
 .prose ol {
-  list-style-type: decimal; /* Ensure numbers are shown for ordered lists */
-  padding-left: 1.5rem; /* Indentation for lists */
-  margin-bottom: 1rem; /* Space between lists and other elements */
-  font-size: 1.125rem; /* Increase font size for list items */
-  line-height: 1.75; /* Increase line height for list items */
+  list-style-type: decimal;
+  padding-left: 1.5rem;
+  margin-bottom: 1rem;
+  font-size: 1.125rem;
+  line-height: 1.75;
 }
 
 .prose li {
-  margin-bottom: 0.5rem; /* Space between list items */
-  font-size: 1.125rem; /* Increase font size for list items */
-  line-height: 1.75; /* Increase line height for list items */
+  margin-bottom: 0.5rem;
+  font-size: 1.125rem;
+  line-height: 1.75;
 }
 
 .prose p {
-  margin-bottom: 1rem; /* Space between paragraphs */
-  font-size: 1.125rem; /* Increase font size for paragraphs */
-  line-height: 1.75; /* Increase line height for paragraphs */
+  margin-bottom: 1rem;
+  font-size: 1.125rem;
+  line-height: 1.75;
 }
 
 .prose h3,
 .prose h4 {
-  margin-top: 1.5rem; /* Space above headings */
-  margin-bottom: 1rem; /* Space below headings */
-  font-size: 1.25rem; /* Increase font size for headings */
-  line-height: 1.75; /* Increase line height for headings */
+  margin-top: 1.5rem;
+  margin-bottom: 1rem;
+  font-size: 1.25rem;
+  line-height: 1.75;
 }
 
 .prose strong {
-  font-weight: bold; /* Bold text for strong elements */
-  font-size: 1.125rem; /* Increase font size for strong elements */
-  line-height: 1.75; /* Increase line height for strong elements */
+  font-weight: bold;
+  font-size: 1.125rem;
+  line-height: 1.75;
+}
+
+.prose a {
+  text-decoration: underline;
+  font-size: 1.125rem;
+  line-height: 1.75;
+}
+
+.prose pre {
+  background-color: rgb(2, 14, 53);
+  padding: .5rem 1rem;
+  border-radius: 0.5rem;
+  overflow-x: auto;
+  font-size: 1rem;
+  line-height: 1.5;
+  margin-bottom: 1.5rem;
+  color: rgb(255, 255, 255);
+
+}
+
+.prose code {
+  padding: 0.25rem 0.5rem;
+  border-radius: 0.5rem;
+  font-size: 0.875rem;
+  line-height: 1.5;
+  color: rgb(255, 255, 255);
+
+}
+
+.prose table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-bottom: 1.5rem;
+  font-size: 1.125rem;
+  line-height: 1.75;
+  background-color: rgb(18, 27, 66);
+  color: rgb(255, 255, 255);
+}
+
+.prose th,
+.prose td {
+  border-radius: 10px;
+  border: 2px solid rgb(28, 23, 97); 
+  padding: 0.5rem 0.6rem 0rem 0.6rem;
+  text-align: left;
+}
+
+.prose th {
+  background-color: rgb(4, 4, 22); 
+  color: white; 
+  font-weight: bold;
+}
+
+
+.prose .selectedCell:after {
+  background: gray;
+  content: "";
+  left: 0;
+  right: 0;
+  top: 0;
+  bottom: 0;
+  pointer-events: none;
+  position: absolute;
+  z-index: 2;
+}
+
+.prose .column-resize-handle {
+  background-color: purple;
+  bottom: -2px;
+  pointer-events: none;
+  position: absolute;
+  right: -2px;
+  top: 0;
+  width: 4px;
+}
+
+.prose .tableWrapper {
+  margin: 1.5rem 0;
+  overflow-x: auto;
+}
+
+.prose.resize-cursor {
+  cursor: ew-resize;
+  cursor: col-resize;
 }

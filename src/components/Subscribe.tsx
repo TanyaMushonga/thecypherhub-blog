@@ -32,7 +32,7 @@ function SUbscribe() {
       );
 
       if (response.status === 201) {
-        toast(response.data.message);
+        toast.success(response.data.message);
       }
       setLoading(false);
       setEmail("");
