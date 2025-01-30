@@ -19,7 +19,7 @@ const Footer: React.FC = () => {
         ))}
       </div>
       <p className="mt-4 text-white">
-        &copy; {new Date().getFullYear()} The dev cycle. All rights reserved.
+        &copy; {new Date().getFullYear()} The Cypher Hub. All rights reserved.
       </p>
     </footer>
   );
