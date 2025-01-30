@@ -29,7 +29,7 @@ function Navbar() {
       <div className="container mx-auto px-4 py-4 flex justify-between items-center">
         <div className="text-2xl font-bold">
           <Link className="text-white" href="/">
-            The Dev Cycle
+            The Cypher Hub
           </Link>
         </div>
         <Dialog>
