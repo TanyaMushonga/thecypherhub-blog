@@ -8,8 +8,8 @@ import Footer from "@/components/footer";
 const inter = Inter({ subsets: ["latin"] });
 export const metadata: Metadata = {
   title: {
-    template: "%s - The dev cycle newsletter",
-    default: "The dev cycle newsletter",
+    template: "%s - The Cypher Hub newsletter",
+    default: "The Cypher Hub newsletter",
   },
   description:
     "This is a newsletter for developers who want to stay updated with the latest trends in the tech industry.",
