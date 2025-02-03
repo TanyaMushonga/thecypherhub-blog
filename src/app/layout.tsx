@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import Script from "next/script";
 import "./globals.css";
 import { Toaster } from "react-hot-toast";
 import { Inter } from "next/font/google";
@@ -27,6 +28,24 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={`${inter.className} antialiased`}>
+        <Script
+          strategy="afterInteractive"
+          src={`https://www.googletagmanager.com/gtag/js?id=G-JR6E9NN6ZR`}
+        />
+        <Script
+          id="google-analytics"
+          strategy="afterInteractive"
+          dangerouslySetInnerHTML={{
+            __html: `
+              window.dataLayer = window.dataLayer || [];
+              function gtag(){dataLayer.push(arguments);}
+              gtag('js', new Date());
+              gtag('config', 'G-JR6E9NN6ZR', {
+                page_path: window.location.pathname,
+              });
+            `,
+          }}
+        />
         <div className="min-h-screen bg-background text-foreground">
           <NavBar />
           <div className="pt-10"> {children}</div>
