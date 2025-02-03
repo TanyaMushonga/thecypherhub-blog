@@ -30,7 +30,7 @@ export default function RootLayout({
       <body className={`${inter.className} antialiased`}>
         <Script
           strategy="afterInteractive"
-          src={`https://www.googletagmanager.com/gtag/js?id=G-JR6E9NN6ZR`}
+          src={`https://www.googletagmanager.com/gtag/js?id=${process.env.GOOGLE_ANALYTICS_ID}`}
         />
         <Script
           id="google-analytics"
@@ -40,7 +40,7 @@ export default function RootLayout({
               window.dataLayer = window.dataLayer || [];
               function gtag(){dataLayer.push(arguments);}
               gtag('js', new Date());
-              gtag('config', 'G-JR6E9NN6ZR', {
+              gtag('config', '${process.env.GOOGLE_ANALYTICS_ID}', {
                 page_path: window.location.pathname,
               });
             `,
