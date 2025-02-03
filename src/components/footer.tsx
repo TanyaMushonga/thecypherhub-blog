@@ -8,6 +8,7 @@ const Footer: React.FC = () => {
       <div className="flex justify-center space-x-4">
         {Navitems.map((social, index) => (
           <Link
+            prefetch={false}
             key={index}
             href={social.link}
             target="_blank"
