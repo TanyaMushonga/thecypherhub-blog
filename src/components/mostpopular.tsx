@@ -15,7 +15,7 @@ function Mostpopular() {
     <div className="lg:flex flex-col hidden gap-4 mb-4">
       <div className="flex flex-row justify-between items-center">
         <p className="text-white text-xl font-bold">Most Popular</p>
-        <Link className="text-white" href={"/all"}>
+        <Link prefetch={false} className="text-white" href={"/all"}>
           VIEW ALL
         </Link>
       </div>
@@ -52,7 +52,6 @@ function Mostpopular() {
                   alt="article cover"
                   className="rounded-md"
                   priority
-                 
                 />
               </div>
             ))}
