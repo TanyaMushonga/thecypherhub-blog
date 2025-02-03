@@ -36,7 +36,7 @@ function SUbscribe() {
       }
       setLoading(false);
       setEmail("");
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
     } catch (error: any) {
       if (error.response) {
         setErrors(error.response.data.error);
@@ -62,7 +62,7 @@ function SUbscribe() {
           <input
             type="email"
             placeholder="Enter your email"
-            className="w-full p-2 rounded-[6px] bg-black text-white"
+            className="rounded-md px-4 py-2 text-white focus:outline-none bg-card"
             value={email}
             onChange={onChange}
           />
