@@ -29,7 +29,7 @@ function ArticleLists({
             {filterArticlesByCategory(allArticle, value)
               .slice(0, 13)
               .map((article) => (
-                <Article key={article.id} blog={article} />
+                <Article key={article.id} blog={article} className="" />
               ))}
           </div>
           {allArticle.length > 13 && (
