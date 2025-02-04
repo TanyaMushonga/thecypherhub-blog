@@ -4,6 +4,12 @@ import "./globals.css";
 import { Toaster } from "react-hot-toast";
 import NavBar from "@/components/NavBar";
 import Footer from "@/components/footer";
+import { Inter } from "next/font/google";
+
+const inter = Inter({
+  subsets: ["latin"],
+  variable: "--font-inter",
+});
 
 export const metadata: Metadata = {
   title: {
@@ -14,6 +20,8 @@ export const metadata: Metadata = {
     "This is a newsletter for developers who want to stay updated with the latest trends in the tech industry.",
   twitter: {
     card: "summary_large_image",
+    creator: "@thecypherhub",
+    site: "@thecypherhub",
   },
   metadataBase: new URL(process.env.NEXT_PUBLIC_BASE_URL!),
 };
@@ -25,7 +33,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className={`antialiased`}>
+      <body className={`${inter.variable} antialiased`}>
         <Script
           strategy="afterInteractive"
           src={`https://www.googletagmanager.com/gtag/js?id=${process.env.GOOGLE_ANALYTICS_ID}`}
