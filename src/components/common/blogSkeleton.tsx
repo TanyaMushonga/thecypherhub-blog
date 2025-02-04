@@ -1,6 +1,6 @@
 import { Skeleton } from "@/components/ui/skeleton";
 
-export function SkeletonCard() {
+export function BlogSkeleton() {
   return (
     <div className="grid xl:grid-cols-4 lg:grid-cols-3 md:grid-cols-2 grid-cols-1 gap-8 md:gap-4">
       <div className="flex flex-col space-y-3">
