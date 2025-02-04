@@ -1,18 +1,20 @@
-"use client";
 import Article from "./article";
-import { useArticle } from "@/store";
 
-function Related() {
-  const blogs = useArticle((state) => state.blog);
-
+function Related({ related }: { related: Article[] }) {
   return (
-    <div className="w-full border-t-2  border-slate-500 p-5">
+    <div className="w-full border-t-2 border-slate-500 p-5">
       <h1 className="text-white font-bold text-xl">Explore related posts</h1>
-      <div className="w-full h-full mt-4 flex md:flex-row flex-col gap-5 overflow-auto">
-        {blogs.slice(1, 4).map((blog) => (
-          <Article key={blog.id} blog={blog} />
-        ))}
-      </div>
+      {related.length > 0 ? (
+        <div className="w-full h-full mt-4 flex md:flex-row flex-col gap-5 overflow-auto ">
+          {related.map((blog) => (
+            <Article key={blog.id} blog={blog} className="w-1/3" />
+          ))}
+        </div>
+      ) : (
+        <div className="flex justify-center items-center">
+          <p className="text-slate-300 mt-4">No related posts found.</p>
+        </div>
+      )}
     </div>
   );
 }
