@@ -2,7 +2,7 @@
 import Image from "next/image";
 import { useRouter } from "next/navigation";
 import React from "react";
-import { DialogClose } from "./ui/dialog";
+import { DialogClose } from "../ui/dialog";
 
 function SearchList({ article }: { article: Article }) {
   const router = useRouter();

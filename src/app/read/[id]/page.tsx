@@ -1,34 +1,54 @@
-import React from "react";
+import React, { Suspense } from "react";
 import { BackgroundBeamsWithCollision } from "@/components/ui/background-beams-with-collision";
-import SUbscribe from "@/components/Subscribe";
-import Related from "@/components/related";
-import Read from "@/components/read";
+import SUbscribe from "@/components/common/Subscribe";
+import Related from "@/components/common/related";
+import ReadSkeleton from "@/components/common/readSkeleton";
+import { notFound } from "next/navigation";
 import { Metadata } from "next";
 
-type Params = Promise<{ id: string[] }>;
+const Read = React.lazy(() => import("@/components/common/read"));
+
+async function getArticle(id: string) {
+  const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/blog/${id}`);
+  const article: Article = await res.json();
+  if (!article) notFound();
+  return article;
+}
+
+async function getRelated(id: string) {
+  const currentBlog: Article = await getArticle(id);
+  const currentBlogCategory = currentBlog?.category;
+  const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/blog`);
+  const article = await res.json();
+  const related: Article[] = article.filter(
+    (related: Article) => related.category === currentBlogCategory
+  );
+  if (!related) notFound();
+  return related.slice(0, 3);
+}
 
 export async function generateStaticParams() {
-  const blogs = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/blog`).then(
-    (res) => res.json()
-  );
+  const blogs: Article[] = await fetch(
+    `${process.env.NEXT_PUBLIC_API_URL}/blog`
+  ).then((res) => res.json());
 
   if (!blogs) {
-    return {
-      notFound: true,
-    };
+    return [];
   }
 
   return blogs.map((post: Article) => ({
-    id: post.id,
+    id: String(post.id),
   }));
 }
 
-export async function generateMetadata({
-  params,
-}: {
-  params: Params;
-}): Promise<Metadata> {
-  const { id } = await params;
+interface PageProps {
+  params: {
+    id: string;
+  };
+}
+
+export async function generateMetadata({ params }: PageProps): Promise<Metadata> {
+  const { id } = params;
 
   try {
     const article = await fetch(
@@ -45,16 +65,13 @@ export async function generateMetadata({
     return {
       title: article?.title,
       description: article?.description,
-      twitter: {
-        card: "summary_large_image",
-      },
       openGraph: {
         images: [
           {
             url: article?.coverImgUrl,
+            width: 800,
+            height: 600,
             alt: article?.title,
-            width: 1200,
-            height: 630,
           },
         ],
       },
@@ -67,16 +84,23 @@ export async function generateMetadata({
     };
   }
 }
-function page() {
+
+export default async function Page({ params }: PageProps) {
+  const { id } = params;
+  const blog = await getArticle(id);
+  const related = await getRelated(id);
+
   return (
     <BackgroundBeamsWithCollision>
       <div className="xl:w-1/2 w-full mx-auto p-5 flex flex-col gap-5 mt-5">
-        <Read />
-        <Related />
+        <Suspense fallback={<ReadSkeleton />}>
+          <Read article={blog} />
+        </Suspense>
+        <Suspense fallback={<p className="text-slate-200">Loading...</p>}>
+          <Related related={related} />
+        </Suspense>
         <SUbscribe />
       </div>
     </BackgroundBeamsWithCollision>
   );
 }
-
-export default page;
