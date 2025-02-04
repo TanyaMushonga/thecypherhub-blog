@@ -1,16 +1,20 @@
-import React from "react";
+export const revalidate = 86400;
+export const dynamicParams = true;
+
+import React, { Suspense } from "react";
 import { BackgroundBeamsWithCollision } from "@/components/ui/background-beams-with-collision";
 import SUbscribe from "@/components/common/Subscribe";
 import Related from "@/components/common/related";
 import Read from "@/components/common/read";
 import { Metadata } from "next";
+import ReadSkeleton from "@/components/common/readSkeleton";
 
 type Params = Promise<{ id: string[] }>;
 
 export async function generateStaticParams() {
-  const blogs = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/blog`).then(
-    (res) => res.json()
-  );
+  const blogs: Article[] = await fetch(
+    `${process.env.NEXT_PUBLIC_API_URL}/blog`
+  ).then((res) => res.json());
 
   if (!blogs) {
     return {
@@ -19,7 +23,7 @@ export async function generateStaticParams() {
   }
 
   return blogs.map((post: Article) => ({
-    id: post.id,
+    id: String(post.id),
   }));
 }
 
@@ -67,16 +71,25 @@ export async function generateMetadata({
     };
   }
 }
-function page() {
+export default async function Page({
+  params,
+}: {
+  params: Promise<{ id: string }>;
+}) {
+  const id = (await params).id;
+  const blog: Article = await fetch(
+    `${process.env.NEXT_PUBLIC_API_URL}/blog/${id}`
+  ).then((res) => res.json());
+
   return (
     <BackgroundBeamsWithCollision>
       <div className="xl:w-1/2 w-full mx-auto p-5 flex flex-col gap-5 mt-5">
-        <Read />
+        <Suspense fallback={<ReadSkeleton />}>
+          <Read article={blog} />
+        </Suspense>
         <Related />
         <SUbscribe />
       </div>
     </BackgroundBeamsWithCollision>
   );
 }
-
-export default page;
