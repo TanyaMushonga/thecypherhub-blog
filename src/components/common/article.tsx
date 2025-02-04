@@ -6,7 +6,7 @@ import React from "react";
 import { useRouter } from "next/navigation";
 import { BsDot } from "react-icons/bs";
 
-function Article({ blog }: { blog: Article }) {
+function Article({ blog, className }: { blog: Article; className: string }) {
   const router = useRouter();
 
   const handleClick = () => {
@@ -19,7 +19,7 @@ function Article({ blog }: { blog: Article }) {
 
   return (
     <div
-      className="flex flex-col w-full relative cursor-pointer"
+      className={`flex flex-col gap-4 bg-card p-4 rounded-md cursor-pointer ${className}`}
       onClick={handleClick}
     >
       <div className="w-auto h-auto">
@@ -30,7 +30,6 @@ function Article({ blog }: { blog: Article }) {
           alt="blog cover"
           className="rounded-md"
           priority
-         
         />
       </div>
       <div className="flex flex-col gap-2">
