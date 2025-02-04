@@ -1,12 +1,10 @@
-export const revalidate = 86400;
-export const dynamicParams = true;
-
 import React, { Suspense } from "react";
 import { BackgroundBeamsWithCollision } from "@/components/ui/background-beams-with-collision";
 import SUbscribe from "@/components/common/Subscribe";
 import Related from "@/components/common/related";
 import ReadSkeleton from "@/components/common/readSkeleton";
 import { notFound } from "next/navigation";
+import { Metadata } from "next";
 
 const Read = React.lazy(() => import("@/components/common/read"));
 
@@ -35,9 +33,7 @@ export async function generateStaticParams() {
   ).then((res) => res.json());
 
   if (!blogs) {
-    return {
-      notFound: true,
-    };
+    return [];
   }
 
   return blogs.map((post: Article) => ({
@@ -45,15 +41,19 @@ export async function generateStaticParams() {
   }));
 }
 
-export async function generateMetadata({
-  params,
-}: {
-  params: Promise<{ id: string }>;
-}) {
-  const { id } = await params;
+interface PageProps {
+  params: {
+    id: string;
+  };
+}
+
+export async function generateMetadata({ params }: PageProps): Promise<Metadata> {
+  const { id } = params;
 
   try {
-    const article = await getArticle(id);
+    const article = await fetch(
+      `${process.env.NEXT_PUBLIC_API_URL}/blog/${id}`
+    ).then((res) => res.json());
 
     if (!article) {
       return {
@@ -65,16 +65,13 @@ export async function generateMetadata({
     return {
       title: article?.title,
       description: article?.description,
-      twitter: {
-        card: "summary_large_image",
-      },
       openGraph: {
         images: [
           {
             url: article?.coverImgUrl,
+            width: 800,
+            height: 600,
             alt: article?.title,
-            width: 1200,
-            height: 630,
           },
         ],
       },
@@ -87,12 +84,9 @@ export async function generateMetadata({
     };
   }
 }
-export default async function Page({
-  params,
-}: {
-  params: Promise<{ id: string }>;
-}) {
-  const { id } = await params;
+
+export default async function Page({ params }: PageProps) {
+  const { id } = params;
   const blog = await getArticle(id);
   const related = await getRelated(id);
 
