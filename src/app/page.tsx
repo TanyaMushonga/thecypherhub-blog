@@ -9,7 +9,7 @@ import { Suspense } from "react";
 
 export default async function Home() {
   const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/blog`);
-  const data = await response.json();
+  const data: Article[] = await response.json();
   const latestBlog = data[0];
 
   return (
