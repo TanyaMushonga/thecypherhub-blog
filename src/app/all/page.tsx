@@ -1,11 +1,5 @@
-import AllArticles from "@/components/allArticles";
-import { Metadata } from "next";
+import AllArticles from "@/components/common/allArticles";
 import React from "react";
-
-export const metadata: Metadata = {
-  title: "Explore"
-}
-
 
 function page() {
   return (

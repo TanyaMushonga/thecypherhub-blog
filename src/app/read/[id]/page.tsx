@@ -1,8 +1,8 @@
 import React from "react";
 import { BackgroundBeamsWithCollision } from "@/components/ui/background-beams-with-collision";
-import SUbscribe from "@/components/Subscribe";
-import Related from "@/components/related";
-import Read from "@/components/read";
+import SUbscribe from "@/components/common/Subscribe";
+import Related from "@/components/common/related";
+import Read from "@/components/common/read";
 import { Metadata } from "next";
 
 type Params = Promise<{ id: string[] }>;

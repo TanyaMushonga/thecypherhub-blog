@@ -1,6 +1,6 @@
-import ArticleTabs from "@/components/articleTabs";
-import Latestblog from "@/components/latestblog";
-import Mostpopular from "@/components/mostpopular";
+import ArticleTabs from "@/components/common/articleTabs";
+import Latestblog from "@/components/common/latestblog";
+import Mostpopular from "@/components/common/mostpopular";
 import { BackgroundBeamsWithCollision } from "@/components/ui/background-beams-with-collision";
 
 export default function Home() {

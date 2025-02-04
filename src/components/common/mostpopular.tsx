@@ -5,8 +5,8 @@ import React from "react";
 import { useRouter } from "next/navigation";
 import { LuPin } from "react-icons/lu";
 import { formatDate, getRandomArticles } from "@/lib/utils";
-import MostPopularSkeleton from "./mostPopularSkeleton";
 import { useFetchArticles } from "@/hooks/useFetchBlogs";
+import MostPopularSkeleton from "./mostPopularSkeleton";
 
 function Mostpopular() {
   const router = useRouter();

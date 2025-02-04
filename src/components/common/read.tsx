@@ -6,7 +6,7 @@ import { formatDate } from "@/lib/utils";
 import Link from "next/link";
 import { LuPin } from "react-icons/lu";
 import { MdTimer } from "react-icons/md";
-import CopyLink from "@/components/copyLink";
+import CopyLink from "@/components/common/copyLink";
 import { notFound, useParams } from "next/navigation";
 import axios from "axios";
 import ReadSkeleton from "./readSkeleton";

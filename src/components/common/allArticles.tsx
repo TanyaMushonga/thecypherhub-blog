@@ -1,6 +1,6 @@
-'use client'
+"use client";
 import React from "react";
-import { ParallaxScroll } from "./ui/parallax-scroll";
+import { ParallaxScroll } from "../ui/parallax-scroll";
 import { useFetchArticles } from "@/hooks/useFetchBlogs";
 
 function AllArticles() {

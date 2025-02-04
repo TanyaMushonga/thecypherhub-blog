@@ -7,7 +7,7 @@ import { useFetchArticles } from "@/hooks/useFetchBlogs";
 import { useRouter } from "next/navigation";
 
 function ArticleLists({ value }: { value: string }) {
-  const { articles, loading} = useFetchArticles(value);
+  const { articles, loading } = useFetchArticles(value);
   const router = useRouter();
 
   return (
@@ -20,7 +20,7 @@ function ArticleLists({ value }: { value: string }) {
             <>
               <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4 md:gap-8">
                 {articles.slice(0, 13).map((article) => (
-                 <Article key={article.id} blog={article} />
+                  <Article key={article.id} blog={article} />
                 ))}
               </div>
               {articles.length > 13 && (

@@ -3,7 +3,7 @@ import { useScroll, useTransform } from "framer-motion";
 import { useRef } from "react";
 import { motion } from "framer-motion";
 import { cn } from "@/lib/utils";
-import Article from "../article";
+import Article from "../common/article";
 
 export const ParallaxScroll = ({
   articles,
@@ -30,7 +30,10 @@ export const ParallaxScroll = ({
 
   return (
     <div
-      className={cn("min-h-[40rem] items-start overflow-y-auto w-full ", className)}
+      className={cn(
+        "min-h-[40rem] items-start overflow-y-auto w-full ",
+        className
+      )}
       ref={gridRef}
     >
       <div
