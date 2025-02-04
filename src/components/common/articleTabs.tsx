@@ -2,7 +2,7 @@ import React from "react";
 import ArticleLists from "./articleLists";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 
-function ArticleTabs() {
+function ArticleTabs({allArticle}: {allArticle: Article[]}) {
   return (
     <div>
       <Tabs defaultValue="all" className="w-full">
@@ -18,13 +18,13 @@ function ArticleTabs() {
           </TabsTrigger>
         </TabsList>
         <TabsContent value="system_design">
-          <ArticleLists value="system-design" />
+          <ArticleLists value="system-design" allArticle={allArticle} />
         </TabsContent>
         <TabsContent value="devops">
-          <ArticleLists value="devops" />
+          <ArticleLists value="devops"  allArticle={allArticle} />
         </TabsContent>
         <TabsContent value="all">
-          <ArticleLists value="all" />
+          <ArticleLists value="all"  allArticle={allArticle} />
         </TabsContent>
       </Tabs>
     </div>
