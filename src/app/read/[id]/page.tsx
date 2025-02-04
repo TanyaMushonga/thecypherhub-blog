@@ -5,11 +5,29 @@ import React, { Suspense } from "react";
 import { BackgroundBeamsWithCollision } from "@/components/ui/background-beams-with-collision";
 import SUbscribe from "@/components/common/Subscribe";
 import Related from "@/components/common/related";
-import Read from "@/components/common/read";
-import { Metadata } from "next";
 import ReadSkeleton from "@/components/common/readSkeleton";
+import { notFound } from "next/navigation";
 
-type Params = Promise<{ id: string[] }>;
+const Read = React.lazy(() => import("@/components/common/read"));
+
+async function getArticle(id: string) {
+  const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/blog/${id}`);
+  const article: Article = await res.json();
+  if (!article) notFound();
+  return article;
+}
+
+async function getRelated(id: string) {
+  const currentBlog: Article = await getArticle(id);
+  const currentBlogCategory = currentBlog?.category;
+  const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/blog`);
+  const article = await res.json();
+  const related: Article[] = article.filter(
+    (related: Article) => related.category === currentBlogCategory
+  );
+  if (!related) notFound();
+  return related.slice(0, 3);
+}
 
 export async function generateStaticParams() {
   const blogs: Article[] = await fetch(
@@ -30,14 +48,12 @@ export async function generateStaticParams() {
 export async function generateMetadata({
   params,
 }: {
-  params: Params;
-}): Promise<Metadata> {
+  params: Promise<{ id: string }>;
+}) {
   const { id } = await params;
 
   try {
-    const article = await fetch(
-      `${process.env.NEXT_PUBLIC_API_URL}/blog/${id}`
-    ).then((res) => res.json());
+    const article = await getArticle(id);
 
     if (!article) {
       return {
@@ -76,10 +92,9 @@ export default async function Page({
 }: {
   params: Promise<{ id: string }>;
 }) {
-  const id = (await params).id;
-  const blog: Article = await fetch(
-    `${process.env.NEXT_PUBLIC_API_URL}/blog/${id}`
-  ).then((res) => res.json());
+  const { id } = await params;
+  const blog = await getArticle(id);
+  const related = await getRelated(id);
 
   return (
     <BackgroundBeamsWithCollision>
@@ -87,7 +102,9 @@ export default async function Page({
         <Suspense fallback={<ReadSkeleton />}>
           <Read article={blog} />
         </Suspense>
-        <Related />
+        <Suspense fallback={<p className="text-slate-200">Loading...</p>}>
+          <Related related={related} />
+        </Suspense>
         <SUbscribe />
       </div>
     </BackgroundBeamsWithCollision>
