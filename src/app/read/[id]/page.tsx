@@ -27,28 +27,41 @@ async function getRelated(id: string) {
   return related.slice(0, 3);
 }
 
-export async function generateStaticParams() {
-  const blogs: Article[] = await fetch(
-    `${process.env.NEXT_PUBLIC_API_URL}/blog`
-  ).then((res) => res.json());
+// export async function generateStaticParams() {
+//   const pageSize = 10; // Adjust the page size as needed
+//   let page = 1;
+//   let allBlogs: Article[] = [];
+//   let blogs: Article[] = [];
 
-  if (!blogs) {
-    return [];
-  }
+//   do {
+//     blogs = await fetch(
+//       `${process.env.NEXT_PUBLIC_API_URL}/blog?page=${page}&pageSize=${pageSize}`
+//     ).then((res) => res.json());
 
-  return blogs.map((post: Article) => ({
-    id: String(post.id),
-  }));
-}
+//     if (blogs && blogs.length > 0) {
+//       allBlogs = allBlogs.concat(blogs);
+//       page++;
+//     }
+//   } while (blogs && blogs.length === pageSize);
 
+//   if (!allBlogs) {
+//     return [];
+//   }
+
+//   return allBlogs.map((post: Article) => ({
+//     id: String(post.id),
+//   }));
+// }
 interface PageProps {
   params: {
     id: string;
   };
 }
 
-export async function generateMetadata({ params }: PageProps): Promise<Metadata> {
-  const { id } = params;
+export async function generateMetadata({
+  params,
+}: PageProps): Promise<Metadata> {
+  const { id } = await params;
 
   try {
     const article = await fetch(
@@ -86,7 +99,7 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
 }
 
 export default async function Page({ params }: PageProps) {
-  const { id } = params;
+  const { id } = await params;
   const blog = await getArticle(id);
   const related = await getRelated(id);
 
