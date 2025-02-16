@@ -8,9 +8,10 @@ import { BackgroundBeamsWithCollision } from "@/components/ui/background-beams-w
 import { Suspense } from "react";
 
 export default async function Home() {
-  const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/blog`);
-  const data: Article[] = await response.json();
-  const latestBlog = data[0];
+  const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/blog`);
+  const data = await res.json();
+  const articles: Article[] = data.blogs;
+  const latestBlog = articles[0];
 
   return (
     <BackgroundBeamsWithCollision className="pt-10">
@@ -18,10 +19,10 @@ export default async function Home() {
         <Suspense fallback={<LatestSkeleton />}></Suspense>
         <Latestblog latestBlog={latestBlog} />
         <Suspense fallback={<MostPopularSkeleton />}>
-          <Mostpopular mostPopular={data} />
+          <Mostpopular mostPopular={articles} />
         </Suspense>
         <Suspense fallback={<BlogSkeleton />}>
-          <ArticleTabs allArticle={data} />
+          <ArticleTabs allArticle={articles} />
         </Suspense>
       </div>
     </BackgroundBeamsWithCollision>
