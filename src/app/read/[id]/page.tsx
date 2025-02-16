@@ -10,7 +10,8 @@ const Read = React.lazy(() => import("@/components/common/read"));
 
 async function getArticle(id: string) {
   const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/blog/${id}`);
-  const article: Article = await res.json();
+  const data = await res.json();
+  const article: Article = data.blog;
   if (!article) notFound();
   return article;
 }
@@ -19,39 +20,48 @@ async function getRelated(id: string) {
   const currentBlog: Article = await getArticle(id);
   const currentBlogCategory = currentBlog?.category;
   const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/blog`);
-  const article = await res.json();
-  const related: Article[] = article.filter(
+  const data = await res.json();
+  const articles: Article[] = data.blogs;
+
+  if (!Array.isArray(articles)) {
+    throw new Error("Expected articles to be an array");
+  }
+
+  const related: Article[] = articles.filter(
     (related: Article) => related.category === currentBlogCategory
   );
-  if (!related) notFound();
+
+  if (!related.length) notFound();
   return related.slice(0, 3);
 }
 
-// export async function generateStaticParams() {
-//   const pageSize = 10; // Adjust the page size as needed
-//   let page = 1;
-//   let allBlogs: Article[] = [];
-//   let blogs: Article[] = [];
+export async function generateStaticParams() {
+  const pageSize = 5;
+  let page = 1;
+  let allBlogs: Article[] = [];
+  let data = [];
+  let blogs: Article[] = [];
 
-//   do {
-//     blogs = await fetch(
-//       `${process.env.NEXT_PUBLIC_API_URL}/blog?page=${page}&pageSize=${pageSize}`
-//     ).then((res) => res.json());
+  do {
+    data = await fetch(
+      `${process.env.NEXT_PUBLIC_API_URL}/blog?page=${page}&page_size=${pageSize}`
+    ).then((res) => res.json());
+    blogs = data.blogs;
 
-//     if (blogs && blogs.length > 0) {
-//       allBlogs = allBlogs.concat(blogs);
-//       page++;
-//     }
-//   } while (blogs && blogs.length === pageSize);
+    if (blogs && blogs.length > 0) {
+      allBlogs = allBlogs.concat(blogs);
+      page++;
+    }
+  } while (blogs && blogs.length === pageSize);
 
-//   if (!allBlogs) {
-//     return [];
-//   }
+  if (!allBlogs) {
+    return [];
+  }
 
-//   return allBlogs.map((post: Article) => ({
-//     id: String(post.id),
-//   }));
-// }
+  return allBlogs.map((post: Article) => ({
+    id: String(post.id),
+  }));
+}
 interface PageProps {
   params: {
     id: string;
@@ -109,7 +119,7 @@ export default async function Page({ params }: PageProps) {
         <Suspense fallback={<ReadSkeleton />}>
           <Read article={blog} />
         </Suspense>
-        <Suspense fallback={<p className="text-slate-200">Loading...</p>}>
+        <Suspense fallback={<ReadSkeleton />}>
           <Related related={related} />
         </Suspense>
         <SUbscribe />
