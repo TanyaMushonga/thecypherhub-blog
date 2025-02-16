@@ -4,8 +4,9 @@ import React, { Suspense } from "react";
 const Search = React.lazy(() => import("./search"));
 
 export default async function Navbar() {
-  const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/blog`);
-  const data: Article[] = await response.json();
+  const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/blog`);
+  const data = await res.json();
+  const articles: Article[] = data.blogs;
 
   return (
     <nav className="fixed top-0 left-0 w-full bg-secondary backdrop-blur-md z-50">
@@ -16,7 +17,7 @@ export default async function Navbar() {
           </Link>
         </div>
         <Suspense fallback={<div>Loading search...</div>}>
-          <Search articles={data} />
+          <Search articles={articles} />
         </Suspense>
       </div>
     </nav>
