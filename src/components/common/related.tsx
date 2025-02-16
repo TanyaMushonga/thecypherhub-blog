@@ -7,7 +7,7 @@ function Related({ related }: { related: Article[] }) {
       {related.length > 0 ? (
         <div className="w-full h-full mt-4 flex md:flex-row flex-col gap-5 overflow-auto ">
           {related.map((blog) => (
-            <Article key={blog.id} blog={blog} className="w-1/3" />
+            <Article key={blog.id} blog={blog} className="w-full md:w-1/3" />
           ))}
         </div>
       ) : (
