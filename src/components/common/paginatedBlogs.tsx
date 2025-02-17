@@ -13,13 +13,15 @@ function PaginatedBlogs() {
   const totalPages = Math.ceil(totalCount / 10);
 
   return (
-    <div className="flex flex-col items-center min-h-screen">
+    <div className="flex flex-col items-center min-h-screen md:mt-10">
       {loading ? (
-        <div className="h-full w-fit mt-20">
-          <BlogSkeleton />{" "}
+        <div className="h-full w-fit mt-10">
+          <BlogSkeleton />
         </div>
       ) : (
-        <ParallaxScroll articles={articles} />
+        <>
+          <ParallaxScroll articles={articles} />
+        </>
       )}
       <div className="flex flex-col items-center mt-4">
         <div className="flex gap-2 mb-4">
