@@ -17,11 +17,14 @@ type Props = {
 
 async function getArticle(id: string) {
   const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/blog/${id}`);
+
   if (!res.ok) {
     throw new Error(`Failed to fetch article with id ${id}: ${res.statusText}`);
   }
-  const data = await res.json();
+
+  const data = await res.clone().json();
   const article: Article = data;
+
   if (!article) notFound();
   return article;
 }
@@ -29,11 +32,14 @@ async function getArticle(id: string) {
 async function getRelated(id: string) {
   const currentBlog: Article = await getArticle(id);
   const currentBlogCategory = currentBlog?.category;
+
   const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/blog`);
+
   if (!res.ok) {
     throw new Error(`Failed to fetch related articles: ${res.statusText}`);
   }
-  const data = await res.json();
+
+  const data = await res.clone().json();
   const articles: Article[] = data.blogs;
 
   if (!Array.isArray(articles)) {
