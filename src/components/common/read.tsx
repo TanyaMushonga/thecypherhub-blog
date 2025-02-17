@@ -48,7 +48,7 @@ function Read({ article }: { article: Article }) {
                 <div className="flex flex-row items-center md:justify-center">
                   <Link
                     prefetch={false}
-                    href={"https://tanya-mushonga.vercel.app/"}
+                    href={"https://tanyaradzwatmushonga.me"}
                     className="text-slate-300 cursor-pointer hover:underline mr-5 text-lg"
                     target="_blank"
                     rel="noopener noreferrer"
