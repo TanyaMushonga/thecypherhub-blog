@@ -58,7 +58,10 @@ function SUbscribe() {
       </p>
       {errors && <p className="text-red-600 text-lg mt-2">{errors}</p>}
       <div className="flex w-full max-w-sm items-center space-x-2 mt-4">
-        <form className="flex flex-wrap  w-full space-x-4" onSubmit={onSubmit}>
+        <form
+          className="flex md:flex-row flex-col gap-4 w-full"
+          onSubmit={onSubmit}
+        >
           <input
             type="email"
             placeholder="Enter your email"
@@ -67,7 +70,7 @@ function SUbscribe() {
             onChange={onChange}
             aria-label="Enter your email to subscribe"
           />
-          <button className="p-[3px] relative">
+          <button className="p-[3px] relative w-fit">
             <div className="absolute inset-0 bg-gradient-to-r from-indigo-500 to-blue-500 rounded-lg" />
             <div className="px-8 py-2  bg-black rounded-[6px]  relative group transition duration-200 text-white hover:bg-transparent">
               {loading ? "Submiting" : "Subscribe"}
