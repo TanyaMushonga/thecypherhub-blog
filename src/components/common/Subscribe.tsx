@@ -65,6 +65,7 @@ function SUbscribe() {
             className="rounded-md px-4 py-2 text-white focus:outline-none bg-card"
             value={email}
             onChange={onChange}
+            aria-label="Enter your email to subscribe"
           />
           <button className="p-[3px] relative">
             <div className="absolute inset-0 bg-gradient-to-r from-indigo-500 to-blue-500 rounded-lg" />

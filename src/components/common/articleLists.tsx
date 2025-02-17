@@ -38,7 +38,8 @@ function ArticleLists({
                 onClick={() => {
                   router.push(`/all`);
                 }}
-                className="px-8 py-1  border-2 border-slate-50 dark:border-white uppercase bg-white text-black transition duration-200 text-sm "
+                className="px-8 py-1 border-2 border-slate-50 dark:border-white uppercase bg-white text-black transition duration-200 text-sm focus:outline-none focus:ring-2 focus:ring-slate-400 focus:ring-offset-2 focus:ring-offset-slate-50"
+                aria-label="View all articles"
               >
                 View all
               </button>

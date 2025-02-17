@@ -28,12 +28,14 @@ function PaginatedBlogs() {
               <button
                 onClick={() => setPage(1)}
                 className="px-4 py-2 bg-blue-500 text-white rounded"
+                aria-label="First page"
               >
                 First
               </button>
               <button
                 onClick={() => setPage((prev) => Math.max(prev - 1, 1))}
                 className="px-4 py-2 bg-blue-500 text-white rounded"
+                aria-label="Previous page"
               >
                 <FaArrowLeft />
               </button>
@@ -46,12 +48,14 @@ function PaginatedBlogs() {
                   setPage((prev) => Math.min(prev + 1, totalPages))
                 }
                 className="px-4 py-2 bg-blue-500 text-white rounded"
+                aria-label="Next page"
               >
                 <FaArrowRight />
               </button>
               <button
                 onClick={() => setPage(totalPages)}
                 className="px-4 py-2 bg-blue-500 text-white rounded"
+                aria-label="Last page"
               >
                 Last
               </button>
