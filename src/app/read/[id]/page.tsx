@@ -8,9 +8,20 @@ import { Metadata } from "next";
 
 const Read = React.lazy(() => import("@/components/common/read"));
 
+export const revalidate = 345600;
+export const dynamicParams = true;
+
+type Props = {
+  params: Promise<{ id: string }>;
+};
+
 async function getArticle(id: string) {
   const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/blog/${id}`);
-  const article: Article = await res.json();
+  if (!res.ok) {
+    throw new Error(`Failed to fetch article with id ${id}: ${res.statusText}`);
+  }
+  const data = await res.json();
+  const article: Article = data;
   if (!article) notFound();
   return article;
 }
@@ -19,54 +30,38 @@ async function getRelated(id: string) {
   const currentBlog: Article = await getArticle(id);
   const currentBlogCategory = currentBlog?.category;
   const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/blog`);
-  const article = await res.json();
-  const related: Article[] = article.filter(
+  if (!res.ok) {
+    throw new Error(`Failed to fetch related articles: ${res.statusText}`);
+  }
+  const data = await res.json();
+  const articles: Article[] = data.blogs;
+
+  if (!Array.isArray(articles)) {
+    throw new Error("Expected articles to be an array");
+  }
+
+  const related: Article[] = articles.filter(
     (related: Article) => related.category === currentBlogCategory
   );
-  if (!related) notFound();
+
+  if (!related.length) notFound();
   return related.slice(0, 3);
 }
 
-// export async function generateStaticParams() {
-//   const pageSize = 10; // Adjust the page size as needed
-//   let page = 1;
-//   let allBlogs: Article[] = [];
-//   let blogs: Article[] = [];
+export async function generateStaticParams() {
+  const data = await fetch(
+    `${process.env.NEXT_PUBLIC_API_URL}/blog?page=1&page_size=50`
+  ).then((res) => res.json());
+  const blogs: Article[] = data.blogs;
 
-//   do {
-//     blogs = await fetch(
-//       `${process.env.NEXT_PUBLIC_API_URL}/blog?page=${page}&pageSize=${pageSize}`
-//     ).then((res) => res.json());
-
-//     if (blogs && blogs.length > 0) {
-//       allBlogs = allBlogs.concat(blogs);
-//       page++;
-//     }
-//   } while (blogs && blogs.length === pageSize);
-
-//   if (!allBlogs) {
-//     return [];
-//   }
-
-//   return allBlogs.map((post: Article) => ({
-//     id: String(post.id),
-//   }));
-// }
-interface PageProps {
-  params: {
-    id: string;
-  };
+  return blogs.map((blog: Article) => ({ id: blog.id }));
 }
 
-export async function generateMetadata({
-  params,
-}: PageProps): Promise<Metadata> {
-  const { id } = await params;
+export async function generateMetadata({ params }: Props): Promise<Metadata> {
+  const id = (await params).id;
 
   try {
-    const article = await fetch(
-      `${process.env.NEXT_PUBLIC_API_URL}/blog/${id}`
-    ).then((res) => res.json());
+    const article = await getArticle(id);
 
     if (!article) {
       return {
@@ -78,10 +73,24 @@ export async function generateMetadata({
     return {
       title: article?.title,
       description: article?.description,
+      //TODO ADD KEYWORDS
+      authors: [
+        { name: "Tanyaradzwa Tanatswa Mushonga" },
+        {
+          name: "Tanyaradzwa Tanatswa Mushonga",
+          url: "https://www.tanyaradzwatmushonga.me/",
+        },
+      ],
+      publisher: "The Cypher Hub",
+      formatDetection: {
+        telephone: true,
+        email: true,
+        address: true,
+      },
       openGraph: {
         images: [
           {
-            url: article?.coverImgUrl,
+            url: article?.coverImgUrl || "",
             width: 800,
             height: 600,
             alt: article?.title,
@@ -98,8 +107,12 @@ export async function generateMetadata({
   }
 }
 
-export default async function Page({ params }: PageProps) {
-  const { id } = await params;
+export default async function Page({
+  params,
+}: {
+  params: Promise<{ id: string }>;
+}) {
+  const id = (await params).id;
   const blog = await getArticle(id);
   const related = await getRelated(id);
 
@@ -109,7 +122,7 @@ export default async function Page({ params }: PageProps) {
         <Suspense fallback={<ReadSkeleton />}>
           <Read article={blog} />
         </Suspense>
-        <Suspense fallback={<p className="text-slate-200">Loading...</p>}>
+        <Suspense fallback={<ReadSkeleton />}>
           <Related related={related} />
         </Suspense>
         <SUbscribe />

@@ -23,7 +23,21 @@ export const metadata: Metadata = {
     creator: "@thecypherhub",
     site: "@thecypherhub",
   },
+  category: "Technology",
   metadataBase: new URL(process.env.NEXT_PUBLIC_BASE_URL!),
+  robots: {
+    index: true,
+    follow: true,
+    nocache: false,
+    googleBot: {
+      index: true,
+      follow: true,
+      noimageindex: false,
+      "max-video-preview": -1,
+      "max-image-preview": "large",
+      "max-snippet": -1,
+    },
+  },
 };
 
 export default function RootLayout({
