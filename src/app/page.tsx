@@ -16,8 +16,9 @@ export default async function Home() {
   return (
     <BackgroundBeamsWithCollision className="pt-10">
       <div className="xl:w-3/4 w-full mx-auto p-5 flex flex-col gap-5">
-        <Suspense fallback={<LatestSkeleton />}></Suspense>
-        <Latestblog latestBlog={latestBlog} />
+        <Suspense fallback={<LatestSkeleton />}>
+          <Latestblog latestBlog={latestBlog} />
+        </Suspense>
         <Suspense fallback={<MostPopularSkeleton />}>
           <Mostpopular mostPopular={articles} />
         </Suspense>
