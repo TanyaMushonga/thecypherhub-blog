@@ -1,19 +1,39 @@
 import { MetadataRoute } from "next";
 
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
-  const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/blog`);
-  const data: Article[] = await response.json();
+  const pageSize = 10;
+  let page = 1;
+  let allBlogs: Article[] = [];
+  let blogs: Article[] = [];
 
-  const blogEntries: MetadataRoute.Sitemap = data.map(({ id }) => ({
-    url: `${process.env.NEXT_PUBLIC_BASE_URL}read/${id}`,
-lastModified: new Date().toISOString(),
-priority: 0.8,
-  }));
+  do {
+    const response = await fetch(
+      `${process.env.NEXT_PUBLIC_API_URL}/blog?page=${page}&page_size=${pageSize}`
+    );
+    const data = await response.json();
+    blogs = data.blogs;
+
+    if (Array.isArray(blogs) && blogs.length > 0) {
+      allBlogs = allBlogs.concat(blogs);
+      page++;
+    }
+  } while (Array.isArray(blogs) && blogs.length === pageSize);
+
+  const blogEntries: MetadataRoute.Sitemap = allBlogs.map(
+    ({ id, updatedAt }) => ({
+      url: `${process.env.NEXT_PUBLIC_BASE_URL}read/${id}`,
+      lastModified: new Date(updatedAt).toISOString(),
+      priority: 0.9,
+      changeFrequency: "weekly",
+    })
+  );
 
   return [
     {
       url: `${process.env.NEXT_PUBLIC_BASE_URL}`,
       lastModified: new Date().toISOString(),
+      priority: 1,
+      changeFrequency: "daily",
     },
     ...blogEntries,
   ];
