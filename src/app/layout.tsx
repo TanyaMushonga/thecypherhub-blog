@@ -24,7 +24,7 @@ export const metadata: Metadata = {
     site: "@thecypherhub",
   },
   category: "Technology",
-  metadataBase: new URL(process.env.VERCEL_PROJECT_PRODUCTION_URL!),
+  metadataBase: new URL(process.env.NEXT_PUBLIC_BASE_URL!),
   robots: {
     index: true,
     follow: true,

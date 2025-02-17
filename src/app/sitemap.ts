@@ -21,7 +21,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
 
   const blogEntries: MetadataRoute.Sitemap = allBlogs.map(
     ({ id, updatedAt }) => ({
-      url: `${process.env.VERCEL_PROJECT_PRODUCTION_URL}read/${id}`,
+      url: `${process.env.NEXT_PUBLIC_BASE_URL}read/${id}`,
       lastModified: new Date(updatedAt).toISOString(),
       priority: 0.9,
       changeFrequency: "weekly",
@@ -30,7 +30,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
 
   return [
     {
-      url: `${process.env.VERCEL_PROJECT_PRODUCTION_URL}`,
+      url: `${process.env.NEXT_PUBLIC_BASE_URL}`,
       lastModified: new Date().toISOString(),
       priority: 1,
       changeFrequency: "daily",
