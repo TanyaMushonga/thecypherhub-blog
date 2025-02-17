@@ -4,9 +4,7 @@ import React from "react";
 import { MdTimer } from "react-icons/md";
 import { LuPin } from "react-icons/lu";
 import { formatDate } from "@/lib/utils";
-import { BsDot } from "react-icons/bs";
 import { useRouter } from "next/navigation";
-import MyProfile from "./myProfile";
 
 function Latestblog({ latestBlog }: { latestBlog: Article }) {
   const router = useRouter();
@@ -45,10 +43,6 @@ function Latestblog({ latestBlog }: { latestBlog: Article }) {
           <p className="text-slate-300">
             {formatDate(new Date(latestBlog?.createdAt))}
           </p>
-          <div className="flex flex-row items-center md:justify-center">
-            <BsDot className="text-slate-300" />
-            <MyProfile />
-          </div>
         </div>
       </div>
     </div>
