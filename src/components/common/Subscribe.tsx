@@ -58,7 +58,7 @@ function SUbscribe() {
       </p>
       {errors && <p className="text-red-600 text-lg mt-2">{errors}</p>}
       <div className="flex w-full max-w-sm items-center space-x-2 mt-4">
-        <form className="flex w-full space-x-4" onSubmit={onSubmit}>
+        <form className="flex flex-wrap  w-full space-x-4" onSubmit={onSubmit}>
           <input
             type="email"
             placeholder="Enter your email"
