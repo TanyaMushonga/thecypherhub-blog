@@ -8,10 +8,17 @@ import { Metadata } from "next";
 
 const Read = React.lazy(() => import("@/components/common/read"));
 
+export const revalidate = 345600; 
+export const dynamicParams = true;
+
+type Props = {
+  params: Promise<{ id: string }>;
+};
+
 async function getArticle(id: string) {
   const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/blog/${id}`);
   const data = await res.json();
-  const article: Article = data
+  const article: Article = data;
   if (!article) notFound();
   return article;
 }
@@ -36,47 +43,19 @@ async function getRelated(id: string) {
 }
 
 export async function generateStaticParams() {
-  const pageSize = 5;
-  let page = 1;
-  let allBlogs: Article[] = [];
-  let data = [];
-  let blogs: Article[] = [];
+  const data = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/blog`).then(
+    (res) => res.json()
+  );
+  const blogs: Article[] = data.blogs;
 
-  do {
-    data = await fetch(
-      `${process.env.NEXT_PUBLIC_API_URL}/blog?page=${page}&page_size=${pageSize}`
-    ).then((res) => res.json());
-    blogs = data.blogs;
-
-    if (blogs && blogs.length > 0) {
-      allBlogs = allBlogs.concat(blogs);
-      page++;
-    }
-  } while (blogs && blogs.length === pageSize);
-
-  if (!allBlogs) {
-    return [];
-  }
-
-  return allBlogs.map((post: Article) => ({
-    id: String(post.id),
-  }));
-}
-interface PageProps {
-  params: {
-    id: string;
-  };
+  return blogs.map((blog) => ({ params: { id: blog.id } }));
 }
 
-export async function generateMetadata({
-  params,
-}: PageProps): Promise<Metadata> {
-  const { id } = await params;
+export async function generateMetadata({ params }: Props): Promise<Metadata> {
+  const id = (await params).id;
 
   try {
-    const article = await fetch(
-      `${process.env.NEXT_PUBLIC_API_URL}/blog/${id}`
-    ).then((res) => res.json());
+    const article = await getArticle(id);
 
     if (!article) {
       return {
@@ -88,10 +67,24 @@ export async function generateMetadata({
     return {
       title: article?.title,
       description: article?.description,
+      //TODO ADD KEYWORDS
+      authors: [
+        { name: "Tanyaradzwa Tanatswa Mushonga" },
+        {
+          name: "Tanyaradzwa Tanatswa Mushonga",
+          url: "https://www.tanyaradzwatmushonga.me/",
+        },
+      ],
+      publisher: "The Cypher Hub",
+      formatDetection: {
+        telephone: true,
+        email: true,
+        address: true,
+      },
       openGraph: {
         images: [
           {
-            url: article?.coverImgUrl,
+            url: article?.coverImgUrl || "",
             width: 800,
             height: 600,
             alt: article?.title,
@@ -108,8 +101,12 @@ export async function generateMetadata({
   }
 }
 
-export default async function Page({ params }: PageProps) {
-  const { id } = await params;
+export default async function Page({
+  params,
+}: {
+  params: Promise<{ id: string }>;
+}) {
+  const id = (await params).id;
   const blog = await getArticle(id);
   const related = await getRelated(id);
 
