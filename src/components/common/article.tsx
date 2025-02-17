@@ -19,7 +19,7 @@ function Article({ blog, className }: { blog: Article; className: string }) {
 
   return (
     <div
-      className={`flex flex-col gap-4 bg-card p-4 rounded-md cursor-pointer ${className}`}
+      className={`flex flex-col gap-4 bg-card rounded-md cursor-pointer ${className}`}
       onClick={handleClick}
     >
       <div className="w-auto h-auto">
