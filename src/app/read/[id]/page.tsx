@@ -8,7 +8,7 @@ import { Metadata } from "next";
 
 const Read = React.lazy(() => import("@/components/common/read"));
 
-export const revalidate = 345600; 
+export const revalidate = 345600;
 export const dynamicParams = true;
 
 type Props = {
@@ -17,6 +17,9 @@ type Props = {
 
 async function getArticle(id: string) {
   const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/blog/${id}`);
+  if (!res.ok) {
+    throw new Error(`Failed to fetch article with id ${id}: ${res.statusText}`);
+  }
   const data = await res.json();
   const article: Article = data;
   if (!article) notFound();
@@ -27,6 +30,9 @@ async function getRelated(id: string) {
   const currentBlog: Article = await getArticle(id);
   const currentBlogCategory = currentBlog?.category;
   const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/blog`);
+  if (!res.ok) {
+    throw new Error(`Failed to fetch related articles: ${res.statusText}`);
+  }
   const data = await res.json();
   const articles: Article[] = data.blogs;
 
@@ -43,12 +49,12 @@ async function getRelated(id: string) {
 }
 
 export async function generateStaticParams() {
-  const data = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/blog`).then(
-    (res) => res.json()
-  );
+  const data = await fetch(
+    `${process.env.NEXT_PUBLIC_API_URL}/blog?page=1&page_size=50`
+  ).then((res) => res.json());
   const blogs: Article[] = data.blogs;
 
-  return blogs.map((blog) => ({ params: { id: blog.id } }));
+  return blogs.map((blog: Article) => ({ id: blog.id }));
 }
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
