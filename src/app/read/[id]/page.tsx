@@ -11,7 +11,7 @@ const Read = React.lazy(() => import("@/components/common/read"));
 async function getArticle(id: string) {
   const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/blog/${id}`);
   const data = await res.json();
-  const article: Article = data.blog;
+  const article: Article = data
   if (!article) notFound();
   return article;
 }
