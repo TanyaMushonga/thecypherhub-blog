@@ -1,4 +1,3 @@
-"use client";
 import { TracingBeam } from "@/components/ui/tracing-beam";
 import Image from "next/image";
 import { formatDate } from "@/lib/utils";
