@@ -1,5 +1,4 @@
 import React, { Suspense } from "react";
-import { BackgroundBeamsWithCollision } from "@/components/ui/background-beams-with-collision";
 import SUbscribe from "@/components/common/Subscribe";
 import Related from "@/components/common/related";
 import ReadSkeleton from "@/components/common/readSkeleton";
@@ -123,16 +122,14 @@ export default async function Page({
   const related = await getRelated(id);
 
   return (
-    <BackgroundBeamsWithCollision>
-      <div className="xl:w-1/2 w-full mx-auto p-5 flex flex-col gap-5 mt-5">
-        <Suspense fallback={<ReadSkeleton />}>
-          <Read article={blog} />
-        </Suspense>
-        <Suspense fallback={<ReadSkeleton />}>
-          <Related related={related} />
-        </Suspense>
-        <SUbscribe />
-      </div>
-    </BackgroundBeamsWithCollision>
+    <div className="xl:w-1/2 w-full mx-auto p-5 flex flex-col gap-5 mt-5">
+      <Suspense fallback={<ReadSkeleton />}>
+        <Read article={blog} />
+      </Suspense>
+      <Suspense fallback={<ReadSkeleton />}>
+        <Related related={related} />
+      </Suspense>
+      <SUbscribe />
+    </div>
   );
 }
