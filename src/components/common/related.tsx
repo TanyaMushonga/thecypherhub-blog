@@ -1,11 +1,13 @@
-import Article from "./article";
+import dynamic from "next/dynamic";
+import React from "react";
+const Article = dynamic(() => import("./article"));
 
 function Related({ related }: { related: Article[] }) {
   return (
     <div className="w-full border-t-2 border-slate-500 p-5">
       <h1 className="text-white font-bold text-xl">Explore related posts</h1>
       {related.length > 0 ? (
-        <div className="w-full h-full mt-4 flex md:flex-row flex-col gap-5 overflow-auto ">
+        <div className="w-full h-full mt-4 flex md:flex-row flex-col gap-5 overflow-auto">
           {related.map((blog) => (
             <Article key={blog.id} blog={blog} className="w-full md:w-1/3" />
           ))}
@@ -19,4 +21,4 @@ function Related({ related }: { related: Article[] }) {
   );
 }
 
-export default Related;
+export default React.memo(Related);
