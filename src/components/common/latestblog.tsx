@@ -1,30 +1,28 @@
-"use client";
 import Image from "next/image";
 import React from "react";
 import { MdTimer } from "react-icons/md";
 import { LuPin } from "react-icons/lu";
 import { formatDate } from "@/lib/utils";
-import { useRouter } from "next/navigation";
+import RouteLayout from "./routeLayout";
 
 function Latestblog({ latestBlog }: { latestBlog: Article }) {
-  const router = useRouter();
-
   return (
-    <div
+    <RouteLayout
       className="flex md:flex-row flex-col gap-5 items-center pb-5 cursor-pointer"
-      onClick={() => {
-        router.push(`/read/${latestBlog?.id}`);
-      }}
+      link={`/read/${latestBlog?.id}`}
     >
       <Image
-        src={latestBlog?.coverImgUrl || ""}
+        src={latestBlog?.coverImgUrl}
         width={600}
         height={200}
-        alt="latest bog"
+        alt="latest blog"
         className="rounded-md"
         priority
         loading="eager"
         sizes="(max-width: 600px) 100vw, (max-width: 1200px) 50vw, 33vw"
+        placeholder="blur"
+        blurDataURL="/placeholderblur.png"
+        style={{ aspectRatio: "3 / 2" }}
       />
       <div className="flex flex-col md:text-center gap-2 w-full">
         <h1 className="text-white md:text-3xl font-bold text-xl">
@@ -34,19 +32,18 @@ function Latestblog({ latestBlog }: { latestBlog: Article }) {
           {latestBlog?.description}
         </p>
         <div className="flex flex-row items-center gap-2 md:justify-center">
-          {" "}
-          <MdTimer className="text-slate-300" />{" "}
+          <MdTimer className="text-slate-300" />
           <p className="text-slate-300">{latestBlog?.readTime}</p>
         </div>
         <div className="flex flex-row items-center md:justify-center">
-          <LuPin className="text-slate-300 mr-2" />{" "}
+          <LuPin className="text-slate-300 mr-2" />
           <p className="text-slate-300">
             {formatDate(new Date(latestBlog?.createdAt))}
           </p>
         </div>
       </div>
-    </div>
+    </RouteLayout>
   );
 }
 
-export default Latestblog;
+export default React.memo(Latestblog);

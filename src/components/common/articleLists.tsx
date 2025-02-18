@@ -1,6 +1,5 @@
-"use client";
 import Article from "./article";
-import { useRouter } from "next/navigation";
+import RouteLayout from "./routeLayout";
 
 function ArticleLists({
   value,
@@ -9,8 +8,6 @@ function ArticleLists({
   value: string;
   allArticle: Article[];
 }) {
-  const router = useRouter();
-
   function filterArticlesByCategory(
     articles: Article[],
     category: string
@@ -34,15 +31,13 @@ function ArticleLists({
           </div>
           {allArticle.length > 13 && (
             <div className="mt-5">
-              <button
-                onClick={() => {
-                  router.push(`/all`);
-                }}
+              <RouteLayout
+                link="/all"
                 className="px-8 py-1 border-2 border-slate-50 dark:border-white uppercase bg-white text-black transition duration-200 text-sm focus:outline-none focus:ring-2 focus:ring-slate-400 focus:ring-offset-2 focus:ring-offset-slate-50"
                 aria-label="View all articles"
               >
                 View all
-              </button>
+              </RouteLayout>
             </div>
           )}
         </>
