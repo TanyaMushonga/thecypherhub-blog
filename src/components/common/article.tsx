@@ -24,12 +24,17 @@ function Article({ blog, className }: { blog: Article; className: string }) {
     >
       <div className="w-auto h-auto">
         <Image
-          src={blog?.coverImgUrl || "/blog_covers/codebuild.jpg"}
+          src={blog?.coverImgUrl}
           width={340}
           height={200}
           alt="blog cover"
           className="rounded-md"
           priority
+          loading="eager"
+          sizes="(max-width: 600px) 100vw, (max-width: 1200px) 50vw, 33vw"
+          placeholder="blur"
+          blurDataURL="/placeholderblur.png"
+          style={{ aspectRatio: '3 / 2' }}
         />
       </div>
       <div className="flex flex-col gap-2">
