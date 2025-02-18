@@ -39,7 +39,8 @@ function Mostpopular({ mostPopular }: { mostPopular: Article[] }) {
               loading="eager"
               sizes="(max-width: 600px) 100vw, (max-width: 1200px) 50vw, 33vw"
               placeholder="blur"
-              blurDataURL="/path/to/placeholder-image.jpg" // Add a placeholder image
+              blurDataURL="/placeholderblur.png"
+              style={{ aspectRatio: "3 / 1" }}
             />
           </RouteLayout>
         ))}
