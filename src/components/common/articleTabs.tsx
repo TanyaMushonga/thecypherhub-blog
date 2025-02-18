@@ -1,8 +1,26 @@
-import React from "react";
-import ArticleLists from "./articleLists";
-import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
+import React, { Suspense, lazy } from "react";
+const Tabs = lazy(() =>
+  import("@/components/ui/tabs").then((module) => ({ default: module.Tabs }))
+);
+const TabsContent = lazy(() =>
+  import("@/components/ui/tabs").then((module) => ({
+    default: module.TabsContent,
+  }))
+);
+const TabsList = lazy(() =>
+  import("@/components/ui/tabs").then((module) => ({
+    default: module.TabsList,
+  }))
+);
+const TabsTrigger = lazy(() =>
+  import("@/components/ui/tabs").then((module) => ({
+    default: module.TabsTrigger,
+  }))
+);
 
-function ArticleTabs({allArticle}: {allArticle: Article[]}) {
+const ArticleLists = lazy(() => import("./articleLists"));
+
+function ArticleTabs({ allArticle }: { allArticle: Article[] }) {
   return (
     <div>
       <Tabs defaultValue="all" className="w-full">
@@ -17,18 +35,20 @@ function ArticleTabs({allArticle}: {allArticle: Article[]}) {
             <p className="text-white">DevOps</p>
           </TabsTrigger>
         </TabsList>
-        <TabsContent value="system_design">
-          <ArticleLists value="system-design" allArticle={allArticle} />
-        </TabsContent>
-        <TabsContent value="devops">
-          <ArticleLists value="devops"  allArticle={allArticle} />
-        </TabsContent>
-        <TabsContent value="all">
-          <ArticleLists value="all"  allArticle={allArticle} />
-        </TabsContent>
+        <Suspense fallback={<div>Loading...</div>}>
+          <TabsContent value="system_design">
+            <ArticleLists value="system-design" allArticle={allArticle} />
+          </TabsContent>
+          <TabsContent value="devops">
+            <ArticleLists value="devops" allArticle={allArticle} />
+          </TabsContent>
+          <TabsContent value="all">
+            <ArticleLists value="all" allArticle={allArticle} />
+          </TabsContent>
+        </Suspense>
       </Tabs>
     </div>
   );
 }
 
-export default ArticleTabs;
+export default React.memo(ArticleTabs);
