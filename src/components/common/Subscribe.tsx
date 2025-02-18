@@ -1,5 +1,5 @@
 "use client";
-import axios from "axios";
+import { subscribe } from "@/actions/subscribe";
 import React, { useState } from "react";
 import toast from "react-hot-toast";
 
@@ -18,31 +18,15 @@ function SUbscribe() {
       setErrors("");
       if (!email) {
         setErrors("Email is required");
+        setLoading(false);
+        return;
       }
-      const response = await axios.post(
-        process.env.NEXT_PUBLIC_API_URL + "/subscribers",
-        {
-          email,
-        },
-        {
-          headers: {
-            "Content-Type": "application/json",
-          },
-        }
-      );
 
-      if (response.status === 201) {
-        toast.success(response.data.message);
-      }
-      setLoading(false);
+      const message = await subscribe(email);
+      toast.success(message);
       setEmail("");
-      // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    } catch (error: any) {
-      if (error.response) {
-        setErrors(error.response.data.error);
-      } else {
-        setErrors("An unexpected error occurred");
-      }
+    } catch {
+      setErrors("An unexpected error occurred");
     } finally {
       setLoading(false);
     }
