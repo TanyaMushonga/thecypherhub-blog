@@ -127,7 +127,7 @@ export default async function Page({
         <Read article={blog} />
       </Suspense>
       <Suspense fallback={<ReadSkeleton />}>
-        <Related related={related} />
+        <Related related={related}  />
       <SUbscribe />
       </Suspense>
     </div>
