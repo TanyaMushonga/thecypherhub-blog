@@ -3,20 +3,26 @@ import { formatDate } from "@/lib/utils";
 import Link from "next/link";
 import { LuPin } from "react-icons/lu";
 import { MdTimer } from "react-icons/md";
-import CopyLink from "@/components/common/copyLink";
+import dynamic from "next/dynamic";
+import React from "react";
+
+const CopyLink = dynamic(() => import("@/components/common/copyLink"));
 
 function Read({ article }: { article: Article }) {
   return (
     <div className="max-w-2xl mx-auto antialiased pt-4 relative">
       <div className="mb-10">
-        <div className="text-sm  dark:prose-invert text-white">
+        <div className="text-sm dark:prose-invert text-white">
           {article?.coverImgUrl && (
             <Image
-              src={article?.coverImgUrl || "/blog_covers/codebuild.jpg"}
+              src={article?.coverImgUrl}
               alt="blog thumbnail"
-              height="1000"
-              width="1000"
+              height={1000}
+              width={1000}
               className="rounded-lg mb-5 object-cover"
+              sizes="(max-width: 600px) 100vw, (max-width: 1200px) 50vw, 33vw"
+              placeholder="blur"
+              blurDataURL="/placeholderblur.png"
             />
           )}
           <div className="flex flex-col gap-2">
@@ -65,4 +71,4 @@ function Read({ article }: { article: Article }) {
   );
 }
 
-export default Read;
+export default React.memo(Read);
