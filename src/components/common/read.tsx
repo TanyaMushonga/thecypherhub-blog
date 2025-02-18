@@ -23,6 +23,10 @@ function Read({ article }: { article: Article }) {
               sizes="(max-width: 600px) 100vw, (max-width: 1200px) 50vw, 33vw"
               placeholder="blur"
               blurDataURL="/placeholderblur.png"
+              priority
+              loading="eager"
+              quality={100}
+              style={{ aspectRatio: "16 / 9" }}
             />
           )}
           <div className="flex flex-col gap-2">
