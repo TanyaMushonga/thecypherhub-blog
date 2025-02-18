@@ -22,6 +22,7 @@ function Latestblog({ latestBlog }: { latestBlog: Article }) {
         sizes="(max-width: 600px) 100vw, (max-width: 1200px) 50vw, 33vw"
         placeholder="blur"
         blurDataURL="/placeholderblur.png"
+        style={{ aspectRatio: "3 / 2" }}
       />
       <div className="flex flex-col md:text-center gap-2 w-full">
         <h1 className="text-white md:text-3xl font-bold text-xl">
