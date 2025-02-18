@@ -128,8 +128,8 @@ export default async function Page({
       </Suspense>
       <Suspense fallback={<ReadSkeleton />}>
         <Related related={related} />
-      </Suspense>
       <SUbscribe />
+      </Suspense>
     </div>
   );
 }
