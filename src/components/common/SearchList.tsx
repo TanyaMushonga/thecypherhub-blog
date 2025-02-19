@@ -10,7 +10,16 @@ function SearchList({ article }: { article: Article }) {
         className="flex flex-row gap-2 items-center cursor-pointer hover:bg-secondary p-2 rounded-md"
         link={`/read/${article.id}`}
       >
-        <Image src={article.coverImgUrl} alt="search" width={40} height={40} />
+        <Image
+          src={article.coverImgUrl}
+          alt="search"
+          width={40}
+          height={40}
+          className="rounded-md"
+          loading="eager"
+          sizes="(max-width: 600px) 100vw, (max-width: 1200px) 50vw, 33vw"
+          placeholder="blur"
+        />
         <p className="text-white text-lg line-clamp-1">{article.title}</p>
       </RouteLayout>
     </DialogClose>

@@ -41,6 +41,7 @@ function Mostpopular({ mostPopular }: { mostPopular: Article[] }) {
               placeholder="blur"
               blurDataURL="/placeholderblur.png"
               style={{ aspectRatio: "3 / 1" }}
+               
             />
           </RouteLayout>
         ))}
