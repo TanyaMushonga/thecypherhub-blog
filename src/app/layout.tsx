@@ -1,15 +1,17 @@
+import dynamic from "next/dynamic";
 import type { Metadata } from "next";
 import Script from "next/script";
 import "./globals.css";
 import { Toaster } from "react-hot-toast";
-import NavBar from "@/components/common/NavBar";
-import Footer from "@/components/common/footer";
 import { Inter } from "next/font/google";
 
 const inter = Inter({
   subsets: ["latin"],
   variable: "--font-inter",
 });
+
+const NavBar = dynamic(() => import("@/components/common/NavBar"));
+const Footer = dynamic(() => import("@/components/common/footer"));
 
 export const metadata: Metadata = {
   title: {
@@ -47,25 +49,33 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
+      <head>
+        <meta charSet="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <meta name="robots" content="index, follow" />
+        <link rel="canonical" href={process.env.NEXT_PUBLIC_BASE_URL} />
+      </head>
       <body className={`${inter.variable} antialiased`}>
         <Script
           strategy="afterInteractive"
           src={`https://www.googletagmanager.com/gtag/js?id=${process.env.GOOGLE_ANALYTICS_ID}`}
+          async
         />
         <Script
           id="google-analytics"
           strategy="afterInteractive"
           dangerouslySetInnerHTML={{
             __html: `
-              window.dataLayer = window.dataLayer || [];
-              function gtag(){dataLayer.push(arguments);}
-              gtag('js', new Date());
-              gtag('config', '${process.env.GOOGLE_ANALYTICS_ID}', {
-                page_path: window.location.pathname,
-              });
-            `,
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', '${process.env.GOOGLE_ANALYTICS_ID}', {
+        page_path: window.location.pathname,
+      });
+    `,
           }}
-        />
+          async
+        />{" "}
         <div className="min-h-screen bg-background text-foreground">
           <NavBar />
           <div className="pt-10"> {children}</div>

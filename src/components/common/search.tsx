@@ -19,10 +19,11 @@ function Search({ articles }: { articles: Article[] }) {
       article.content.toLowerCase().includes(search.toLowerCase()) ||
       article.description.toLowerCase().includes(search.toLowerCase())
   );
+
   return (
     <>
       <Dialog>
-        <DialogTrigger>
+        <DialogTrigger aria-label="Open search dialog">
           <div className="hidden md:flex items-center">
             <input
               type="text"
@@ -60,7 +61,7 @@ function Search({ articles }: { articles: Article[] }) {
       </Dialog>
       <div className="md:hidden">
         <Dialog>
-          <DialogTrigger>
+          <DialogTrigger aria-label="Open search dialog">
             <IoSearchOutline className="text-white w-7 h-7" />
           </DialogTrigger>
           <DialogContent className="bg-card">

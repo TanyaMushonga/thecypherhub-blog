@@ -35,6 +35,7 @@ function Article({ blog, className }: { blog: Article; className: string }) {
           placeholder="blur"
           blurDataURL="/placeholderblur.png"
           style={{ aspectRatio: '3 / 2' }}
+           
         />
       </div>
       <div className="flex flex-col gap-2">

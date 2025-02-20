@@ -102,6 +102,9 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
           },
         ],
       },
+      alternates: {
+        canonical: `${process.env.NEXT_PUBLIC_BASE_URL}/read/${id}`,
+      },
     };
   } catch (error) {
     console.error("Error fetching metadata:", error);
@@ -127,8 +130,8 @@ export default async function Page({
         <Read article={blog} />
       </Suspense>
       <Suspense fallback={<ReadSkeleton />}>
-        <Related related={related}  />
-      <SUbscribe />
+        <Related related={related} />
+        <SUbscribe />
       </Suspense>
     </div>
   );
