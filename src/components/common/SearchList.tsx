@@ -18,7 +18,6 @@ function SearchList({ article }: { article: Article }) {
           className="rounded-md"
           loading="eager"
           sizes="(max-width: 600px) 100vw, (max-width: 1200px) 50vw, 33vw"
-          placeholder="blur"
         />
         <p className="text-white text-lg line-clamp-1">{article.title}</p>
       </RouteLayout>
