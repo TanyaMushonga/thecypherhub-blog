@@ -24,7 +24,9 @@ export const metadata: Metadata = {
 };
 
 export default async function Home() {
-  const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/blog`);
+  const res = await fetch(
+    `${process.env.NEXT_PUBLIC_API_URL}/blog?page=1&page_size=15`
+  );
   const data = await res.json();
   const articles: Article[] = data.blogs;
   const latestBlog = articles[0];
