@@ -1,7 +1,6 @@
 import { BlogSkeleton } from "@/components/common/blogSkeleton";
 
 import { Suspense } from "react";
-import { Metadata } from "next";
 import dynamic from "next/dynamic";
 
 const ArticleTabs = dynamic(() => import("@/components/common/articleTabs"));
@@ -14,21 +13,6 @@ const MostPopularSkeleton = dynamic(
   () => import("@/components/common/mostPopularSkeleton")
 );
 
-export const metadata: Metadata = {
-  title: "Home - The Cypher Hub",
-  description:
-    "Discover the latest and most popular blogs from The Cypher Hub newsletter.",
-  openGraph: {
-    title: "Home - The Cypher Hub",
-    description:
-      "Discover the latest and most popular blogs from The Cypher Hub newsletter.",
-    url: `${process.env.NEXT_PUBLIC_BASE_URL}`,
-    type: "website",
-  },
-  alternates: {
-    canonical: `${process.env.NEXT_PUBLIC_BASE_URL}`,
-  },
-};
 
 export const revalidate = 3600;
 
