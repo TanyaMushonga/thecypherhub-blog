@@ -73,21 +73,6 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
         description: "An error occurred while fetching metadata.",
       };
     }
-
-    // Check if coverImgUrl is a base64 string
-    const isBase64 = (str: string) => {
-      try {
-        return btoa(atob(str)) === str;
-      } catch {
-        return false;
-      }
-    };
-
-    const coverImgUrl = article?.coverImgUrl || "";
-    const imageUrl = isBase64(coverImgUrl)
-      ? `${process.env.NEXT_PUBLIC_BASE_URL}/fallback.webp` // Ensure this URL points to a valid image
-      : coverImgUrl;
-      
     return {
       title: article?.title,
       description: article?.description,
@@ -108,7 +93,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
       openGraph: {
         images: [
           {
-            url: imageUrl,
+            url: `${process.env.NEXT_PUBLIC_BASE_URL}/fallback.webp`,
             width: 800,
             height: 600,
             alt: article?.title,
