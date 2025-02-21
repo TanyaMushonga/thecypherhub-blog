@@ -82,11 +82,12 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
         return false;
       }
     };
+
     const coverImgUrl = article?.coverImgUrl || "";
     const imageUrl = isBase64(coverImgUrl)
-      ? "/fallback.webp" 
+      ? `${process.env.NEXT_PUBLIC_BASE_URL}/fallback.webp` // Ensure this URL points to a valid image
       : coverImgUrl;
-
+      
     return {
       title: article?.title,
       description: article?.description,
