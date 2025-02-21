@@ -14,43 +14,32 @@ type Props = {
   params: Promise<{ id: string }>;
 };
 
-async function getArticle(id: string) {
-  const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/blog/${id}`);
-
-  if (!res.ok) {
-    throw new Error(`Failed to fetch article with id ${id}: ${res.statusText}`);
+async function getArticleAndRelated(id: string) {
+  const articleRes = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/blog/${id}`);
+  if (!articleRes.ok) {
+    throw new Error(`Failed to fetch article with id ${id}: ${articleRes.statusText}`);
   }
+  const articleData = await articleRes.json();
+  const article: Article = articleData;
 
-  const data = await res.clone().json();
-  const article: Article = data;
-
-  if (!article) notFound();
-  return article;
-}
-
-async function getRelated(id: string) {
-  const currentBlog: Article = await getArticle(id);
-  const currentBlogCategory = currentBlog?.category;
-
-  const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/blog`);
-
-  if (!res.ok) {
-    throw new Error(`Failed to fetch related articles: ${res.statusText}`);
+  const relatedRes = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/blog`);
+  if (!relatedRes.ok) {
+    throw new Error(`Failed to fetch related articles: ${relatedRes.statusText}`);
   }
-
-  const data = await res.clone().json();
-  const articles: Article[] = data.blogs;
+  const relatedData = await relatedRes.json();
+  const articles: Article[] = relatedData.blogs;
 
   if (!Array.isArray(articles)) {
     throw new Error("Expected articles to be an array");
   }
 
   const related: Article[] = articles.filter(
-    (related: Article) => related.category === currentBlogCategory
+    (related: Article) => related.category === article.category
   );
 
   if (!related.length) notFound();
-  return related.slice(0, 3);
+
+  return { article, related: related.slice(0, 3) };
 }
 
 export async function generateStaticParams() {
@@ -66,7 +55,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const id = (await params).id;
 
   try {
-    const article = await getArticle(id);
+    const { article } = await getArticleAndRelated(id);
 
     if (!article) {
       return {
@@ -78,7 +67,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
     return {
       title: article?.title,
       description: article?.description,
-      //TODO ADD KEYWORDS
+      keywords: article?.keywords || [],
       authors: [
         { name: "Tanyaradzwa Tanatswa Mushonga" },
         {
@@ -121,13 +110,12 @@ export default async function Page({
   params: Promise<{ id: string }>;
 }) {
   const id = (await params).id;
-  const blog = await getArticle(id);
-  const related = await getRelated(id);
+  const { article, related } = await getArticleAndRelated(id);
 
   return (
     <div className="xl:w-1/2 w-full mx-auto p-5 flex flex-col gap-5 mt-5">
       <Suspense fallback={<ReadSkeleton />}>
-        <Read article={blog} />
+        <Read article={article} />
       </Suspense>
       <Suspense fallback={<ReadSkeleton />}>
         <Related related={related} />
