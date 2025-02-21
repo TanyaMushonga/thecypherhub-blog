@@ -74,6 +74,19 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
       };
     }
 
+    // Check if coverImgUrl is a base64 string
+    const isBase64 = (str: string) => {
+      try {
+        return btoa(atob(str)) === str;
+      } catch {
+        return false;
+      }
+    };
+    const coverImgUrl = article?.coverImgUrl || "";
+    const imageUrl = isBase64(coverImgUrl)
+      ? "/fallback.webp" 
+      : coverImgUrl;
+
     return {
       title: article?.title,
       description: article?.description,
@@ -94,7 +107,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
       openGraph: {
         images: [
           {
-            url: article?.coverImgUrl || "",
+            url: imageUrl,
             width: 800,
             height: 600,
             alt: article?.title,
