@@ -6,6 +6,7 @@ declare interface Article {
   category: string;
   createdAt: string;
   content: string;
+  keywords: string[];
   readTime: string;
   updatedAt: string;
 }
