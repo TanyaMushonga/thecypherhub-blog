@@ -7,7 +7,7 @@ import { Metadata } from "next";
 
 const Read = React.lazy(() => import("@/components/common/read"));
 
-export const revalidate = 345600;
+export const revalidate = 3600;
 export const dynamicParams = true;
 
 type Props = {
@@ -15,16 +15,25 @@ type Props = {
 };
 
 async function getArticleAndRelated(id: string) {
-  const articleRes = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/blog/${id}`);
+  const articleRes = await fetch(
+    `${process.env.NEXT_PUBLIC_API_URL}/blog/${id}`,
+    { next: { revalidate: 3600 } }
+  );
   if (!articleRes.ok) {
-    throw new Error(`Failed to fetch article with id ${id}: ${articleRes.statusText}`);
+    throw new Error(
+      `Failed to fetch article with id ${id}: ${articleRes.statusText}`
+    );
   }
   const articleData = await articleRes.json();
   const article: Article = articleData;
 
-  const relatedRes = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/blog`);
+  const relatedRes = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/blog`, {
+    next: { revalidate: 3600 },
+  });
   if (!relatedRes.ok) {
-    throw new Error(`Failed to fetch related articles: ${relatedRes.statusText}`);
+    throw new Error(
+      `Failed to fetch related articles: ${relatedRes.statusText}`
+    );
   }
   const relatedData = await relatedRes.json();
   const articles: Article[] = relatedData.blogs;
@@ -44,7 +53,8 @@ async function getArticleAndRelated(id: string) {
 
 export async function generateStaticParams() {
   const data = await fetch(
-    `${process.env.NEXT_PUBLIC_API_URL}/blog?page=1&page_size=50`
+    `${process.env.NEXT_PUBLIC_API_URL}/blog?page=1&page_size=50`,
+    { next: { revalidate: 3600 } }
   ).then((res) => res.json());
   const blogs: Article[] = data.blogs;
 
