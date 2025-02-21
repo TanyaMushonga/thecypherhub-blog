@@ -1,11 +1,18 @@
-import ArticleTabs from "@/components/common/articleTabs";
 import { BlogSkeleton } from "@/components/common/blogSkeleton";
-import Latestblog from "@/components/common/latestblog";
-import LatestSkeleton from "@/components/common/latestSkeleton";
-import Mostpopular from "@/components/common/mostpopular";
-import MostPopularSkeleton from "@/components/common/mostPopularSkeleton";
+
 import { Suspense } from "react";
 import { Metadata } from "next";
+import dynamic from "next/dynamic";
+
+const ArticleTabs = dynamic(() => import("@/components/common/articleTabs"));
+const Latestblog = dynamic(() => import("@/components/common/latestblog"));
+const LatestSkeleton = dynamic(
+  () => import("@/components/common/latestSkeleton")
+);
+const Mostpopular = dynamic(() => import("@/components/common/mostpopular"));
+const MostPopularSkeleton = dynamic(
+  () => import("@/components/common/mostPopularSkeleton")
+);
 
 export const metadata: Metadata = {
   title: "Home - The Cypher Hub",
