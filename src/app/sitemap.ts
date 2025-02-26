@@ -23,7 +23,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     ({ slug, updatedAt }) => ({
       url: `${process.env.NEXT_PUBLIC_BASE_URL}blog/${slug}`,
       lastModified: new Date(updatedAt).toISOString(),
-      priority: 0.9,
+      priority: 1,
       changeFrequency: "weekly",
     })
   );
