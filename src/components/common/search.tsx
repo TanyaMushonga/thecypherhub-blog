@@ -51,7 +51,7 @@ function Search({ articles }: { articles: Article[] }) {
           <div className="flex flex-col gap-4">
             {filteredArticles.length > 0 ? (
               filteredArticles.map((article) => (
-                <SearchList key={article.id} article={article} />
+                <SearchList key={article.slug} article={article} />
               ))
             ) : (
               <p className="text-white">No results found</p>
@@ -83,7 +83,7 @@ function Search({ articles }: { articles: Article[] }) {
             <div className="flex flex-col gap-4">
               {filteredArticles.length > 0 ? (
                 filteredArticles.map((article) => (
-                  <SearchList key={article.id} article={article} />
+                  <SearchList key={article.slug} article={article} />
                 ))
               ) : (
                 <p className="text-white">No results found</p>
