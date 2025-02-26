@@ -20,8 +20,8 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   } while (Array.isArray(blogs) && blogs.length === pageSize);
 
   const blogEntries: MetadataRoute.Sitemap = allBlogs.map(
-    ({ id, updatedAt }) => ({
-      url: `${process.env.NEXT_PUBLIC_BASE_URL}blog/${id}`,
+    ({ slug, updatedAt }) => ({
+      url: `${process.env.NEXT_PUBLIC_BASE_URL}blog/${slug}`,
       lastModified: new Date(updatedAt).toISOString(),
       priority: 0.9,
       changeFrequency: "weekly",
