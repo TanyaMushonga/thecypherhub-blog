@@ -8,7 +8,7 @@ function SearchList({ article }: { article: Article }) {
     <DialogClose>
       <RouteLayout
         className="flex flex-row gap-2 items-center cursor-pointer hover:bg-secondary p-2 rounded-md"
-        link={`/read/${article.id}`}
+        link={`/blog/${article.slug}`}
       >
         <Image
           src={article.coverImgUrl}

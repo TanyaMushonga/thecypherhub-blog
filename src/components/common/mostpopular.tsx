@@ -13,8 +13,8 @@ function Mostpopular({ mostPopular }: { mostPopular: Article[] }) {
         {getRandomArticles(mostPopular, 3).map((article) => (
           <RouteLayout
             className="bg-card w-full md:w-1/3 p-4 rounded-lg flex flex-row justify-between cursor-pointer gap-2"
-            key={article?.id}
-            link={`/read/${article?.id}`}
+            key={article?.slug}
+            link={`/blog/${article?.slug}`}
           >
             <div className="flex flex-col">
               <p className="text-white text-md font-bold line-clamp-2">

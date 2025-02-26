@@ -11,17 +11,17 @@ export const revalidate = 3600;
 export const dynamicParams = true;
 
 type Props = {
-  params: Promise<{ id: string }>;
+  params: Promise<{ slug: string }>;
 };
 
-async function getArticleAndRelated(id: string) {
+async function getArticleAndRelated(slug: string) {
   const articleRes = await fetch(
-    `${process.env.NEXT_PUBLIC_API_URL}/blog/${id}`,
+    `${process.env.NEXT_PUBLIC_API_URL}/blog/${slug}`,
     { next: { revalidate: 3600 } }
   );
   if (!articleRes.ok) {
     throw new Error(
-      `Failed to fetch article with id ${id}: ${articleRes.statusText}`
+      `Failed to fetch article with slug ${slug}: ${articleRes.statusText}`
     );
   }
   const articleData = await articleRes.json();
@@ -58,14 +58,14 @@ export async function generateStaticParams() {
   ).then((res) => res.json());
   const blogs: Article[] = data.blogs;
 
-  return blogs.map((blog: Article) => ({ id: blog.id }));
+  return blogs.map((blog: Article) => ({ slug: blog.slug }));
 }
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
-  const id = (await params).id;
+  const slug = (await params).slug;
 
   try {
-    const { article } = await getArticleAndRelated(id);
+    const { article } = await getArticleAndRelated(slug);
 
     if (!article) {
       return {
@@ -93,15 +93,15 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
       openGraph: {
         images: [
           {
-            url: `${process.env.NEXT_PUBLIC_BASE_URL}/fallback.webp`,
-            width: 800,
-            height: 600,
-            alt: article?.title,
+            url: article?.coverImgUrl,
+            width: 1200,
+            height: 630,
+            alt: article?.slug,
           },
         ],
       },
       alternates: {
-        canonical: `${process.env.NEXT_PUBLIC_BASE_URL}/read/${id}`,
+        canonical: `${process.env.NEXT_PUBLIC_BASE_URL}/read/${slug}`,
       },
     };
   } catch (error) {
@@ -116,10 +116,10 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 export default async function Page({
   params,
 }: {
-  params: Promise<{ id: string }>;
+  params: Promise<{ slug: string }>;
 }) {
-  const id = (await params).id;
-  const { article, related } = await getArticleAndRelated(id);
+  const slug = (await params).slug;
+  const { article, related } = await getArticleAndRelated(slug);
 
   return (
     <div className="xl:w-1/2 w-full mx-auto p-5 flex flex-col gap-5 mt-5">

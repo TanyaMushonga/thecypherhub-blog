@@ -9,7 +9,7 @@ function Latestblog({ latestBlog }: { latestBlog: Article }) {
   return (
     <RouteLayout
       className="flex md:flex-row flex-col gap-5 items-center pb-5 cursor-pointer"
-      link={`/read/${latestBlog?.id}`}
+      link={`/blog/${latestBlog?.slug}`}
     >
       <Image
         src={latestBlog?.coverImgUrl}
@@ -28,7 +28,7 @@ function Latestblog({ latestBlog }: { latestBlog: Article }) {
         <h1 className="text-white md:text-3xl font-bold text-xl">
           {latestBlog?.title}
         </h1>
-        <p className="text-slate-300 md:text-xl text-lg line-clamp-5">
+        <p className="text-slate-300 md:text-xl text-lg line-clamp-3">
           {latestBlog?.description}
         </p>
         <div className="flex flex-row items-center gap-2 mt-5">

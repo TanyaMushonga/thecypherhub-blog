@@ -8,6 +8,16 @@ const nextConfig: NextConfig = {
   experimental: {
     // Add any experimental features here
   },
+  images: {
+    remotePatterns: [
+      {
+        protocol: "https",
+        hostname: "vhwltxiaz42mcyxk.public.blob.vercel-storage.com",
+        port: "",
+        pathname: "/**",
+      },
+    ],
+  },
 };
 
 export default nextConfig;
