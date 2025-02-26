@@ -24,19 +24,19 @@ function Latestblog({ latestBlog }: { latestBlog: Article }) {
         blurDataURL="/placeholderblur.png"
         style={{ aspectRatio: "3 / 2" }}
       />
-      <div className="flex flex-col md:text-center gap-2 w-full">
+      <div className="flex flex-col md:text-start gap-2 w-full">
         <h1 className="text-white md:text-3xl font-bold text-xl">
           {latestBlog?.title}
         </h1>
-        <p className="text-slate-300 md:text-xl text-lg line-clamp-2">
+        <p className="text-slate-300 md:text-xl text-lg line-clamp-5">
           {latestBlog?.description}
         </p>
-        <div className="flex flex-row items-center gap-2 md:justify-center">
+        <div className="flex flex-row items-center gap-2 mt-5">
           <MdTimer className="text-slate-300" />
           <p className="text-slate-300">{latestBlog?.readTime}</p>
         </div>
-        <div className="flex flex-row items-center md:justify-center">
-          <LuPin className="text-slate-300 mr-2" />
+        <div className="flex flex-row items-center gap-2">
+          <LuPin className="text-slate-300" />
           <p className="text-slate-300">
             {formatDate(new Date(latestBlog?.createdAt))}
           </p>

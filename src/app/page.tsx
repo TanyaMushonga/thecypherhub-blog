@@ -1,30 +1,26 @@
-import ArticleTabs from "@/components/common/articleTabs";
 import { BlogSkeleton } from "@/components/common/blogSkeleton";
-import Latestblog from "@/components/common/latestblog";
-import LatestSkeleton from "@/components/common/latestSkeleton";
-import Mostpopular from "@/components/common/mostpopular";
-import MostPopularSkeleton from "@/components/common/mostPopularSkeleton";
-import { Suspense } from "react";
-import { Metadata } from "next";
 
-export const metadata: Metadata = {
-  title: "Home - The Cypher Hub",
-  description:
-    "Discover the latest and most popular blogs from The Cypher Hub newsletter.",
-  openGraph: {
-    title: "Home - The Cypher Hub",
-    description:
-      "Discover the latest and most popular blogs from The Cypher Hub newsletter.",
-    url: `${process.env.NEXT_PUBLIC_BASE_URL}`,
-    type: "website",
-  },
-  alternates: {
-    canonical: `${process.env.NEXT_PUBLIC_BASE_URL}`,
-  },
-};
+import { Suspense } from "react";
+import dynamic from "next/dynamic";
+
+const ArticleTabs = dynamic(() => import("@/components/common/articleTabs"));
+const Latestblog = dynamic(() => import("@/components/common/latestblog"));
+const LatestSkeleton = dynamic(
+  () => import("@/components/common/latestSkeleton")
+);
+const Mostpopular = dynamic(() => import("@/components/common/mostpopular"));
+const MostPopularSkeleton = dynamic(
+  () => import("@/components/common/mostPopularSkeleton")
+);
+
+
+export const revalidate = 3600;
 
 export default async function Home() {
-  const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/blog`);
+  const res = await fetch(
+    `${process.env.NEXT_PUBLIC_API_URL}/blog?page=1&page_size=15`,
+    { next: { revalidate: 3600 } }
+  );
   const data = await res.json();
   const articles: Article[] = data.blogs;
   const latestBlog = articles[0];
