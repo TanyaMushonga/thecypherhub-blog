@@ -31,9 +31,13 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   return [
     {
       url: `${process.env.NEXT_PUBLIC_BASE_URL}`,
-      lastModified: new Date().toISOString(),
       priority: 1,
-      changeFrequency: "daily",
+      changeFrequency: "weekly",
+    },
+    {
+      url: `${process.env.NEXT_PUBLIC_BASE_URL}/all`,
+      priority: 1,
+      changeFrequency: "weekly",
     },
     ...blogEntries,
   ];
