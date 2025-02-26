@@ -4,7 +4,9 @@ import React, { Suspense } from "react";
 const Search = React.lazy(() => import("./search"));
 
 export default async function Navbar() {
-  const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/blog`);
+  const res = await fetch(
+    `${process.env.NEXT_PUBLIC_API_URL}/blog?page=1&page_size=50`
+  );
   const data = await res.json();
   const articles: Article[] = data.blogs;
 
