@@ -8,6 +8,8 @@ declare interface Article {
   content: string;
   keywords: string[];
   readTime: string;
+  slug: string;
+  keywords: string[];
   updatedAt: string;
 }
 
