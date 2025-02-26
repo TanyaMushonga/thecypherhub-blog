@@ -9,7 +9,7 @@ body {
 @font-face {
   font-family: 'Inter';
   src: url('/fonts/inter/Inter-Italic-VariableFont_opsz,wght.ttf') format('ttf'),
-       url('/fonts/inter/Inter-Italic-VariableFont_opsz,wght.ttf') format('ttf');
+    url('/fonts/inter/Inter-Italic-VariableFont_opsz,wght.ttf') format('ttf');
   font-weight: 400;
   font-style: normal;
 }
@@ -167,14 +167,16 @@ body {
 
 .prose pre {
   background-color: rgb(2, 14, 53);
+  border-width: 1px;
+  border-style: solid;
+  border-color: rgb(28, 23, 97);
   padding: .5rem 1rem;
   border-radius: 0.5rem;
   overflow-x: auto;
   font-size: 1rem;
   line-height: 1.5;
   margin-bottom: 1.5rem;
-  color: rgb(255, 255, 255);
-
+  color: #449e34
 }
 
 .prose code {
@@ -182,8 +184,7 @@ body {
   border-radius: 0.5rem;
   font-size: 0.875rem;
   line-height: 1.5;
-  color: rgb(255, 255, 255);
-
+  color: #449e34
 }
 
 .prose table {
@@ -198,47 +199,13 @@ body {
 
 .prose th,
 .prose td {
-  border-radius: 10px;
-  border: 2px solid rgb(28, 23, 97); 
-  padding: 0.5rem 0.6rem 0rem 0.6rem;
+  border: 1px solid rgb(28, 23, 97);
+  padding: 0.5rem 0.6rem;
   text-align: left;
 }
 
 .prose th {
-  background-color: rgb(4, 4, 22); 
-  color: white; 
+  background-color: rgb(4, 4, 22);
+  color: white;
   font-weight: bold;
-}
-
-
-.prose .selectedCell:after {
-  background: gray;
-  content: "";
-  left: 0;
-  right: 0;
-  top: 0;
-  bottom: 0;
-  pointer-events: none;
-  position: absolute;
-  z-index: 2;
-}
-
-.prose .column-resize-handle {
-  background-color: purple;
-  bottom: -2px;
-  pointer-events: none;
-  position: absolute;
-  right: -2px;
-  top: 0;
-  width: 4px;
-}
-
-.prose .tableWrapper {
-  margin: 1.5rem 0;
-  overflow-x: auto;
-}
-
-.prose.resize-cursor {
-  cursor: ew-resize;
-  cursor: col-resize;
 }
