@@ -14,7 +14,7 @@ function Article({ blog, className }: { blog: Article; className: string }) {
     if (typeof window !== "undefined") {
       window.scrollTo({ top: 0, behavior: "smooth" });
     }
-    router.push(`/read/${blog.id}`);
+    router.push(`/blog/${blog.slug}`);
   };
 
   return (
