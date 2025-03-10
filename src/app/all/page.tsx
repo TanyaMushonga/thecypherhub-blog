@@ -6,7 +6,7 @@ export const metadata: Metadata = {
   title: "All Blogs - The Cypher Hub",
   description: "Browse all blogs from The Cypher Hub newsletter.",
   alternates: {
-    canonical: `${process.env.NEXT_PUBLIC_BASE_URL}/all`,
+    canonical: `${process.env.NEXT_PUBLIC_BASE_URL}all`,
   },
 };
 
