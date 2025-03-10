@@ -101,7 +101,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
         ],
       },
       alternates: {
-        canonical: `${process.env.NEXT_PUBLIC_BASE_URL}/read/${slug}`,
+        canonical: `${process.env.NEXT_PUBLIC_BASE_URL}blog/${slug}`,
       },
     };
   } catch (error) {
