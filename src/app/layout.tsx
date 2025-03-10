@@ -19,7 +19,7 @@ export const metadata: Metadata = {
     default: "The Cypher Hub newsletter",
   },
   description:
-    "This is a newsletter for developers who want to stay updated with the latest trends in the tech industry.",
+    "The cypher hub is a newsletter for developers who want to stay updated with the latest trends in the tech industry.",
   twitter: {
     card: "summary_large_image",
     creator: "@thecypherhub",
