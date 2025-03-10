@@ -35,7 +35,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
       changeFrequency: "weekly",
     },
     {
-      url: `${process.env.NEXT_PUBLIC_BASE_URL}/all`,
+      url: `${process.env.NEXT_PUBLIC_BASE_URL}all`,
       priority: 1,
       changeFrequency: "weekly",
     },
