@@ -105,6 +105,7 @@ export default function RootLayout({
         <meta charSet="UTF-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <meta name="robots" content="index, follow" />
+        <meta name="google-site-verification" content="google9884af7e75ae101d.html" />
         <link rel="canonical" href={process.env.NEXT_PUBLIC_BASE_URL} />
       </head>
       <body className={`${inter.variable} antialiased`}>
