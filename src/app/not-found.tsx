@@ -7,8 +7,8 @@ export default function NotFound() {
       <FaExclamationTriangle className="text-6xl mb-4 text-red-500" />
       <h2 className="text-4xl font-bold mb-2">Not Found</h2>
       <p className="text-lg mb-4">Could not find the requested resource</p>
-      <Link href="/" prefetch={false}>
-        <a className="text-blue-500 hover:underline">Return Home</a>
+      <Link href="/" prefetch={false} className="text-blue-500 hover:underline">
+        Return Home
       </Link>
     </div>
   );
