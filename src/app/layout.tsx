@@ -102,10 +102,17 @@ export default function RootLayout({
   return (
     <html lang="en">
       <head>
+        <meta
+          name="google-site-verification"
+          content="_cuUK8FcUd9DgVvRvcC22LZZ29FoD-6lI5mOX2iRhYE"
+        />
         <meta charSet="UTF-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <meta name="robots" content="index, follow" />
-        <meta name="google-site-verification" content="google9884af7e75ae101d.html" />
+        <meta
+          name="google-site-verification"
+          content="google9884af7e75ae101d.html"
+        />
         <link rel="canonical" href={process.env.NEXT_PUBLIC_BASE_URL} />
       </head>
       <body className={`${inter.variable} antialiased`}>
