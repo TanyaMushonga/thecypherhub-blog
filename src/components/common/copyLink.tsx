@@ -1,12 +1,18 @@
 "use client";
 import toast from "react-hot-toast";
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { FaFacebook, FaLinkedin } from "react-icons/fa";
 import { RiTwitterXLine } from "react-icons/ri";
 import { FaLink } from "react-icons/fa6";
 
 function CopyLink() {
-  const currentUrl = window.location.href;
+  const [currentUrl, setCurrentUrl] = useState("");
+
+  useEffect(() => {
+    if (typeof window !== "undefined") {
+      setCurrentUrl(window.location.href);
+    }
+  }, []);
 
   const copyToClipboard = () => {
     navigator.clipboard
