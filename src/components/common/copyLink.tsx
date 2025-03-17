@@ -1,11 +1,14 @@
 "use client";
 import toast from "react-hot-toast";
 import React from "react";
-import { IoIosLink } from "react-icons/io";
+import { FaFacebook, FaLinkedin } from "react-icons/fa";
+import { RiTwitterXLine } from "react-icons/ri";
+import { FaLink } from "react-icons/fa6";
 
 function CopyLink() {
+  const currentUrl = window.location.href;
+
   const copyToClipboard = () => {
-    const currentUrl = window.location.href;
     navigator.clipboard
       .writeText(currentUrl)
       .then(() => {
@@ -16,21 +19,55 @@ function CopyLink() {
       });
   };
 
+  const shareOnFacebook = () => {
+    window.open(
+      `https://www.facebook.com/sharer/sharer.php?u=${currentUrl}`,
+      "_blank"
+    );
+  };
+
+  const shareOnTwitter = () => {
+    window.open(`https://twitter.com/intent/tweet?url=${currentUrl}`, "_blank");
+  };
+
+  const shareOnLinkedIn = () => {
+    window.open(
+      `https://www.linkedin.com/shareArticle?mini=true&url=${currentUrl}`,
+      "_blank"
+    );
+  };
+
   return (
-    <button
-      onClick={copyToClipboard}
-      className="ms-auto relative inline-flex h-12 overflow-hidden rounded-full p-[1px] focus:outline-none focus:ring-2 focus:ring-slate-400 focus:ring-offset-2 focus:ring-offset-slate-50"
-      aria-label="Copy link to clipboard"
-      aria-live="polite"
-    >
-      <span className="absolute inset-[-1000%] animate-[spin_2s_linear_infinite] bg-[conic-gradient(from_90deg_at_50%_50%,#E2CBFF_0%,#393BB2_50%,#E2CBFF_100%)]" />
-      <span className="inline-flex h-full w-full cursor-pointer items-center justify-center rounded-full bg-card px-3 py-1 text-sm font-medium text-white backdrop-blur-3xl">
-        <div className="flex flex-row gap-2 items-center cursor-pointer">
-          <IoIosLink className="text-white text-lg" />
-          <p className="text-white text-lg">Copy link</p>
-        </div>
-      </span>
-    </button>
+    <div className="flex gap-4">
+      <button
+        onClick={shareOnFacebook}
+        className="inline-flex items-center justify-center"
+        aria-label="Share on Facebook"
+      >
+        <FaFacebook className="text-lg text-white h-7 w-7" />
+      </button>
+      <button
+        onClick={shareOnTwitter}
+        className="inline-flex items-center justify-center"
+        aria-label="Share on Twitter"
+      >
+        <RiTwitterXLine className="text-lg text-white h-7 w-7" />
+      </button>
+      <button
+        onClick={shareOnLinkedIn}
+        className="inline-flex items-center justify-center"
+        aria-label="Share on LinkedIn"
+      >
+        <FaLinkedin className="text-lg text-white h-7 w-7" />
+      </button>
+      <button
+        onClick={copyToClipboard}
+        className="inline-flex items-center justify-center"
+        aria-label="Copy link to clipboard"
+      >
+        <FaLink className="text-lg text-white h-7 w-7" />
+      </button>
+    </div>
   );
 }
 
