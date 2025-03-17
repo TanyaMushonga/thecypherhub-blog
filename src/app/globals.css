@@ -170,13 +170,18 @@ body {
   border-width: 1px;
   border-style: solid;
   border-color: rgb(28, 23, 97);
-  padding: .5rem 1rem;
+  padding: 0.5rem 1rem;
   border-radius: 0.5rem;
   overflow-x: auto;
   font-size: 1rem;
   line-height: 1.5;
   margin-bottom: 1.5rem;
-  color: #449e34
+  color: #449e34;
+  max-width: 100%;
+  word-wrap: break-word;
+  overflow-wrap: break-word;
+  white-space: pre-wrap;
+  /* Ensure long lines break and wrap */
 }
 
 .prose code {
@@ -184,7 +189,29 @@ body {
   border-radius: 0.5rem;
   font-size: 0.875rem;
   line-height: 1.5;
-  color: #449e34
+  color: #449e34;
+  max-width: 100%;
+  word-wrap: break-word;
+  overflow-wrap: break-word;
+  white-space: pre-wrap;
+  /* Ensure long lines break and wrap */
+}
+
+/* Media query for smaller screens */
+@media (max-width: 600px) {
+  .prose pre {
+    font-size: 0.875rem;
+    /* Adjust font size for smaller screens */
+    padding: 0.5rem;
+    /* Adjust padding for smaller screens */
+  }
+
+  .prose code {
+    font-size: 0.75rem;
+    /* Adjust font size for smaller screens */
+    padding: 0.25rem;
+    /* Adjust padding for smaller screens */
+  }
 }
 
 .prose table {
