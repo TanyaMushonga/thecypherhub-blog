@@ -1,7 +1,7 @@
 "use server";
 import axios from "axios";
 
-export async function subscribe(token: string) {
+export async function newVerification(token: string) {
   if (!token) {
     throw new Error("Missing token");
   }
