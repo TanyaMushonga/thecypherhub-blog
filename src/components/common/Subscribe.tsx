@@ -1,12 +1,12 @@
 "use client";
 import { subscribe } from "@/actions/subscribe";
 import React, { useState } from "react";
-import toast from "react-hot-toast";
 
 function SUbscribe() {
   const [email, setEmail] = useState<string>("");
   const [errors, setErrors] = useState<string>("");
   const [loading, setLoading] = useState(false);
+  const [message, setMessage] = useState<string>("");
   const onChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setEmail(e.target.value);
   };
@@ -16,6 +16,7 @@ function SUbscribe() {
     try {
       setLoading(true);
       setErrors("");
+      setMessage("");
       if (!email) {
         setErrors("Email is required");
         setLoading(false);
@@ -23,7 +24,7 @@ function SUbscribe() {
       }
 
       const message = await subscribe(email);
-      toast.success(message);
+      setMessage(message);
       setEmail("");
     } catch {
       setErrors("An unexpected error occurred");
@@ -41,6 +42,11 @@ function SUbscribe() {
         Get the latest posts delivered right to your inbox
       </p>
       {errors && <p className="text-red-600 text-lg mt-2">{errors}</p>}
+      {message && (
+        <div className="mt-2 w-full bg-card p-2 rounded-md">
+          <p className="text-green-600 text-lg">{message}</p>
+        </div>
+      )}
       <div className="flex w-full max-w-sm items-center space-x-2 mt-4">
         <form
           className="flex md:flex-row flex-col gap-4 w-full"
