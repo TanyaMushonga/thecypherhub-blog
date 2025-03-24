@@ -1,7 +1,6 @@
 "use client";
 import { subscribe } from "@/actions/subscribe";
 import React, { useState } from "react";
-import toast from "react-hot-toast";
 
 function SUbscribe() {
   const [email, setEmail] = useState<string>("");
