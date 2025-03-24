@@ -7,7 +7,7 @@ export async function newVerification(token: string) {
   }
 
   const response = await axios.post(
-    process.env.NEXT_PUBLIC_API_URL + "/subscribers",
+    process.env.NEXT_PUBLIC_API_URL + "/email-confirmation",
     { token },
     {
       headers: {
