@@ -123,16 +123,18 @@ export default async function Page({
   const { article, related } = await getArticleAndRelated(slug);
 
   return (
-    <div className="xl:w-3/4 w-full mx-auto p-5 flex flex-col gap-5 mt-5">
-      <Suspense fallback={<ReadSkeleton />}>
-        <div className="flex flex-row gap-20">
+    <div className="flex flex-row w-full gap-5 justify-end md:px-10">
+      <div className="xl:w-1/2 w-full p-5 flex flex-col gap-5 mt-5">
+        <Suspense fallback={<ReadSkeleton />}>
           <Read article={article} />
-          <TableOfContents content={article?.content} />
-        </div>
-      </Suspense>
-      <Suspense fallback={<ReadSkeleton />}>
-        <Related related={related} />
-        <SUbscribe />
+        </Suspense>
+        <Suspense fallback={<ReadSkeleton />}>
+          <Related related={related} />
+          <SUbscribe />
+        </Suspense>
+      </div>
+      <Suspense fallback={<div>Loading...</div>}>
+        <TableOfContents content={article?.content} />
       </Suspense>
     </div>
   );
