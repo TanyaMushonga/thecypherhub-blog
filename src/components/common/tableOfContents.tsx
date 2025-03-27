@@ -52,16 +52,16 @@ const TableOfContents = ({ content }: { content: string }) => {
   }, [content]);
 
   return (
-    <div className="bg-gray-800 text-white p-4 rounded-lg shadow-lg my-6">
-      <h2 className="text-lg font-semibold mb-4">Table of Contents</h2>
+    <div className="text-white p-4 h-fit w-fit hidden md:block border border-gray-300 md:mt-28">
+      <h2 className="text-lg font-semibold mb-4">CONTENTS</h2>
       <ul className="space-y-2">
-        {tocItems.map((item) => (
+        {tocItems.map((item, index) => (
           <li
             key={item.id}
             className={`ml-${(item.level - 1) * 4} text-sm hover:underline`}
           >
             <a href={`#${item.id}`} className="text-blue-400">
-              {item.text}
+              {index + 1}. {item.text}
             </a>
           </li>
         ))}
