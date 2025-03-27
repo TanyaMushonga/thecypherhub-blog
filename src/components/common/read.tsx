@@ -15,7 +15,7 @@ function Read({ article }: { article: Article }) {
     <div className="max-w-2xl mx-auto antialiased pt-4 relative">
       <div className="mb-10">
         <h1 className="text-white md:text-3xl font-bold text-xl my-4">
-          <span className="text-blue-400 px-2">#</span>
+          <span className="text-blue-400 pe-2">#</span>
           {article?.title}
         </h1>
         <div className="flex md:flex-row flex-col md:items-center gap-2 mb-5 justify-between">
@@ -39,7 +39,7 @@ function Read({ article }: { article: Article }) {
               target="_blank"
               rel="noopener noreferrer"
             >
-              Written by <span className="text-blue-300">TanyaMushonga</span>
+              Written by <span className="text-blue-400">TanyaMushonga</span>
             </Link>
           </div>
         </div>
