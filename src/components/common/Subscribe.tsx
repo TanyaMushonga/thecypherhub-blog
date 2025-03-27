@@ -34,12 +34,13 @@ function SUbscribe() {
   };
 
   return (
-    <div className="border-t-2 border-slate-500 py-5">
+    <div className="border-t-2 border-b-2 mb-4 border-slate-500 py-5">
       <h1 className="text-white font-bold text-xl md:text-2xl">
-        Subscribe to our newsletter
+        Level Up Your Tech Knowledge!
       </h1>
       <p className="text-slate-300 text-lg my-1">
-        Get the latest posts delivered right to your inbox
+        Subscribe now to get expert insights, coding tips, and exclusive content
+        delivered straight to your inbox!
       </p>
       {errors && <p className="text-red-600 text-lg mt-2">{errors}</p>}
       {message && (
@@ -67,6 +68,12 @@ function SUbscribe() {
             </div>
           </button>
         </form>
+      </div>
+      <div className="my-2">
+        <p className="text-slate-300 text-sm">
+          By subscribing, you consent to receiving emails from{" "}
+          <strong>The Cypher Hub</strong>
+        </p>
       </div>
     </div>
   );
