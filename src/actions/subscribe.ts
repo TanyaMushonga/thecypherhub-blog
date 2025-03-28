@@ -1,18 +1,18 @@
 "use server";
 
-import axios from 'axios';
+import axios from "axios";
 
 export async function subscribe(email: string) {
   if (!email) {
-    throw new Error('Email is required');
+    throw new Error("Email is required");
   }
 
   const response = await axios.post(
-    process.env.NEXT_PUBLIC_API_URL + '/subscribers',
+    process.env.NEXT_PUBLIC_API_URL + "/subscribers",
     { email },
     {
       headers: {
-        'Content-Type': 'application/json',
+        "Content-Type": "application/json",
       },
     }
   );
@@ -20,6 +20,6 @@ export async function subscribe(email: string) {
   if (response.status === 201 || response.status === 200) {
     return response.data.message;
   } else {
-    throw new Error(response.data.error || 'An unexpected error occurred');
+    return response.data.error || "An unexpected error occurred";
   }
 }
