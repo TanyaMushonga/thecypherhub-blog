@@ -11,6 +11,13 @@ declare interface Article {
   slug: string;
   keywords: string[];
   updatedAt: string;
+  comments: comments[];
+}
+
+declare interface comments {
+  id: string;
+  comment: string;
+  createdAt: Date;
 }
 
 declare interface ArticleStore {

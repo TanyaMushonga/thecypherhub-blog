@@ -70,7 +70,7 @@ function SUbscribe() {
         </form>
       </div>
       <div className="my-2">
-        <p className="text-slate-300 text-sm">
+        <p className="text-slate-300 text-sm italic">
           By subscribing, you consent to receiving emails from{" "}
           <strong>The Cypher Hub</strong>
         </p>

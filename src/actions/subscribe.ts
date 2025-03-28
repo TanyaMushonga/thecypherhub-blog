@@ -17,7 +17,7 @@ export async function subscribe(email: string) {
     }
   );
 
-  if (response.status === 201) {
+  if (response.status === 201 || response.status === 200) {
     return response.data.message;
   } else {
     throw new Error(response.data.error || 'An unexpected error occurred');
