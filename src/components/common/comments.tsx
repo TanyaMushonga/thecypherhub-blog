@@ -12,9 +12,8 @@ import { ScrollArea } from "../ui/scroll-area";
 import WriteAcomment from "./writeComment";
 
 function Comments({ article }: { article: Article }) {
-  console.log(article?.comments, "article in comments");
   return (
-    <div className="flex flex-col gap-4 my-5 border-t-2 border-slate-500 p-5">
+    <div className="flex flex-col gap-4 mt-5 border-t-2 border-slate-500 py-5">
       <h1 className="text-white font-bold text-xl">Comments</h1>
       <div>
         {article?.comments?.length > 0 ? (
@@ -39,9 +38,7 @@ function Comments({ article }: { article: Article }) {
           </SheetTrigger>
           <SheetContent>
             <SheetHeader>
-              <SheetTitle className="text-white">
-                Anonymous comments
-              </SheetTitle>
+              <SheetTitle className="text-white">Anonymous comments</SheetTitle>
             </SheetHeader>
             <div className="flex-1">
               <ScrollArea className="w-full h-[85vh]">
