@@ -18,13 +18,15 @@ function Comments({ article }: { article: Article }) {
       <h1 className="text-white font-bold text-xl">Comments</h1>
       <div>
         {article?.comments?.length > 0 ? (
-          article?.comments
-            .slice(-5)
-            .map(
-              (comment: { id: string; comment: string; createdAt: string }) => (
-                <CommentCard key={comment.id} comment={comment} />
-              )
-            )
+          article?.comments.slice(-5).map((comment: comments) => (
+            <CommentCard
+              key={comment.id}
+              comment={{
+                ...comment,
+                createdAt: new Date(comment.createdAt),
+              }}
+            />
+          ))
         ) : (
           <p className="text-slate-300 mt-4">No comments found.</p>
         )}
@@ -38,19 +40,15 @@ function Comments({ article }: { article: Article }) {
           <SheetContent>
             <SheetHeader>
               <SheetTitle className="text-white">
-                Anonymousy comments
+                Anonymous comments
               </SheetTitle>
             </SheetHeader>
             <div className="flex-1">
               <ScrollArea className="w-full h-[85vh]">
                 {article?.comments?.length > 0 ? (
-                  article?.comments.map(
-                    (comment: {
-                      id: string;
-                      comment: string;
-                      createdAt: string;
-                    }) => <CommentCard key={comment.id} comment={comment} />
-                  )
+                  article?.comments.map((comment: comments) => (
+                    <CommentCard key={comment.id} comment={comment} />
+                  ))
                 ) : (
                   <p className="text-slate-300 mt-4">No comments found.</p>
                 )}
