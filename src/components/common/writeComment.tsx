@@ -1,6 +1,5 @@
 "use client";
 
-import { toast } from "sonner";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import * as z from "zod";
@@ -10,6 +9,7 @@ import { Form, FormControl, FormField, FormItem } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
 import { useTransition } from "react";
 import { writeComment } from "@/actions/comments";
+import toast from "react-hot-toast";
 
 export const commentSchema = z.object({
   comment: z.string().min(1),
