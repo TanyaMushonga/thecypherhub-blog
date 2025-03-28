@@ -40,8 +40,8 @@ function Comments({ article }: { article: Article }) {
             <SheetHeader>
               <SheetTitle className="text-white">Anonymous comments</SheetTitle>
             </SheetHeader>
-            <div className="flex-1">
-              <ScrollArea className="w-full h-[85vh]">
+            <div className="w-full h-full flex flex-col mb-10">
+              <ScrollArea className="w-full h-[80vh]">
                 {article?.comments?.length > 0 ? (
                   article?.comments.map((comment: comments) => (
                     <CommentCard key={comment.id} comment={comment} />
