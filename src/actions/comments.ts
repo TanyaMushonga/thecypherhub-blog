@@ -7,6 +7,7 @@ import { commentSchema } from "../../schema/validations";
 
 export const writeComment = async (
   articleId: string,
+  slug: string,
   values: z.infer<typeof commentSchema>
 ) => {
   try {
@@ -25,7 +26,7 @@ export const writeComment = async (
     if (!res.ok) {
       return { error: "Failed to write comment" };
     }
-    revalidatePath(`/comments?articleId=${articleId}`);
+    revalidatePath(`/blog/${slug}`);
     return { success: "Comment added successfully" };
   } catch (error) {
     console.error("Error writing comment:", error);
