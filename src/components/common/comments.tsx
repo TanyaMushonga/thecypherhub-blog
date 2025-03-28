@@ -10,16 +10,15 @@ import CommentCard from "./commentCard";
 import { MessageSquareText } from "lucide-react";
 import { ScrollArea } from "../ui/scroll-area";
 import WriteAcomment from "./writeComment";
-import { getComments } from "@/actions/comments";
 
-async function Comments({ articleId }: { articleId: string }) {
-  const comments = await getComments(articleId);
+function Comments({ article }: { article: Article }) {
+  console.log(article?.comments, "article in comments");
   return (
     <div className="flex flex-col gap-4 my-5 border-t-2 border-slate-500 p-5">
       <h1 className="text-white font-bold text-xl">Comments</h1>
       <div>
-        {comments?.length ? (
-          comments
+        {article?.comments?.length > 0 ? (
+          article?.comments
             .slice(-5)
             .map(
               (comment: { id: string; comment: string; createdAt: string }) => (
@@ -44,8 +43,8 @@ async function Comments({ articleId }: { articleId: string }) {
             </SheetHeader>
             <div className="flex-1">
               <ScrollArea className="w-full h-[85vh]">
-                {comments?.length ? (
-                  comments.map(
+                {article?.comments?.length > 0 ? (
+                  article?.comments.map(
                     (comment: {
                       id: string;
                       comment: string;
@@ -56,7 +55,7 @@ async function Comments({ articleId }: { articleId: string }) {
                   <p className="text-slate-300 mt-4">No comments found.</p>
                 )}
               </ScrollArea>
-              <WriteAcomment />
+              <WriteAcomment articleId={article?.id} />
             </div>
           </SheetContent>
         </Sheet>
