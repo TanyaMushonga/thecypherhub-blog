@@ -55,7 +55,7 @@ function Comments({ article }: { article: Article }) {
                   <p className="text-slate-300 mt-4">No comments found.</p>
                 )}
               </ScrollArea>
-              <WriteAcomment articleId={article?.id} />
+              <WriteAcomment articleId={article?.id} slug={article?.slug} />
             </div>
           </SheetContent>
         </Sheet>
