@@ -10,12 +10,11 @@ import { Input } from "@/components/ui/input";
 import { useTransition } from "react";
 import { writeComment } from "@/actions/comments";
 import toast from "react-hot-toast";
+import { commentSchema } from "../../../schema/validations";
 
-export const commentSchema = z.object({
-  comment: z.string().min(1),
-});
 
-export default function WriteAcomment() {
+
+export default function WriteAcomment({ articleId }: { articleId: string }) {
   const [isPending, startTransition] = useTransition();
   const form = useForm<z.infer<typeof commentSchema>>({
     resolver: zodResolver(commentSchema),
@@ -27,7 +26,7 @@ export default function WriteAcomment() {
   function onSubmit(values: z.infer<typeof commentSchema>) {
     try {
       startTransition(() => {
-        writeComment("articleId", values).then((res) => {
+        writeComment(articleId, values).then((res) => {
           if (res?.success) {
             form.reset();
             toast.success(res.success);
