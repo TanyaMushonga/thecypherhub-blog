@@ -82,7 +82,7 @@ function Read({ article }: { article: Article }) {
               {article?.updatedAt && formatDate(new Date(article.updatedAt))}
             </p>
           </div>
-          <Comments article={article} />
+          <Comments article={article}  />
         </div>
       </div>
     </div>
