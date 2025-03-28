@@ -13,7 +13,7 @@ const CopyLink = dynamic(() => import("@/components/common/copyLink"));
 
 function Read({ article }: { article: Article }) {
   return (
-    <div className="max-w-2xl mx-auto antialiased pt-4 relative">
+    <div className="max-w-3xl mx-auto antialiased pt-4 relative">
       <div className="mb-10">
         <h1 className="text-white md:text-3xl font-bold text-xl my-4">
           <span className="text-blue-400 pe-2">#</span>
@@ -45,7 +45,7 @@ function Read({ article }: { article: Article }) {
           </div>
         </div>
         <div className="flex flex-col gap-2 my-6">
-          <p className="text-slate-300 md:text-xl text-lg line-clamp-6">
+          <p className="text-slate-300 md:text-xl text-lg">
             {article?.description}
           </p>
         </div>
@@ -78,11 +78,11 @@ function Read({ article }: { article: Article }) {
           />
           <div>
             <p className="text-slate-300 text-sm italic">
-              Last updated on{" "}
+              This article was last updated on{" "}
               {article?.updatedAt && formatDate(new Date(article.updatedAt))}
             </p>
           </div>
-          <Comments article={article}  />
+          <Comments article={article} />
         </div>
       </div>
     </div>
