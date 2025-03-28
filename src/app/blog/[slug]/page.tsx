@@ -124,7 +124,7 @@ export default async function Page({
 
   return (
     <div className="flex flex-row w-full gap-5 justify-end md:px-10">
-      <div className="xl:w-1/2 w-full p-5 flex flex-col gap-5 mt-5 md:me-20">
+      <div className="xl:w-1/2 w-full p-5 flex flex-col mt-5 md:me-20">
         <Suspense fallback={<ReadSkeleton />}>
           <Read article={article} />
         </Suspense>
