@@ -13,7 +13,7 @@ import SearchList from "./SearchList";
 function Search({ articles }: { articles: Article[] }) {
   const [search, setSearch] = useState("");
 
-  const filteredArticles = articles.filter(
+  const filteredArticles = articles?.filter(
     (article) =>
       article.title.toLowerCase().includes(search.toLowerCase()) ||
       article.content.toLowerCase().includes(search.toLowerCase()) ||
@@ -49,8 +49,8 @@ function Search({ articles }: { articles: Article[] }) {
             </div>
           </DialogHeader>
           <div className="flex flex-col gap-4">
-            {filteredArticles.length > 0 ? (
-              filteredArticles.map((article) => (
+            {filteredArticles?.length > 0 ? (
+              filteredArticles?.map((article) => (
                 <SearchList key={article.slug} article={article} />
               ))
             ) : (
