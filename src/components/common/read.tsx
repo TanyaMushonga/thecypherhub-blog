@@ -7,6 +7,7 @@ import dynamic from "next/dynamic";
 import React from "react";
 import SUbscribe from "./Subscribe";
 import Disclaimer from "./disclaimer";
+import Comments from "./comments";
 
 const CopyLink = dynamic(() => import("@/components/common/copyLink"));
 
@@ -64,12 +65,8 @@ function Read({ article }: { article: Article }) {
               quality={100}
             />
           )}
-          <div className="flex flex-row flex-wrap justify-between items-center border-b-2 py-3 border-slate-500 gap-4">
-            <p className="text-slate-300 text-lg">
-              Last updated on{" "}
-              {article?.updatedAt && formatDate(new Date(article.updatedAt))}
-            </p>
-
+          <div className="flex flex-row flex-wrap justify-between items-center  py-3 gap-4">
+            <p className="text-lg">Share this article on</p>
             <CopyLink />
           </div>
           <Disclaimer />
@@ -79,6 +76,13 @@ function Read({ article }: { article: Article }) {
             className="prose"
             dangerouslySetInnerHTML={{ __html: article?.content || "" }}
           />
+          <div>
+            <p className="text-slate-300 text-sm italic">
+              Last updated on{" "}
+              {article?.updatedAt && formatDate(new Date(article.updatedAt))}
+            </p>
+          </div>
+          <Comments articleId={article?.id} />
         </div>
       </div>
     </div>
