@@ -13,13 +13,12 @@ const MostPopularSkeleton = dynamic(
   () => import("@/components/common/mostPopularSkeleton")
 );
 
-
-export const revalidate = 3600;
-
 export default async function Home() {
   const res = await fetch(
     `${process.env.NEXT_PUBLIC_API_URL}/blog?page=1&page_size=15`,
-    { next: { revalidate: 3600 } }
+    {
+      next: { revalidate: 3600 }, 
+    }
   );
   const data = await res.json();
   const articles: Article[] = data.blogs;
