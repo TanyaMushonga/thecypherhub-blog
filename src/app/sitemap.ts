@@ -23,7 +23,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     ({ slug, updatedAt }) => ({
       url: `${process.env.NEXT_PUBLIC_BASE_URL}blog/${slug}`,
       lastModified: new Date(updatedAt).toISOString(),
-      priority: 1,
+      priority: 0.8,
       changeFrequency: "weekly",
     })
   );
@@ -32,13 +32,8 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     {
       url: `${process.env.NEXT_PUBLIC_BASE_URL}`,
       priority: 1,
-      changeFrequency: "weekly",
+      changeFrequency: "daily",
     },
-    {
-      url: `${process.env.NEXT_PUBLIC_BASE_URL}all`,
-      priority: 1,
-      changeFrequency: "weekly",
-    },
-    ...blogEntries,
+     ...blogEntries,
   ];
 }
