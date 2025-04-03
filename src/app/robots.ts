@@ -6,11 +6,9 @@ export default function robots(): MetadataRoute.Robots {
       {
         userAgent: "*",
         allow: "/",
-        disallow: [
-          "https://dashboard.thecypherhub.tech/",
-        ],
+        disallow: ["/read/*", "/all"],
       },
     ],
-    sitemap: `${process.env.NEXT_PUBLIC_BASE_URL}/sitemap.xml`,
+    sitemap: `${process.env.NEXT_PUBLIC_BASE_URL}sitemap.xml`,
   };
 }
