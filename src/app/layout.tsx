@@ -25,73 +25,11 @@ export const metadata: Metadata = {
     creator: "@thecypherhub",
     site: "@thecypherhub",
   },
+  alternates: {
+    canonical: "https://www.thecypherhub.tech/",
+  },
   category: "Technology",
   metadataBase: new URL(process.env.NEXT_PUBLIC_BASE_URL!),
-  robots: {
-    index: true,
-    follow: true,
-    nocache: false,
-    googleBot: {
-      index: true,
-      follow: true,
-      noimageindex: false,
-      "max-video-preview": -1,
-      "max-image-preview": "large",
-      "max-snippet": -1,
-    },
-  },
-  keywords: [
-    "latest trends in web development",
-    "how to build mobile applications",
-    "best practices for DevOps engineers",
-    "getting started with AWS services",
-    "social life of software developers",
-    "top React frameworks for developers",
-    "popular Python frameworks for web development",
-    "cyber security tips for developers",
-    "how to secure your web applications",
-    "best tools for mobile app development",
-    "introduction to cloud computing with AWS",
-    "how to manage DevOps pipelines",
-    "latest updates in React ecosystem",
-    "how to use Python for web development",
-    "best practices for cyber security",
-    "how to improve web application performance",
-    "top tools for DevOps automation",
-    "how to build scalable web applications",
-    "best practices for mobile app security",
-    "how to get started with React",
-    "introduction to Python web frameworks",
-    "how to secure your mobile applications",
-    "best practices for AWS security",
-    "how to manage cloud infrastructure",
-    "latest trends in mobile app development",
-    "how to use DevOps tools effectively",
-    "best practices for web development",
-    "how to build secure web applications",
-    "top tools for web developers",
-    "how to get started with DevOps",
-    "introduction to AWS cloud services",
-    "how to improve mobile app performance",
-    "best practices for React development",
-    "how to use Python for data science",
-    "top frameworks for web development",
-    "how to secure your cloud infrastructure",
-    "best practices for mobile app development",
-    "how to manage DevOps workflows",
-    "latest updates in AWS services",
-    "how to build responsive web applications",
-    "best tools for Python developers",
-    "how to get started with mobile development",
-    "introduction to cyber security for developers",
-    "how to use React for web development",
-    "best practices for cloud security",
-    "how to manage web development projects",
-    "latest trends in software development",
-    "how to build scalable mobile applications",
-    "best tools for DevOps engineers",
-    "how to secure your web applications",
-  ],
 };
 
 export default function RootLayout({
@@ -113,7 +51,7 @@ export default function RootLayout({
           name="google-site-verification"
           content="google9884af7e75ae101d.html"
         />
-        <link rel="canonical" href={process.env.NEXT_PUBLIC_BASE_URL} />
+        <link rel="canonical" href={`https://www.thecypherhub.tech/`} />
       </head>
       <body className={`${inter.variable} antialiased`}>
         <Script
