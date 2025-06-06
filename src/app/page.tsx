@@ -15,9 +15,9 @@ const MostPopularSkeleton = dynamic(
 
 export default async function Home() {
   const res = await fetch(
-    `${process.env.NEXT_PUBLIC_API_URL}/blog?page=1&page_size=15`,
+    `${process.env.NEXT_PUBLIC_API_URL}/blog?page=1&page_size=5`,
     {
-      next: { revalidate: 3600 }, 
+      next: { revalidate: 3600 },
     }
   );
   const data = await res.json();
@@ -33,7 +33,7 @@ export default async function Home() {
         <Mostpopular mostPopular={articles} />
       </Suspense>
       <Suspense fallback={<BlogSkeleton />}>
-        <ArticleTabs allArticle={articles} />
+        <ArticleTabs />
       </Suspense>
     </div>
   );
