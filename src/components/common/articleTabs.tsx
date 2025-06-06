@@ -20,7 +20,7 @@ const TabsTrigger = lazy(() =>
 
 const ArticleLists = lazy(() => import("./articleLists"));
 
-function ArticleTabs({ allArticle }: { allArticle: Article[] }) {
+function ArticleTabs() {
   return (
     <div>
       <Tabs defaultValue="all" className="w-full">
@@ -37,13 +37,13 @@ function ArticleTabs({ allArticle }: { allArticle: Article[] }) {
         </TabsList>
         <Suspense fallback={<div>Loading...</div>}>
           <TabsContent value="system_design">
-            <ArticleLists value="system-design" allArticle={allArticle} />
+            <ArticleLists value="system-design" />
           </TabsContent>
           <TabsContent value="devops">
-            <ArticleLists value="devops" allArticle={allArticle} />
+            <ArticleLists value="devops" />
           </TabsContent>
           <TabsContent value="all">
-            <ArticleLists value="all" allArticle={allArticle} />
+            <ArticleLists value="all" />
           </TabsContent>
         </Suspense>
       </Tabs>
