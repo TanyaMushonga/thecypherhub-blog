@@ -22,28 +22,46 @@ const ArticleLists = lazy(() => import("./articleLists"));
 
 function ArticleTabs() {
   return (
-    <div>
+    <div className="w-full">
       <Tabs defaultValue="all" className="w-full">
-        <TabsList>
-          <TabsTrigger value="all">
-            <p className="text-white">All</p>
-          </TabsTrigger>
-          <TabsTrigger value="system_design" className="text-white">
-            <p className="text-white"> System Design</p>
-          </TabsTrigger>
-          <TabsTrigger value="devops">
-            <p className="text-white">DevOps</p>
-          </TabsTrigger>
-        </TabsList>
-        <Suspense fallback={<div>Loading...</div>}>
-          <TabsContent value="system_design">
+        <div className="flex items-center justify-start mb-8 overflow-x-auto pb-2 no-visible-scrollbar border-b border-border/40">
+          <TabsList className="bg-transparent p-0 gap-8 h-auto">
+            <TabsTrigger
+              value="all"
+              className="bg-transparent px-0 py-3 text-base text-muted-foreground data-[state=active]:text-primary data-[state=active]:bg-transparent data-[state=active]:shadow-none data-[state=active]:border-b-2 data-[state=active]:border-primary rounded-none transition-none"
+            >
+              All Posts
+            </TabsTrigger>
+            <TabsTrigger
+              value="system_design"
+              className="bg-transparent px-0 py-3 text-base text-muted-foreground data-[state=active]:text-primary data-[state=active]:bg-transparent data-[state=active]:shadow-none data-[state=active]:border-b-2 data-[state=active]:border-primary rounded-none transition-none"
+            >
+              System Design
+            </TabsTrigger>
+            <TabsTrigger
+              value="devops"
+              className="bg-transparent px-0 py-3 text-base text-muted-foreground data-[state=active]:text-primary data-[state=active]:bg-transparent data-[state=active]:shadow-none data-[state=active]:border-b-2 data-[state=active]:border-primary rounded-none transition-none"
+            >
+              DevOps
+            </TabsTrigger>
+          </TabsList>
+        </div>
+
+        <Suspense
+          fallback={
+            <div className="py-10 text-center text-muted-foreground">
+              Loading articles...
+            </div>
+          }
+        >
+          <TabsContent value="all" className="mt-0">
+            <ArticleLists value="all" />
+          </TabsContent>
+          <TabsContent value="system_design" className="mt-0">
             <ArticleLists value="system-design" />
           </TabsContent>
-          <TabsContent value="devops">
+          <TabsContent value="devops" className="mt-0">
             <ArticleLists value="devops" />
-          </TabsContent>
-          <TabsContent value="all">
-            <ArticleLists value="all" />
           </TabsContent>
         </Suspense>
       </Tabs>
