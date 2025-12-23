@@ -5,13 +5,10 @@ import { formatDate } from "@/lib/utils";
 import Link from "next/link";
 import { LuCalendarDays } from "react-icons/lu";
 import { MdTimer } from "react-icons/md";
-import dynamic from "next/dynamic";
 import React from "react";
 import SUbscribe from "./Subscribe";
 import Disclaimer from "./disclaimer";
 import Comments from "./comments";
-
-const CopyLink = dynamic(() => import("@/components/common/copyLink"));
 
 function Read({ article }: { article: Article }) {
   return (
@@ -89,20 +86,7 @@ function Read({ article }: { article: Article }) {
         <div dangerouslySetInnerHTML={{ __html: article?.content || "" }} />
       </article>
 
-      {/* Footer / Share */}
-      <div className="border-t border-border/50 pt-8 mt-10">
-        <div className="flex flex-col md:flex-row justify-between items-center gap-6 p-6 bg-card rounded-xl border border-border/50">
-          <div>
-            <h3 className="text-lg font-bold text-white mb-1">
-              Share this article
-            </h3>
-            <p className="text-slate-400 text-sm">
-              Find this helpful? Spread the word.
-            </p>
-          </div>
-          <CopyLink />
-        </div>
-      </div>
+      {/* Footer (share buttons moved to TOC) */}
 
       <div className="mt-12">
         <Disclaimer />
