@@ -28,19 +28,19 @@ function ArticleTabs() {
           <TabsList className="bg-transparent p-0 gap-8 h-auto">
             <TabsTrigger
               value="all"
-              className="bg-transparent px-0 py-3 text-base text-muted-foreground data-[state=active]:text-primary data-[state=active]:bg-transparent data-[state=active]:shadow-none data-[state=active]:border-b-2 data-[state=active]:border-primary rounded-none transition-none"
+              className="bg-transparent px-0 py-3 text-base text-muted-foreground data-[state=active]:text-cyan-400/80 data-[state=active]:bg-transparent data-[state=active]:shadow-none data-[state=active]:border-b-2 data-[state=active]:border-cyan-400/80 rounded-none transition-none"
             >
               All Posts
             </TabsTrigger>
             <TabsTrigger
               value="system_design"
-              className="bg-transparent px-0 py-3 text-base text-muted-foreground data-[state=active]:text-primary data-[state=active]:bg-transparent data-[state=active]:shadow-none data-[state=active]:border-b-2 data-[state=active]:border-primary rounded-none transition-none"
+              className="bg-transparent px-0 py-3 text-base text-muted-foreground data-[state=active]:text-cyan-400/80 data-[state=active]:bg-transparent data-[state=active]:shadow-none data-[state=active]:border-b-2 data-[state=active]:border-cyan-400/80 rounded-none transition-none"
             >
               System Design
             </TabsTrigger>
             <TabsTrigger
               value="devops"
-              className="bg-transparent px-0 py-3 text-base text-muted-foreground data-[state=active]:text-primary data-[state=active]:bg-transparent data-[state=active]:shadow-none data-[state=active]:border-b-2 data-[state=active]:border-primary rounded-none transition-none"
+              className="bg-transparent px-0 py-3 text-base text-muted-foreground data-[state=active]:text-cyan-400/80 data-[state=active]:bg-transparent data-[state=active]:shadow-none data-[state=active]:border-b-2 data-[state=active]:border-cyan-400/80 rounded-none transition-none"
             >
               DevOps
             </TabsTrigger>
