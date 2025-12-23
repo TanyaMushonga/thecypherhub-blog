@@ -6,10 +6,17 @@ const Search = React.lazy(() => import("./search"));
 
 export default async function Navbar() {
   const res = await fetch(
-    `${process.env.NEXT_PUBLIC_API_URL}/blog?page=1&page_size=50`
+    `${process.env.NEXT_PUBLIC_API_URL}/blog?page=1&page_size=50`,
+    { next: { revalidate: 3600 } }
   );
-  const data = await res.json();
-  const articles: Article[] = data.blogs;
+  let articles: Article[] = [];
+
+  try {
+    const data = await res.json();
+    articles = data.blogs || [];
+  } catch (error) {
+    console.error("Failed to fetch articles for search:", error);
+  }
 
   return (
     <nav className="fixed top-0 left-0 w-full bg-background/80 backdrop-blur-lg border-b border-border/50 z-50">
