@@ -39,7 +39,7 @@ function Latestblog({ latestBlog }: { latestBlog: Article }) {
           </span>
         </div>
 
-        <h1 className="text-3xl md:text-5xl font-extrabold text-white leading-tight tracking-tight group-hover:text-primary transition-colors duration-300">
+        <h1 className="text-3xl md:text-3xl font-extrabold text-white leading-tight tracking-tight group-hover:text-primary transition-colors duration-300 line-clamp-3">
           {latestBlog.title}
         </h1>
 
