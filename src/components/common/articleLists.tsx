@@ -3,101 +3,142 @@ import { useFetchArticles } from "@/hooks/useFetchArticles";
 import Article from "./article";
 import { Skeleton } from "../ui/skeleton";
 import { Button } from "../ui/button";
+import { ChevronDown } from "lucide-react";
+import { useCallback, useEffect, useRef, useState } from "react";
 
 interface ArticleListsProps {
   value: string;
 }
 
 function ArticleLists({ value }: ArticleListsProps) {
-  const { setPage, articles, loading, totalCount, page } =
-    useFetchArticles("all");
-  const itemsPerPage = 12;
-  const totalPages = Math.ceil(totalCount / itemsPerPage);
+  const [displayedArticles, setDisplayedArticles] = useState<Article[]>([]);
+  const [hasMore, setHasMore] = useState(true);
+  const [loadingMore, setLoadingMore] = useState(false);
+  const observerTarget = useRef<HTMLDivElement>(null);
 
-  const filterArticlesByCategory = (
-    articles: Article[],
-    category: string
-  ): Article[] => {
-    if (category.toLowerCase() === "all") {
-      return articles;
+  const itemsPerPage = 10;
+  const { setPage, articles, loading, totalCount, page } = useFetchArticles(
+    value,
+    itemsPerPage
+  );
+
+  // Update displayed articles when new articles are fetched
+  useEffect(() => {
+    if (page === 1) {
+      setDisplayedArticles(articles);
+    } else {
+      setDisplayedArticles((prev) => {
+        const newArticles = articles.filter(
+          (article) => !prev.some((p) => p.slug === article.slug)
+        );
+        return [...prev, ...newArticles];
+      });
     }
-    return articles.filter(
-      (article) => article.category === category.toLowerCase()
+
+    // Check if there are more articles to load
+    const totalPages = Math.ceil((totalCount || 0) / itemsPerPage);
+    setHasMore(page < totalPages);
+    setLoadingMore(false);
+  }, [articles, page, totalCount]);
+
+  // Handle manual "Load More" button click
+  const handleLoadMore = useCallback(() => {
+    setLoadingMore(true);
+    setPage((prev) => prev + 1);
+  }, [setPage]);
+
+  // Infinite scroll observer
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      (entries) => {
+        if (entries[0].isIntersecting && hasMore && !loadingMore && !loading) {
+          handleLoadMore();
+        }
+      },
+      { threshold: 0.5 }
     );
-  };
 
-  const filteredArticles = filterArticlesByCategory(articles, value);
+    if (observerTarget.current) {
+      observer.observe(observerTarget.current);
+    }
 
-  const handlePrevious = () => {
-    if (page > 1) setPage(page - 1);
-  };
+    return () => observer.disconnect();
+  }, [hasMore, loadingMore, loading, handleLoadMore]);
 
-  const handleNext = () => {
-    if (page < totalPages) setPage(page + 1);
-  };
-
-  if (loading) {
+  if (loading && displayedArticles.length === 0) {
     return (
-      <div className="w-full h-full p-4">
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4 md:gap-8">
-          {Array.from({ length: itemsPerPage }).map((_, index) => (
-            <div key={index} className="flex flex-col space-y-3">
-              <Skeleton className="h-[200px] w-full rounded-lg" />
-              <Skeleton className="h-4 w-[250px]" />
-              <Skeleton className="h-4 w-[200px]" />
+      <div className="w-full flex flex-col gap-6 py-4">
+        {Array.from({ length: 5 }).map((_, index) => (
+          <div
+            key={index}
+            className="flex flex-col space-y-3 border-b border-border/40 pb-6 px-4"
+          >
+            <div className="flex items-center gap-2">
+              <Skeleton className="h-4 w-24" />
+              <Skeleton className="h-4 w-16" />
             </div>
-          ))}
-        </div>
+            <Skeleton className="h-8 w-3/4" />
+            <Skeleton className="h-4 w-full" />
+            <Skeleton className="h-4 w-2/3" />
+          </div>
+        ))}
+      </div>
+    );
+  }
+
+  if (displayedArticles.length === 0) {
+    return (
+      <div className="w-full py-12 text-center">
+        <p className="text-gray-400 text-lg">No articles found.</p>
       </div>
     );
   }
 
   return (
-    <div className="w-full h-full p-4 flex flex-col">
-      {filteredArticles.length > 0 ? (
-        <>
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4 md:gap-8 mb-6">
-            {filteredArticles.map((article) => (
-              <Article key={article.slug} blog={article} className="" />
-            ))}
-          </div>
-
-          {totalPages > 1 && (
-            <div className="flex justify-center items-center gap-4 mt-auto py-4 w-full bg-background">
-              <Button
-                variant="outline"
-                onClick={handlePrevious}
-                disabled={page === 1}
-                className="text-white border-gray-400 hover:bg-gray-700 hover:text-white transition-colors duration-200 disabled:opacity-50 disabled:cursor-not-allowed"
-              >
-                Previous
-              </Button>
-              <span className="text-sm text-gray-600">
-                Page {page} of {totalPages}
-              </span>
-              <Button
-                variant="outline"
-                onClick={handleNext}
-                disabled={page === totalPages || totalPages === 0}
-                className="text-white border-gray-400 hover:bg-gray-700 hover:text-white transition-colors duration-200 disabled:opacity-50 disabled:cursor-not-allowed"
-              >
-                Next
-              </Button>
-            </div>
-          )}
-        </>
-      ) : (
-        <div className="w-full h-full flex flex-col gap-3 justify-center items-center">
-          <h2 className="text-white font-bold text-xl md:text-2xl">
-            No articles found
-          </h2>
-          <p className="text-slate-300 text-lg">
-            {value === "all"
-              ? "There are no articles available yet."
-              : `There are no articles in the ${value} category.`}
-          </p>
+    <div className="w-full space-y-0">
+      {displayedArticles.map((article, idx) => (
+        <div
+          key={article.slug}
+          className={`py-6 border-b border-gray-800/50 hover:bg-gray-900/30 transition-colors duration-200 px-0 ${
+            idx === displayedArticles.length - 1 ? "last:border-b-0" : ""
+          }`}
+        >
+          <Article
+            blog={article}
+            className="!bg-transparent !rounded-none !gap-0 !p-0"
+            showImage={false}
+            variant="compact"
+          />
         </div>
-      )}
+      ))}
+
+      {/* Load More Button or Infinite Scroll Trigger */}
+      <div ref={observerTarget} className="py-8 flex justify-center">
+        {hasMore && (
+          <Button
+            onClick={handleLoadMore}
+            disabled={loadingMore || loading}
+            className="bg-cyan-500 hover:bg-cyan-600 text-white font-semibold px-8 py-3 rounded-lg flex items-center gap-2 transition-all duration-200"
+          >
+            {loadingMore || loading ? (
+              <>
+                <span className="inline-block animate-spin">↻</span>
+                Loading...
+              </>
+            ) : (
+              <>
+                <span>Load More Articles</span>
+                <ChevronDown className="h-4 w-4" />
+              </>
+            )}
+          </Button>
+        )}
+        {!hasMore && displayedArticles.length > 0 && (
+          <p className="text-gray-500 text-sm">
+            You&apos;ve reached the end of articles
+          </p>
+        )}
+      </div>
     </div>
   );
 }
