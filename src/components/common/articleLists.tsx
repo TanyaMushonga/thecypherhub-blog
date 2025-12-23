@@ -99,10 +99,16 @@ function ArticleLists({ value }: ArticleListsProps) {
       {displayedArticles.map((article, idx) => (
         <div
           key={article.slug}
-          className={`py-6 border-b border-gray-800/50 hover:bg-gray-900/30 transition-colors duration-200 px-0 ${
+          className={`flex gap-4 py-6 border-b border-gray-700/50 hover:bg-gray-900/30 transition-colors duration-200 px-0 ${
             idx === displayedArticles.length - 1 ? "last:border-b-0" : ""
           }`}
         >
+          <div className="flex-shrink-0 w-10 text-right p-4">
+            <span className="text-sm font-mono text-cyan-400/80">
+              {String(idx + 1).padStart(2, "0")}
+            </span>
+          </div>
+
           <Article
             blog={article}
             className="!bg-transparent !rounded-none !gap-0 !p-0"
