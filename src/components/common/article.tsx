@@ -32,7 +32,7 @@ function Article({
   if (variant === "compact") {
     return (
       <div
-        className="group flex items-start justify-between gap-4 w-full cursor-pointer"
+        className="group flex items-start justify-between gap-4 w-full cursor-pointer p-3"
         onClick={handleClick}
       >
         <div className="flex-1 min-w-0">
@@ -78,11 +78,6 @@ function Article({
       )}
 
       <div className="flex flex-col gap-3">
-        <div className="flex items-center justify-between text-xs text-slate-500">
-          <span>{formatDate(new Date(blog?.createdAt))}</span>
-          <span>{blog?.readTime}</span>
-        </div>
-
         <h2 className="text-xl font-bold text-slate-100 group-hover:text-primary transition-colors line-clamp-2 leading-snug">
           {blog?.title}
         </h2>
@@ -90,7 +85,10 @@ function Article({
         <p className="text-sm text-slate-400 line-clamp-2">
           {blog?.description}
         </p>
-
+        <div className="flex items-center justify-between text-xs text-slate-500">
+          <span>{formatDate(new Date(blog?.createdAt))}</span>
+          <span>{blog?.readTime}</span>
+        </div>
         <div className="flex items-center gap-2 pt-2">
           <span className="px-2 py-1 text-xs rounded-full bg-cyan-900/30 text-cyan-300 border border-cyan-700/50">
             {blog?.category?.toUpperCase()}
