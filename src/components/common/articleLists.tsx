@@ -11,7 +11,7 @@ interface ArticleListsProps {
 function ArticleLists({ value }: ArticleListsProps) {
   const { setPage, articles, loading, totalCount, page } =
     useFetchArticles("all");
-  const itemsPerPage = 10;
+  const itemsPerPage = 12;
   const totalPages = Math.ceil(totalCount / itemsPerPage);
 
   const filterArticlesByCategory = (
