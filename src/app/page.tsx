@@ -59,7 +59,7 @@ export default async function Home() {
                 <Article
                   key={article.slug}
                   blog={article}
-                  showImage={true}
+                  showImage={false}
                   variant="card"
                 />
               ))}
