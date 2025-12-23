@@ -1,5 +1,4 @@
 import React, { Suspense } from "react";
-import SUbscribe from "@/components/common/Subscribe";
 import Related from "@/components/common/related";
 import ReadSkeleton from "@/components/common/readSkeleton";
 import { notFound } from "next/navigation";
@@ -130,7 +129,6 @@ export default async function Page({
         </Suspense>
         <Suspense fallback={<ReadSkeleton />}>
           <Related related={related} />
-          <SUbscribe />
         </Suspense>
       </div>
       <Suspense fallback={<div>Loading...</div>}>
