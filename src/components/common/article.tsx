@@ -4,13 +4,12 @@ import { formatDate } from "@/lib/utils";
 import Image from "next/image";
 import React from "react";
 import { useRouter } from "next/navigation";
-import { BsDot } from "react-icons/bs";
+import { LuCalendar, LuClock } from "react-icons/lu";
 
-function Article({ blog, className }: { blog: Article; className: string }) {
+function Article({ blog, className }: { blog: Article; className?: string }) {
   const router = useRouter();
 
   const handleClick = () => {
-    // Ensure window.scrollTo only runs in the browser environment
     if (typeof window !== "undefined") {
       window.scrollTo({ top: 0, behavior: "smooth" });
     }
@@ -19,37 +18,40 @@ function Article({ blog, className }: { blog: Article; className: string }) {
 
   return (
     <div
-      className={`flex flex-col gap-4 bg-card rounded-md cursor-pointer ${className}`}
+      className={`group flex flex-col gap-4 p-4 rounded-xl bg-card/50 border border-transparent hover:border-primary/50 hover:bg-card transition-all duration-300 cursor-pointer ${className}`}
       onClick={handleClick}
     >
-      <div className="w-auto h-auto">
+      <div className="relative w-full aspect-[3/2] overflow-hidden rounded-lg">
         <Image
           src={blog?.coverImgUrl}
-          width={340}
-          height={200}
-          alt="blog cover"
-          className="rounded-md"
-          priority
-          loading="eager"
-          sizes="(max-width: 600px) 100vw, (max-width: 1200px) 50vw, 33vw"
+          fill
+          alt={blog.title}
+          className="object-cover transition-transform duration-500 group-hover:scale-110"
+          sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
           placeholder="blur"
           blurDataURL="/placeholderblur.png"
-          style={{ aspectRatio: '3 / 2' }}
-           
         />
       </div>
-      <div className="flex flex-col gap-2">
-        <h1 className="text-white text-xl font-bold line-clamp-1 mt-1">
-          {blog?.title}
-        </h1>
-        <p className="text-slate-300 line-clamp-1">{blog?.description}</p>
-        <div className="flex flex-row items-center gap-2">
-          <p className="text-slate-300">{blog?.readTime}</p>
-          <BsDot className="text-slate-300" />
-          <p className="text-slate-300">
+
+      <div className="flex flex-col gap-3">
+        <div className="flex items-center justify-between text-xs text-slate-500">
+          <span className="flex items-center gap-1">
+            <LuCalendar className="w-3 h-3" />
             {formatDate(new Date(blog?.createdAt))}
-          </p>
+          </span>
+          <span className="flex items-center gap-1">
+            <LuClock className="w-3 h-3" />
+            {blog?.readTime}
+          </span>
         </div>
+
+        <h2 className="text-xl font-bold text-slate-100 group-hover:text-primary transition-colors line-clamp-2 leading-snug">
+          {blog?.title}
+        </h2>
+
+        <p className="text-sm text-slate-400 line-clamp-2">
+          {blog?.description}
+        </p>
       </div>
     </div>
   );
