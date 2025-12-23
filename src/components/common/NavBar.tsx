@@ -29,7 +29,7 @@ export default async function Navbar() {
           <div className="bg-primary/20 p-1.5 rounded-lg group-hover:bg-primary/30 transition-colors">
             <IoTerminal className="w-6 h-6 text-primary" />
           </div>
-          <span className="text-xl font-bold tracking-tight text-white group-hover:text-primary transition-colors">
+          <span className="text-xl font-bold tracking-tight text-slate-200 group-hover:text-primary transition-colors">
             The Cypher Hub
           </span>
         </Link>
