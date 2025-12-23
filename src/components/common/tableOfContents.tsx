@@ -1,6 +1,7 @@
 "use client";
 
 import React, { useEffect, useState } from "react";
+import CopyLink from "./copyLink";
 
 interface TOCItem {
   id: string;
@@ -52,21 +53,28 @@ const TableOfContents = ({ content }: { content: string }) => {
   }, [content]);
 
   return (
-    <div className="text-white p-4 h-fit w-[23rem] hidden md:block border border-gray-300 md:mt-28">
-      <h2 className="text-lg font-semibold mb-4">CONTENTS</h2>
-      <ul className="space-y-2">
-        {tocItems.map((item) => (
-          <li
-            key={item.id}
-            className={`ml-${(item.level - 1) * 4} text-sm hover:underline`}
-          >
-            <a href={`#${item.id}`} className="text-blue-400">
-              {item.text}
-            </a>
-          </li>
-        ))}
-      </ul>
-    </div>
+    <aside className="text-white p-4 hidden md:block md:mt-28">
+      <div className="sticky top-28 self-start border border-border/30 rounded-md p-4 bg-card">
+        <h2 className="text-lg font-semibold mb-4">CONTENTS</h2>
+        <ul className="space-y-2 max-h-[60vh] overflow-auto pr-2 no-visible-scrollbar">
+          {tocItems.map((item) => (
+            <li
+              key={item.id}
+              className={`ml-${(item.level - 1) * 4} text-sm hover:underline`}
+            >
+              <a href={`#${item.id}`} className="text-blue-400">
+                {item.text}
+              </a>
+            </li>
+          ))}
+        </ul>
+
+        <div className="mt-6 border-t border-border/20 pt-4">
+          <h3 className="text-sm text-slate-300 mb-2">Share</h3>
+          <CopyLink />
+        </div>
+      </div>
+    </aside>
   );
 };
 
