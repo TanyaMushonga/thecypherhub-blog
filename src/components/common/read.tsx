@@ -1,5 +1,3 @@
-"use client";
-
 import Image from "next/image";
 import { formatDate } from "@/lib/utils";
 import Link from "next/link";
@@ -7,15 +5,14 @@ import { LuCalendarDays } from "react-icons/lu";
 import { MdTimer } from "react-icons/md";
 import React from "react";
 import SUbscribe from "./Subscribe";
-import Disclaimer from "./disclaimer";
 import Comments from "./comments";
 
 function Read({ article }: { article: Article }) {
   return (
-    <div className="max-w-4xl mx-auto antialiased pt-8 pb-20 px-4 md:px-0 relative">
+    <div className="max-w-4xl mx-auto antialiased pt-8 pb-20 md:px-0 relative">
       {/* Header Section */}
-      <header className="mb-10 text-center md:text-left border-b border-border/50 pb-10">
-        <div className="flex items-center gap-2 mb-6 justify-center md:justify-start">
+      <header className="mb-10 text-left border-b border-border/50 pb-10">
+        <div className="flex items-center gap-2 mb-6 justify-start">
           <span className="px-3 py-1 bg-primary/20 text-primary text-sm font-semibold rounded-full">
             {article.category || "Article"}
           </span>
@@ -25,14 +22,14 @@ function Read({ article }: { article: Article }) {
           {article?.title}
         </h1>
 
-        <div className="flex flex-wrap items-center justify-center md:justify-between gap-6 text-slate-400">
+        <div className="flex flex-wrap items-center justify-between gap-6 text-slate-400">
           <div className="flex items-center gap-6">
             <div className="flex items-center gap-2">
-              <div className="p-2 bg-slate-800 rounded-full">
+              <div className="rounded-full">
                 <Image
                   src="/profile.jfif"
-                  width={24}
-                  height={24}
+                  width={28}
+                  height={28}
                   alt="Author"
                   className="rounded-full"
                 />
@@ -65,7 +62,6 @@ function Read({ article }: { article: Article }) {
           </div>
         </div>
       </header>
-
       {/* Cover Image */}
       {article?.coverImgUrl && (
         <div className="relative w-full aspect-video rounded-2xl overflow-hidden mb-12 shadow-2xl border border-border/30">
@@ -86,15 +82,8 @@ function Read({ article }: { article: Article }) {
         <div dangerouslySetInnerHTML={{ __html: article?.content || "" }} />
       </article>
 
-      {/* Footer (share buttons moved to TOC) */}
-
-      <div className="mt-12">
-        <Disclaimer />
-        <div className="my-10">
-          <SUbscribe />
-        </div>
-        <Comments article={article} />
-      </div>
+      <SUbscribe />
+      <Comments article={article} />
     </div>
   );
 }
