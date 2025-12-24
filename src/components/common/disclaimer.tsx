@@ -2,22 +2,18 @@ import { AiOutlineExclamationCircle } from "react-icons/ai";
 
 const Disclaimer = () => {
   return (
-    <div className="text-white rounded-lg shadow-lg my-6 p-4 bg-gray-800">
-      <div className="flex items-center mb-4">
-        <AiOutlineExclamationCircle className="text-yellow-400 text-2xl mr-2" />
-        <h2 className="text-xl font-semibold">Disclaimer</h2>
+    <div className="text-white rounded-lg shadow-lg p-4 mt-4 bg-gray-800 my-6">
+      <div className="flex items-center mb-2">
+        <AiOutlineExclamationCircle className="text-yellow-400 text-md mr-2" />
+        <h2 className="text-md font-semibold">Disclaimer</h2>
       </div>
-      <p className="text-sm mb-2">
-        The content provided in this article is based solely on my research and
-        personal understanding. While I strive for accuracy, information may
-        vary, and readers should verify details independently.
+      <p className="text-sm text-gray-300 mb-2">
+        This content reflects my personal research. Please verify details
+        independently.
       </p>
-      <p className="text-sm mb-2">
-        If you wish to redistribute or reference this article, please ensure you
-        provide a proper backlink to the original source.
-      </p>
-      <p className="text-xs text-gray-400 italic">
-        Thank you for your understanding and support!
+      <p className="text-sm text-gray-300">
+        If referencing this article, kindly provide a backlink to the original
+        source.
       </p>
     </div>
   );

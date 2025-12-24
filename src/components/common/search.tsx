@@ -20,75 +20,84 @@ function Search({ articles }: { articles: Article[] }) {
       article.description.toLowerCase().includes(search.toLowerCase())
   );
 
+  // Common search input component to avoid duplication
+  const SearchInput = () => (
+    <div className="flex items-center w-full">
+      <IoSearchOutline className="text-white w-5 h-5 mr-2" />
+      <input
+        type="text"
+        placeholder="Search..."
+        className="w-full rounded-md px-4 py-2 text-white focus:outline-none bg-card"
+        onChange={(e) => setSearch(e.target.value)}
+        value={search}
+        aria-label="Search articles"
+      />
+    </div>
+  );
+
+  // Common results component
+  const SearchResults = () => (
+    <div className="mt-4 space-y-2 overflow-y-auto flex-1">
+      {filteredArticles.length ? (
+        filteredArticles.map((article) => (
+          <SearchList key={article.slug} article={article} />
+        ))
+      ) : (
+        <p className="text-sm text-muted-foreground px-2 text-center py-4">
+          No results found
+        </p>
+      )}
+    </div>
+  );
+
   return (
     <>
-      <Dialog>
-        <DialogTrigger aria-label="Open search dialog">
-          <div className="hidden md:flex items-center">
-            <input
-              type="text"
-              placeholder="Search..."
-              className="rounded-md px-4 py-2 text-white focus:outline-none bg-card"
-            />
-          </div>
-        </DialogTrigger>
-        <DialogContent className="bg-card">
-          <DialogHeader>
-            <div className="hidden">
-              <DialogTitle>Search</DialogTitle>
-            </div>
-            <div className="flex items-center">
-              <IoSearchOutline className="text-white w-5 h-5" />
-              <input
-                type="text"
-                placeholder="Search..."
-                className="rounded-md px-4 py-2 text-white focus:outline-none bg-card"
-                onChange={(e) => setSearch(e.target.value)}
-                value={search}
-              />
-            </div>
-          </DialogHeader>
-          <div className="flex flex-col gap-4">
-            {filteredArticles?.length > 0 ? (
-              filteredArticles?.map((article) => (
-                <SearchList key={article.slug} article={article} />
-              ))
-            ) : (
-              <p className="text-white">No results found</p>
-            )}
-          </div>
-        </DialogContent>
-      </Dialog>
-      <div className="md:hidden">
+      {/* Desktop version - shows input field */}
+      <div className="hidden md:block">
         <Dialog>
-          <DialogTrigger aria-label="Open search dialog">
-            <IoSearchOutline className="text-white w-7 h-7" />
-          </DialogTrigger>
-          <DialogContent className="bg-card">
-            <DialogHeader>
-              <div className="hidden">
-                <DialogTitle>Search</DialogTitle>
-              </div>
-              <div className="flex items-center">
-                <IoSearchOutline className="text-white w-5 h-5" />
+          <DialogTrigger asChild aria-label="Open search dialog">
+            <div className="flex items-center cursor-pointer">
+              <div className="relative">
                 <input
                   type="text"
                   placeholder="Search..."
-                  className="rounded-md px-4 py-2 text-white focus:outline-none bg-card"
-                  onChange={(e) => setSearch(e.target.value)}
-                  value={search}
+                  className="rounded-md px-4 py-2 text-white focus:outline-none bg-card w-full min-w-[200px]"
+                  readOnly
                 />
+                <div className="absolute right-3 top-1/2 transform -translate-y-1/2">
+                  <IoSearchOutline className="text-white w-4 h-4" />
+                </div>
               </div>
-            </DialogHeader>
-            <div className="flex flex-col gap-4">
-              {filteredArticles.length > 0 ? (
-                filteredArticles.map((article) => (
-                  <SearchList key={article.slug} article={article} />
-                ))
-              ) : (
-                <p className="text-white">No results found</p>
-              )}
             </div>
+          </DialogTrigger>
+          <DialogContent className="bg-card max-w-2xl w-full h-[60vh] flex flex-col p-0">
+            <DialogHeader className="px-6 pt-6">
+              <div className="sr-only">
+                <DialogTitle>Search Articles</DialogTitle>
+              </div>
+              <SearchInput />
+            </DialogHeader>
+            <SearchResults />
+          </DialogContent>
+        </Dialog>
+      </div>
+
+      {/* Mobile version - shows only icon */}
+      <div className="md:hidden">
+        <Dialog>
+          <DialogTrigger asChild aria-label="Open search dialog">
+            <button className="p-2">
+              <IoSearchOutline className="text-white w-6 h-6" />
+            </button>
+          </DialogTrigger>
+          <DialogContent className="bg-card max-w-2xl w-[90vw] h-[60vh] flex flex-col p-0">
+            <DialogHeader className="px-6 pt-6">
+              <div className="sr-only">
+                <DialogTitle>Search Articles</DialogTitle>
+              </div>
+              <SearchInput />
+            </DialogHeader>
+            <SearchResults />
           </DialogContent>
         </Dialog>
       </div>

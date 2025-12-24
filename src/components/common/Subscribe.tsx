@@ -1,12 +1,15 @@
 "use client";
 import { subscribe } from "@/actions/subscribe";
 import React, { useState } from "react";
+import { IoMailOpenOutline } from "react-icons/io5";
+import { LuLoader } from "react-icons/lu";
 
 function SUbscribe() {
   const [email, setEmail] = useState<string>("");
   const [errors, setErrors] = useState<string>("");
   const [loading, setLoading] = useState(false);
   const [message, setMessage] = useState<string>("");
+
   const onChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setEmail(e.target.value);
   };
@@ -34,45 +37,51 @@ function SUbscribe() {
   };
 
   return (
-    <div className="border-t-2 border-b-2 mb-4 border-slate-500 py-5">
-      <h1 className="text-white font-bold text-xl md:text-2xl">
-        Level Up Your Tech Knowledge!
-      </h1>
-      <p className="text-slate-300 text-lg my-1">
-        Subscribe now to get expert insights, coding tips, and exclusive content
-        delivered straight to your inbox!
-      </p>
-      {errors && <p className="text-red-600 text-lg mt-2">{errors}</p>}
-      {message && (
-        <div className="mt-2 w-full bg-card p-2 rounded-md">
-          <p className="text-green-600 text-lg">{message}</p>
+    <div className="relative overflow-hidden rounded-2xl bg-gradient-to-br from-indigo-900/50 to-slate-900 border border-indigo-500/30 p-8 md:p-12">
+      {/* Background Decor */}
+      <div className="absolute -top-24 -right-24 w-48 h-48 bg-primary/20 rounded-full blur-3xl"></div>
+
+      <div className="relative z-10 max-w-2xl">
+        <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-indigo-500/20 text-indigo-300 text-sm font-medium mb-4">
+          <IoMailOpenOutline />
+          <span>Newsletter</span>
         </div>
-      )}
-      <div className="flex w-full max-w-sm items-center space-x-2 mt-4">
-        <form
-          className="flex md:flex-row flex-col gap-4 w-full"
-          onSubmit={onSubmit}
-        >
+
+        <h2 className="text-2xl md:text-3xl font-bold text-white mb-3">
+          Level Up Your Tech Knowledge
+        </h2>
+        <p className="text-slate-400 text-lg mb-8">
+          Join 5,000+ developers receiving expert insights, coding tips, and
+          exclusive content delivered straight to your inbox.
+        </p>
+
+        <form onSubmit={onSubmit} className="flex flex-col sm:flex-row gap-3">
           <input
             type="email"
-            placeholder="Enter your email"
-            className="rounded-md px-4 py-2 text-white focus:outline-none bg-card"
+            placeholder="Enter your email address"
+            className="flex-1 px-5 py-3 rounded-lg bg-slate-950/50 border border-slate-700 text-white placeholder:text-slate-500 focus:outline-none focus:border-primary focus:ring-1 focus:ring-primary transition-all"
             value={email}
             onChange={onChange}
-            aria-label="Enter your email to subscribe"
+            disabled={loading}
           />
-          <button className="p-[3px] relative w-fit">
-            <div className="absolute inset-0 bg-gradient-to-r from-indigo-500 to-blue-500 rounded-lg" />
-            <div className="px-8 py-2  bg-black rounded-[6px]  relative group transition duration-200 text-white hover:bg-transparent">
-              {loading ? "Submiting" : "Subscribe"}
-            </div>
+          <button
+            type="submit"
+            disabled={loading}
+            className="px-6 py-3 rounded-lg bg-primary hover:bg-primary/90 text-white font-medium transition-colors disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center gap-2"
+          >
+            {loading ? (
+              <LuLoader className="animate-spin" />
+            ) : (
+              "Subscribe Free"
+            )}
           </button>
         </form>
-      </div>
-      <div className="my-2">
-        <p className="text-slate-300 text-sm italic">
-          By subscribing, you consent to receiving emails from{" "}
-          <strong>The Cypher Hub</strong>
+
+        {errors && <p className="text-red-400 mt-3 text-sm">{errors}</p>}
+        {message && <p className="text-green-400 mt-3 text-sm">{message}</p>}
+
+        <p className="text-slate-500 text-xs mt-4">
+          No spam, ever. Unsubscribe at any time.
         </p>
       </div>
     </div>

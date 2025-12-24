@@ -1,45 +1,61 @@
 import Image from "next/image";
 import React from "react";
 import { MdTimer } from "react-icons/md";
-import { LuPin } from "react-icons/lu";
+import { LuCalendarDays } from "react-icons/lu";
 import { formatDate } from "@/lib/utils";
 import RouteLayout from "./routeLayout";
-
+ 
 function Latestblog({ latestBlog }: { latestBlog: Article }) {
+  if (!latestBlog) return null;
+
   return (
     <RouteLayout
-      className="flex md:flex-row flex-col gap-5 items-center pb-5 cursor-pointer"
-      link={`/blog/${latestBlog?.slug}`}
+      className="group relative flex md:flex-row flex-col gap-8 items-start pb-10 cursor-pointer border-b border-border/50"
+      link={`/blog/${latestBlog.slug}`}
     >
-      <Image
-        src={latestBlog?.coverImgUrl}
-        width={600}
-        height={200}
-        alt="latest blog"
-        className="rounded-md"
-        priority
-        loading="eager"
-        sizes="(max-width: 600px) 100vw, (max-width: 1200px) 50vw, 33vw"
-        placeholder="blur"
-        blurDataURL="/placeholderblur.png"
-        style={{ aspectRatio: "3 / 2" }}
-      />
-      <div className="flex flex-col md:text-start gap-2 w-full">
-        <h1 className="text-white md:text-3xl font-bold text-xl">
-          {latestBlog?.title}
-        </h1>
-        <p className="text-slate-300 md:text-xl text-lg line-clamp-3">
-          {latestBlog?.description}
-        </p>
-        <div className="flex flex-row items-center gap-2 mt-5">
-          <MdTimer className="text-slate-300" />
-          <p className="text-slate-300">{latestBlog?.readTime}</p>
+      <div className="w-full md:w-1/2 overflow-hidden rounded-xl border border-border/50 shadow-2xl">
+        <Image
+          src={latestBlog.coverImgUrl}
+          width={800}
+          height={500}
+          alt={latestBlog.title}
+          className="w-full h-auto object-cover transition-transform duration-500 group-hover:scale-105"
+          priority
+          loading="eager"
+          sizes="(max-width: 768px) 100vw, 50vw"
+          placeholder="blur"
+          blurDataURL="/placeholderblur.png"
+          style={{ aspectRatio: "16/9" }}
+        />
+      </div>
+
+      <div className="flex flex-col gap-4 w-full md:w-1/2 justify-center">
+        <div className="inline-flex items-center gap-2">
+          <span className="px-3 py-1 rounded-full bg-primary/10 text-primary text-xs font-semibold uppercase tracking-wider">
+            Featured
+          </span>
+          <span className="px-3 py-1 rounded-full bg-secondary text-secondary-foreground text-xs font-medium uppercase tracking-wider">
+            {latestBlog.category || "Tech"}
+          </span>
         </div>
-        <div className="flex flex-row items-center gap-2">
-          <LuPin className="text-slate-300" />
-          <p className="text-slate-300">
-            {formatDate(new Date(latestBlog?.createdAt))}
-          </p>
+
+        <h1 className="text-3xl md:text-3xl font-extrabold text-white leading-tight tracking-tight group-hover:text-primary transition-colors duration-300 line-clamp-3">
+          {latestBlog.title}
+        </h1>
+
+        <p className="text-slate-400 text-lg line-clamp-3 leading-relaxed">
+          {latestBlog.description}
+        </p>
+
+        <div className="flex flex-wrap items-center gap-6 mt-4 text-sm text-slate-500 font-medium">
+          <div className="flex items-center gap-2">
+            <MdTimer className="w-4 h-4" />
+            <span>{latestBlog.readTime} read</span>
+          </div>
+          <div className="flex items-center gap-2">
+            <LuCalendarDays className="w-4 h-4" />
+            <span>{formatDate(new Date(latestBlog.createdAt))}</span>
+          </div>
         </div>
       </div>
     </RouteLayout>

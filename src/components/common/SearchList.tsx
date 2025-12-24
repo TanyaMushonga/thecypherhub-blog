@@ -1,25 +1,33 @@
-import Image from "next/image";
 import React from "react";
-import { DialogClose } from "../ui/dialog";
+import { DialogClose } from "@/components/ui/dialog";
+import { LuChevronRight, LuFileText } from "react-icons/lu";
 import RouteLayout from "./routeLayout";
 
 function SearchList({ article }: { article: Article }) {
   return (
-    <DialogClose>
+    <DialogClose asChild>
       <RouteLayout
-        className="flex flex-row gap-2 items-center cursor-pointer hover:bg-secondary p-2 rounded-md"
         link={`/blog/${article.slug}`}
+        className="group flex items-center justify-between rounded-md px-3 py-2 transition
+             hover:bg-muted cursor-pointer me-2"
       >
-        <Image
-          src={article.coverImgUrl}
-          alt="search"
-          width={40}
-          height={40}
-          className="rounded-md"
-          loading="eager"
-          sizes="(max-width: 600px) 100vw, (max-width: 1200px) 50vw, 33vw"
-        />
-        <p className="text-white text-lg line-clamp-1">{article.title}</p>
+        <div className="flex items-center gap-3 min-w-0 ">
+          <div className="flex h-8 w-8 items-center justify-center rounded-md bg-primary/10 text-primary">
+            <LuFileText className="h-4 w-4" />
+          </div>
+
+          <div className="min-w-0">
+            <p className="text-sm font-medium text-foreground line-clamp-1">
+              {article.title}
+            </p>
+
+            <p className="text-xs text-muted-foreground line-clamp-1">
+              {article.description}
+            </p>
+          </div>
+        </div>
+
+        <LuChevronRight className="h-4 w-4 text-muted-foreground group-hover:text-primary" />
       </RouteLayout>
     </DialogClose>
   );
