@@ -1,17 +1,14 @@
-import dynamic from "next/dynamic";
 import type { Metadata } from "next";
 import Script from "next/script";
 import "./globals.css";
 import { Toaster } from "react-hot-toast";
 import { Inter } from "next/font/google";
+import { SpeedInsights } from "@vercel/speed-insights/next";
 
 const inter = Inter({
   subsets: ["latin"],
   variable: "--font-inter",
 });
-
-const NavBar = dynamic(() => import("@/components/common/NavBar"));
-const Footer = dynamic(() => import("@/components/common/footer"));
 
 export const metadata: Metadata = {
   title: {
@@ -73,12 +70,21 @@ export default function RootLayout({
     `,
           }}
           async
-        />{" "}
-        <div className="min-h-screen bg-background text-foreground">
-          <NavBar />
-          <div className="pt-10"> {children}</div>
-          <Toaster />
-          <Footer />
+        />
+        <div className="">
+          {children}
+          <SpeedInsights />
+          <Toaster
+            position="top-right"
+            toastOptions={{
+              duration: 4000,
+              style: {
+                background: "hsl(var(--card))",
+                color: "hsl(var(--foreground))",
+                border: "1px solid hsl(var(--border))",
+              },
+            }}
+          />
         </div>
       </body>
     </html>
