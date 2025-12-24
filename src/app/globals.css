@@ -1,12 +1,14 @@
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
+@charset "UTF-8";
 
 /* -------------------------------
-   GLOBAL
+   IMPORTS (MUST BE FIRST)
 -------------------------------- */
-@import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@300;400;500;600;700&family=Fira+Code:wght@300;400;500;600;700&family=IBM+Plex+Mono:wght@300;400;500;600&display=swap');
+@import "tailwindcss";
+ 
 
+/* -------------------------------
+   BASE STYLES
+-------------------------------- */
 body {
   font-family: "Inter", system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
 }
@@ -19,49 +21,71 @@ body {
   font-style: normal;
 }
 
-/* -------------------------------
-   THEME VARIABLES
--------------------------------- */
 
-@layer base {
-  :root {
-    --background: 222 47% 11%;
-    --foreground: 210 40% 98%;
-    --card: 222 47% 14%;
-    --card-foreground: 210 40% 98%;
-    --popover: 222 47% 11%;
-    --popover-foreground: 210 40% 98%;
-    --primary: 217 91% 60%;
-    --primary-foreground: 222 47% 11%;
-    --secondary: 217 33% 17%;
-    --secondary-foreground: 210 40% 98%;
-    --muted: 217 33% 17%;
-    --muted-foreground: 215 20% 65%;
-    --accent: 217 33% 17%;
-    --accent-foreground: 210 40% 98%;
-    --destructive: 0 63% 31%;
-    --destructive-foreground: 210 40% 98%;
-    --border: 217 33% 17%;
-    --input: 217 33% 17%;
-    --ring: 224 76% 48%;
-    --radius: 0.5rem;
-  }
+@theme {
+  /* Colors converted from HSL to HEX/RGB */
+  --color-background: #0f172a;           /* was: 222 47% 11% */
+  --color-foreground: #f1f5f9;           /* was: 210 40% 98% */
+  --color-card: #111827;                 /* was: 222 47% 14% */
+  --color-card-foreground: #f1f5f9;      /* was: 210 40% 98% */
+  --color-primary: #3b82f6;              /* was: 217 91% 60% */
+  --color-primary-foreground: #0f172a;   /* was: 222 47% 11% */
+  --color-secondary: #1e293b;            /* was: 217 33% 17% */
+  --color-secondary-foreground: #f1f5f9; /* was: 210 40% 98% */
+  --color-muted: #1e293b;                /* was: 217 33% 17% */
+  --color-muted-foreground: #94a3b8;     /* was: 215 20% 65% */
+  --color-accent: #1e293b;               /* was: 217 33% 17% */
+  --color-accent-foreground: #f1f5f9;    /* was: 210 40% 98% */
+  --color-destructive: #991b1b;          /* was: 0 63% 31% */
+  --color-destructive-foreground: #f1f5f9; /* was: 210 40% 98% */
+  --color-border: #1e293b;               /* was: 217 33% 17% */
+  --color-input: #1e293b;                /* was: 217 33% 17% */
+  --color-ring: #1d4ed8;                 /* was: 224 76% 48% */
+
+  /* Border radius */
+  --radius: 0.5rem;
+
+  /* Font Family */
+  --font-sans: "Inter", system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
 }
 
+/* Apply theme variables to the Tailwind layers */
 @layer base {
+  :root {
+    --background: var(--color-background);
+    --foreground: var(--color-foreground);
+    --card: var(--color-card);
+    --card-foreground: var(--color-card-foreground);
+    --primary: var(--color-primary);
+    --primary-foreground: var(--color-primary-foreground);
+    --secondary: var(--color-secondary);
+    --secondary-foreground: var(--color-secondary-foreground);
+    --muted: var(--color-muted);
+    --muted-foreground: var(--color-muted-foreground);
+    --accent: var(--color-accent);
+    --accent-foreground: var(--color-accent-foreground);
+    --destructive: var(--color-destructive);
+    --destructive-foreground: var(--color-destructive-foreground);
+    --border: var(--color-border);
+    --input: var(--color-input);
+    --ring: var(--color-ring);
+    --radius: var(--radius);
+  }
+
   * {
-    @apply border-border;
+    border-color: var(--border);
   }
 
   body {
-    @apply bg-background text-foreground;
+    background-color: var(--background);
+    color: var(--foreground);
+    font-family: var(--font-sans);
   }
 }
 
 /* -------------------------------
    SCROLLBAR
 -------------------------------- */
-
 .no-visible-scrollbar {
   scrollbar-width: none;
   -ms-overflow-style: none;
@@ -72,15 +96,16 @@ body {
 }
 
 /* -------------------------------
-   PROSE / BLOG TYPOGRAPHY
+   PROSE / BLOG TYPOGRAPHY (rest of your CSS remains unchanged)
 -------------------------------- */
-
 .prose {
   max-width: 100%;
   line-height: 1.25;
   overflow-wrap: break-word;
   word-wrap: break-word;
 }
+
+/* ... rest of your CSS code remains exactly as it was ... */
 
 /* Prevent any child from overflowing */
 .prose > * {
@@ -204,8 +229,7 @@ body {
   padding: 0;
   overflow: hidden;
   max-width: 100%;
-  box-shadow:
-    0 10px 30px rgba(0, 0, 0, 0.45),
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.45),
     inset 0 1px 0 rgba(255, 255, 255, 0.04);
 }
 
@@ -235,9 +259,7 @@ body {
   height: 0.7rem;
   border-radius: 50%;
   background: #ef4444;
-  box-shadow:
-    1.1rem 0 0 #eab308,
-    2.2rem 0 0 #22c55e;
+  box-shadow: 1.1rem 0 0 #eab308, 2.2rem 0 0 #22c55e;
 }
 
 /* Code container */
