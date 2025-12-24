@@ -26,7 +26,6 @@ export const metadata: Metadata = {
   description:
     "The Cypher Hub delivers in-depth programming tutorials, software engineering insights, and cutting-edge technology analysis. Stay ahead with expert guides on web development, cloud computing, DevOps, and modern tech stacks.",
   keywords: [
-    // Programming Languages & Frameworks
     "JavaScript",
     "TypeScript",
     "Python",
@@ -51,7 +50,6 @@ export const metadata: Metadata = {
     "Laravel",
     "Ruby on Rails",
 
-    // Web Development
     "web development",
     "frontend development",
     "backend development",
@@ -64,7 +62,6 @@ export const metadata: Metadata = {
     "single page applications",
     "server-side rendering",
 
-    // Cloud & DevOps
     "AWS",
     "Azure",
     "Google Cloud",
@@ -82,7 +79,6 @@ export const metadata: Metadata = {
     "GitHub Actions",
     "GitLab CI",
 
-    // Databases
     "PostgreSQL",
     "MySQL",
     "MongoDB",
@@ -94,7 +90,6 @@ export const metadata: Metadata = {
     "data modeling",
     "database optimization",
 
-    // AI & Machine Learning
     "artificial intelligence",
     "machine learning",
     "deep learning",
@@ -107,7 +102,6 @@ export const metadata: Metadata = {
     "computer vision",
     "natural language processing",
 
-    // Software Engineering
     "software architecture",
     "design patterns",
     "clean code",
@@ -122,7 +116,6 @@ export const metadata: Metadata = {
     "REST APIs",
     "GraphQL",
 
-    // Tools & Platforms
     "Git",
     "VS Code",
     "IntelliJ",
@@ -137,7 +130,6 @@ export const metadata: Metadata = {
     "webpack",
     "Vite",
 
-    // Mobile Development
     "React Native",
     "Flutter",
     "iOS development",
@@ -145,7 +137,6 @@ export const metadata: Metadata = {
     "mobile app development",
     "cross-platform development",
 
-    // Cybersecurity
     "web security",
     "cybersecurity",
     "authentication",
@@ -156,7 +147,6 @@ export const metadata: Metadata = {
     "encryption",
     "ethical hacking",
 
-    // Career & Learning
     "programming tutorials",
     "coding bootcamp",
     "tech career",
@@ -165,7 +155,6 @@ export const metadata: Metadata = {
     "tech interview preparation",
     "portfolio building",
 
-    // General Tech
     "technology trends",
     "tech news",
     "software development",
@@ -191,7 +180,6 @@ export const metadata: Metadata = {
   },
   metadataBase: new URL(process.env.NEXT_PUBLIC_BASE_URL!),
 
-  // Open Graph
   openGraph: {
     type: "website",
     locale: "en_US",
@@ -202,15 +190,13 @@ export const metadata: Metadata = {
       "Expert programming tutorials, software engineering insights, and cutting-edge technology analysis.",
     images: [
       {
-        url: "/og-image.png", // Make sure to create this image
+        url: "/og-image.png",
         width: 1200,
         height: 630,
         alt: "The Cypher Hub - Tech Blog",
       },
     ],
   },
-
-  // Twitter
   twitter: {
     card: "summary_large_image",
     title: "The Cypher Hub - Tech Insights & Programming Blog",
@@ -220,8 +206,6 @@ export const metadata: Metadata = {
     creator: "@thecypherhub",
     site: "@thecypherhub",
   },
-
-  // Robots
   robots: {
     index: true,
     follow: true,
@@ -233,24 +217,16 @@ export const metadata: Metadata = {
       "max-snippet": -1,
     },
   },
-
-  // Alternates
   alternates: {
     canonical: "https://www.thecypherhub.tech/",
     languages: {
       "en-US": "https://www.thecypherhub.tech/",
     },
   },
-
-  // Category
   category: "Technology",
-
-  // Other metadata
   applicationName: "The Cypher Hub",
   generator: "Next.js",
   referrer: "origin-when-cross-origin",
-
-  // Verification
   verification: {
     google: "_cuUK8FcUd9DgVvRvcC22LZZ29FoD-6lI5mOX2iRhYE",
     other: {
@@ -262,8 +238,6 @@ export const metadata: Metadata = {
   icons: {
     icon: [
       { url: "/favicon.ico" },
-      { url: "/favicon-16x16.png", sizes: "16x16", type: "image/png" },
-      { url: "/favicon-32x32.png", sizes: "32x32", type: "image/png" },
     ],
     apple: [
       { url: "/apple-touch-icon.png", sizes: "180x180", type: "image/png" },
@@ -276,8 +250,6 @@ export const metadata: Metadata = {
       },
     ],
   },
-
-  // Apple Web App
   appleWebApp: {
     capable: true,
     title: "The Cypher Hub",
@@ -293,15 +265,12 @@ export default function RootLayout({
   return (
     <html lang="en" className="dark">
       <head>
-        {/* Preconnect to important domains */}
         <link rel="preconnect" href="https://fonts.googleapis.com" />
         <link
           rel="preconnect"
           href="https://fonts.gstatic.com"
           crossOrigin="anonymous"
         />
-
-        {/* Favicon links (already in metadata but good to have explicit) */}
         <link rel="icon" href="/favicon.ico" sizes="any" />
       
         <link
@@ -312,8 +281,6 @@ export default function RootLayout({
         <link rel="manifest" href="/site.webmanifest" />
         <meta name="msapplication-TileColor" content="#000000" />
         <meta name="theme-color" content="#000000" />
-
-        {/* Structured Data for better SEO */}
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{
