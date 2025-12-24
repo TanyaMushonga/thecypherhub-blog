@@ -5,6 +5,7 @@
 /* -------------------------------
    GLOBAL
 -------------------------------- */
+@import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@300;400;500;600;700&family=Fira+Code:wght@300;400;500;600;700&family=IBM+Plex+Mono:wght@300;400;500;600&display=swap');
 
 body {
   font-family: "Inter", system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
@@ -26,32 +27,23 @@ body {
   :root {
     --background: 222 47% 11%;
     --foreground: 210 40% 98%;
-
     --card: 222 47% 14%;
     --card-foreground: 210 40% 98%;
-
     --popover: 222 47% 11%;
     --popover-foreground: 210 40% 98%;
-
     --primary: 217 91% 60%;
     --primary-foreground: 222 47% 11%;
-
     --secondary: 217 33% 17%;
     --secondary-foreground: 210 40% 98%;
-
     --muted: 217 33% 17%;
     --muted-foreground: 215 20% 65%;
-
     --accent: 217 33% 17%;
     --accent-foreground: 210 40% 98%;
-
     --destructive: 0 63% 31%;
     --destructive-foreground: 210 40% 98%;
-
     --border: 217 33% 17%;
     --input: 217 33% 17%;
     --ring: 224 76% 48%;
-
     --radius: 0.5rem;
   }
 }
@@ -86,6 +78,21 @@ body {
 .prose {
   max-width: 100%;
   line-height: 1.25;
+  overflow-wrap: break-word;
+  word-wrap: break-word;
+}
+
+/* Prevent any child from overflowing */
+.prose > * {
+  max-width: 100%;
+}
+
+/* Images */
+.prose img {
+  max-width: 100%;
+  height: auto;
+  border-radius: 0.75rem;
+  margin: 1.5rem 0;
 }
 
 /* Headings */
@@ -97,9 +104,10 @@ body {
   font-weight: 700;
   letter-spacing: -0.02em;
   line-height: 1.2;
-
   margin-top: 2rem;
   margin-bottom: 0.75rem;
+  word-wrap: break-word;
+  overflow-wrap: break-word;
 }
 
 .prose h1 {
@@ -122,11 +130,15 @@ body {
   font-size: 1.05rem;
   line-height: 1.25;
   margin-bottom: 1.1rem;
+  word-wrap: break-word;
+  overflow-wrap: break-word;
+  text-align: justify;
 }
 
 .prose strong {
   color: #ffffff;
   font-weight: 600;
+  word-break: break-word;
 }
 
 /* Links */
@@ -135,6 +147,8 @@ body {
   text-decoration: none;
   border-bottom: 1px dashed #60a5fa;
   transition: all 0.2s ease;
+  word-break: break-word;
+  overflow-wrap: break-word;
 }
 
 .prose a:hover {
@@ -147,22 +161,27 @@ body {
 .prose ol {
   color: #cbd5e1;
   font-size: 1.05rem;
-  padding-left: 1.75rem; /* increased indent for clearer markers */
+  padding-left: 1.75rem;
   margin-bottom: 1.2rem;
-  line-height: 1.2; /* tighter spacing for lists */
+  line-height: 1.2;
+  max-width: 100%;
+  text-align: justify;
 }
 
 .prose li {
   margin-bottom: 0.35rem;
+  word-wrap: break-word;
+  overflow-wrap: break-word;
+  text-align: justify;
 }
 
-/* Make list bullets/numbers visible and styled */
+/* Make list bullets/numbers visible and match text color */
 .prose li::marker {
-  color: #60a5fa; /* cyan marker */
-  opacity: 0.95;
+  color: #cbd5e1;
+  opacity: 1;
 }
 
-/* Ensure list markers are visible despite Tailwind's preflight reset */
+/* Ensure list markers are visible */
 .prose ul {
   list-style-type: disc;
   list-style-position: outside;
@@ -173,21 +192,18 @@ body {
 }
 
 /* -------------------------------
-   CODE BLOCKS (UNIFIED)
--------------------------------- */
-/* -------------------------------
    CODE BLOCKS (EDITOR STYLE)
 -------------------------------- */
 
 .prose pre {
   position: relative;
-  background: #020617; /* deep navy */
+  background: #020617;
   border: 1px solid #1e293b;
   border-radius: 0.75rem;
   margin: 1.75rem 0;
-  padding: 0; /* important */
+  padding: 0;
   overflow: hidden;
-
+  max-width: 100%;
   box-shadow:
     0 10px 30px rgba(0, 0, 0, 0.45),
     inset 0 1px 0 rgba(255, 255, 255, 0.04);
@@ -200,20 +216,12 @@ body {
   display: flex;
   align-items: center;
   justify-content: space-between;
-
   height: 2.5rem;
   padding: 0 1rem;
-
   font-size: 0.75rem;
   font-weight: 500;
   color: #94a3b8;
-
-  background: linear-gradient(
-    to bottom,
-    #020617,
-    #020617
-  );
-
+  background: linear-gradient(to bottom, #020617, #020617);
   border-bottom: 1px solid #1e293b;
 }
 
@@ -223,11 +231,9 @@ body {
   position: absolute;
   top: 0.9rem;
   left: 1rem;
-
   width: 0.7rem;
   height: 0.7rem;
   border-radius: 50%;
-
   background: #ef4444;
   box-shadow:
     1.1rem 0 0 #eab308,
@@ -237,18 +243,37 @@ body {
 /* Code container */
 .prose pre code {
   display: block;
-  padding: 1.25rem 1.25rem 1.4rem;
+  padding: 1.25rem;
   margin-top: 0;
-
   background: transparent !important;
   color: #e5e7eb;
-
   font-family: "JetBrains Mono", Menlo, Monaco, Consolas, monospace;
   font-size: 0.9rem;
-  line-height: 1.25;
-
+  line-height: 1.6;
   overflow-x: auto;
   white-space: pre;
+  word-wrap: normal;
+  word-break: normal;
+  max-width: 100%;
+}
+
+/* Scrollbar styling for code blocks */
+.prose pre code::-webkit-scrollbar {
+  height: 8px;
+}
+
+.prose pre code::-webkit-scrollbar-track {
+  background: #0f172a;
+  border-radius: 4px;
+}
+
+.prose pre code::-webkit-scrollbar-thumb {
+  background: #334155;
+  border-radius: 4px;
+}
+
+.prose pre code::-webkit-scrollbar-thumb:hover {
+  background: #475569;
 }
 
 /* Remove Tailwind span issues from syntax highlighters */
@@ -265,6 +290,8 @@ body {
   border-radius: 0.35rem;
   border: 1px solid #1e293b;
   font-size: 0.85em;
+  word-break: break-all;
+  overflow-wrap: break-word;
 }
 
 /* -------------------------------
@@ -275,11 +302,14 @@ body {
   border-left: 3px solid #3b82f6;
   padding: 0.75rem 1rem;
   margin: 1.25rem 0;
-
   font-style: italic;
   color: #94a3b8;
   background: rgba(59, 130, 246, 0.08);
   border-radius: 0 0.5rem 0.5rem 0;
+  word-wrap: break-word;
+  overflow-wrap: break-word;
+  max-width: 100%;
+  text-align: justify;
 }
 
 /* -------------------------------
@@ -291,6 +321,36 @@ body {
   border-collapse: collapse;
   margin-bottom: 1.75rem;
   color: #cbd5e1;
+  display: block;
+  overflow-x: auto;
+  max-width: 100%;
+}
+
+/* Scrollbar for tables */
+.prose table::-webkit-scrollbar {
+  height: 8px;
+}
+
+.prose table::-webkit-scrollbar-track {
+  background: #0f172a;
+  border-radius: 4px;
+}
+
+.prose table::-webkit-scrollbar-thumb {
+  background: #334155;
+  border-radius: 4px;
+}
+
+.prose table::-webkit-scrollbar-thumb:hover {
+  background: #475569;
+}
+
+.prose thead,
+.prose tbody,
+.prose tr {
+  display: table;
+  width: 100%;
+  table-layout: fixed;
 }
 
 .prose th {
@@ -298,11 +358,17 @@ body {
   text-align: left;
   padding: 0.6rem 0.75rem;
   border: 1px solid #334155;
+  word-wrap: break-word;
+  overflow-wrap: break-word;
+  hyphens: auto;
 }
 
 .prose td {
   padding: 0.6rem 0.75rem;
   border: 1px solid #334155;
+  word-wrap: break-word;
+  overflow-wrap: break-word;
+  hyphens: auto;
 }
 
 /* -------------------------------
@@ -312,5 +378,100 @@ body {
 @media (min-width: 1024px) {
   .prose {
     font-size: 1.05rem;
+  }
+}
+
+/* -------------------------------
+   RESPONSIVE ADJUSTMENTS
+-------------------------------- */
+
+@media (max-width: 768px) {
+  .prose h1 {
+    font-size: 1.75rem;
+  }
+
+  .prose h2 {
+    font-size: 1.4rem;
+  }
+
+  .prose h3 {
+    font-size: 1.2rem;
+  }
+
+  .prose p,
+  .prose li {
+    font-size: 0.95rem;
+  }
+
+  .prose pre {
+    margin: 1.25rem -0.5rem;
+    border-radius: 0.5rem;
+  }
+
+  .prose pre code {
+    font-size: 0.8rem;
+    padding: 1rem;
+  }
+
+  .prose table {
+    font-size: 0.85rem;
+  }
+
+  .prose th,
+  .prose td {
+    padding: 0.5rem 0.6rem;
+    font-size: 0.85rem;
+  }
+
+  /* Better handling of inline code on mobile */
+  .prose p code,
+  .prose li code {
+    font-size: 0.8em;
+    padding: 0.15rem 0.35rem;
+  }
+
+  .prose ul,
+  .prose ol {
+    padding-left: 1.25rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .prose h1 {
+    font-size: 1.5rem;
+  }
+
+  .prose h2 {
+    font-size: 1.25rem;
+  }
+
+  .prose h3 {
+    font-size: 1.1rem;
+  }
+
+  .prose p,
+  .prose li {
+    font-size: 0.9rem;
+    line-height: 1.5;
+  }
+
+  .prose pre code {
+    font-size: 0.75rem;
+    padding: 0.75rem;
+  }
+
+  .prose ul,
+  .prose ol {
+    padding-left: 1rem;
+  }
+
+  .prose table {
+    font-size: 0.8rem;
+  }
+
+  .prose th,
+  .prose td {
+    padding: 0.4rem 0.5rem;
+    font-size: 0.8rem;
   }
 }
