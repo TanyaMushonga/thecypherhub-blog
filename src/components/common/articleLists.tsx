@@ -19,7 +19,6 @@ function ArticleLists({ value }: ArticleListsProps) {
   const itemsPerPage = 10;
   const { setPage, articles, loading, totalCount, page } = useFetchArticles(
     value,
-    itemsPerPage
   );
 
   // Update displayed articles when new articles are fetched
