@@ -32,14 +32,14 @@ export default async function Navbar() {
         >
           {/* Animated terminal icon */}
           <div className="relative group">
-            <div className="absolute -inset-1 bg-gradient-to-r from-primary/30 to-cyan-500/30 rounded-xl blur opacity-0 group-hover:opacity-70 transition duration-500" />
-            <div className="relative bg-gradient-to-br from-card to-gray-900 p-2 rounded-lg border border-gray-800 group-hover:border-primary/50 transition-all duration-300">
+            <div className="absolute -inset-1 bg-linear-to-r from-primary/30 to-cyan-500/30 rounded-xl blur opacity-0 group-hover:opacity-70 transition duration-500" />
+            <div className="relative bg-linear-to-br from-card to-gray-900 p-2 rounded-lg border border-gray-800 group-hover:border-primary/50 transition-all duration-300">
               <IoTerminal className="w-6 h-6 text-primary group-hover:text-cyan-400/80 transition-colors duration-300" />
             </div>
           </div>
 
           <div className="flex flex-col leading-tight">
-            <span className="text-xl font-bold tracking-tight bg-gradient-to-r from-gray-200 via-primary/25 to-cyan-400/80 bg-clip-text text-transparent group-hover:from-primary group-hover:via-cyan-300/80 group-hover:to-primary transition-all duration-300 font-mono">
+            <span className="text-xl font-bold tracking-tight bg-linear-to-r from-gray-200 via-primary/25 to-cyan-400/80 bg-clip-text text-transparent group-hover:from-primary group-hover:via-cyan-300/80 group-hover:to-primary transition-all duration-300 font-mono">
               The Cypher Hub
             </span>
             <span className="text-[10px] text-gray-400 font-medium tracking-[0.2em] uppercase font-mono">
@@ -55,7 +55,7 @@ export default async function Navbar() {
         <Suspense
           fallback={
             <div className="flex items-center gap-2">
-              <div className="hidden md:block h-9 w-36 rounded-lg bg-gradient-to-r from-gray-800 to-gray-900 animate-pulse border border-gray-800" />
+              <div className="hidden md:block h-9 w-36 rounded-lg bg-linear-to-r from-gray-800 to-gray-900 animate-pulse border border-gray-800" />
               <div className="md:hidden h-9 w-9 rounded-lg bg-gray-900 animate-pulse border border-gray-800" />
             </div>
           }
