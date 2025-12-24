@@ -4,7 +4,7 @@ import { useEffect, useState, useCallback } from "react";
 const articleCache: { [key: string]: { articles: Article[]; total: number } } =
   {};
 
-export const useFetchArticles = (value: string, p0?: number) => {
+export const useFetchArticles = (value: string) => {
   const [articles, setArticles] = useState<Article[]>([]);
   const [loading, setLoading] = useState(false);
   const [page, setPage] = useState(1);
