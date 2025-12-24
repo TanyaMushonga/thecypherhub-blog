@@ -13,7 +13,7 @@ import WriteAcomment from "./writeComment";
 
 function Comments({ article }: { article: Article }) {
   return (
-    <div className="flex flex-col gap-4 mt-5 border-t-2 border-slate-500 py-5">
+    <div className="flex flex-col gap-4 mt-5 border-t border-slate-500/50 py-5">
       <h1 className="text-white font-bold text-xl">Comments</h1>
       <div>
         {article?.comments?.length > 0 ? (
@@ -34,11 +34,11 @@ function Comments({ article }: { article: Article }) {
         <Sheet>
           <SheetTrigger className="flex items-center gap-2">
             <MessageSquareText />
-            <p>Write a comment anonymously</p>
+            <p>Write a comment</p>
           </SheetTrigger>
           <SheetContent>
             <SheetHeader>
-              <SheetTitle className="text-white">Anonymous comments</SheetTitle>
+              <SheetTitle className="text-white">Comments</SheetTitle>
             </SheetHeader>
             <div className="w-full h-full flex flex-col mb-10">
               <ScrollArea className="w-full h-[80vh]">
