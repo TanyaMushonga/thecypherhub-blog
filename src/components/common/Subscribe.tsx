@@ -37,7 +37,7 @@ function SUbscribe() {
   };
 
   return (
-    <div className="relative overflow-hidden rounded-2xl bg-gradient-to-br from-indigo-900/50 to-slate-900 border border-indigo-500/30 p-8 md:p-12">
+    <div className="relative overflow-hidden rounded-2xl bg-linear-to-br from-indigo-900/50 to-slate-900 border border-indigo-500/30 p-8 md:p-12">
       {/* Background Decor */}
       <div className="absolute -top-24 -right-24 w-48 h-48 bg-primary/20 rounded-full blur-3xl"></div>
 

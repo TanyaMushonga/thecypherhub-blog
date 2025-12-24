@@ -128,7 +128,7 @@ function NewVerificationForm() {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-gray-900 via-background to-gray-950 flex items-center justify-center p-4">
+    <div className="min-h-screen bg-linear-to-br from-gray-900 via-background to-gray-950 flex items-center justify-center p-4">
       <motion.div
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
@@ -141,8 +141,8 @@ function NewVerificationForm() {
           <div className="absolute -top-20 -right-20 w-40 h-40 bg-primary/10 rounded-full blur-3xl" />
           <div className="absolute -bottom-20 -left-20 w-40 h-40 bg-secondary/10 rounded-full blur-3xl" />
 
-          {/* Animated gradient border */}
-          <div className="absolute inset-0 rounded-2xl p-[1px] bg-gradient-to-br from-transparent via-primary/20 to-transparent -z-10" />
+          {/* Animated linear border */}
+          <div className="absolute inset-0 rounded-2xl p-px bg-linear-to-br from-transparent via-primary/20 to-transparent -z-10" />
 
           <div className="relative z-10">
             {/* Icon Container */}
@@ -173,7 +173,7 @@ function NewVerificationForm() {
               key={`title-${state}`}
               initial={{ opacity: 0, y: 10 }}
               animate={{ opacity: 1, y: 0 }}
-              className="text-2xl md:text-3xl font-bold text-center mb-4 bg-gradient-to-r from-foreground to-primary bg-clip-text text-transparent"
+              className="text-2xl md:text-3xl font-bold text-center mb-4 bg-linear-to-r from-foreground to-primary bg-clip-text text-transparent"
             >
               {StatusTitle()}
             </motion.h1>
@@ -204,7 +204,7 @@ function NewVerificationForm() {
               <div className="mb-8">
                 <div className="w-full h-1 bg-border rounded-full overflow-hidden">
                   <motion.div
-                    className="h-full bg-gradient-to-r from-primary to-secondary"
+                    className="h-full bg-linear-to-r from-primary to-secondary"
                     initial={{ width: "0%" }}
                     animate={{ width: "100%" }}
                     transition={{ duration: 2, repeat: Infinity }}
@@ -276,7 +276,7 @@ function NewVerificationForm() {
                 >
                   <Button
                     onClick={handleRedirect}
-                    className="w-full h-12 bg-gradient-to-r from-primary to-secondary hover:opacity-90 text-primary-foreground font-semibold group"
+                    className="w-full h-12 bg-linear-to-r from-primary to-secondary hover:opacity-90 text-primary-foreground font-semibold group"
                   >
                     {state === "success" ? "Go to Homepage" : "Back to Home"}
                     <LuArrowRight className="ml-2 h-5 w-5 group-hover:translate-x-1 transition-transform" />
