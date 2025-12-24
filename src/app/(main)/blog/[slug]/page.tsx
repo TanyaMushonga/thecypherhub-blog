@@ -4,6 +4,7 @@ import ReadSkeleton from "@/components/common/readSkeleton";
 import { notFound } from "next/navigation";
 import { Metadata } from "next";
 import TableOfContents from "@/components/common/tableOfContents";
+import Link from "next/link";
 
 const Read = React.lazy(() => import("@/components/common/read"));
 
@@ -15,68 +16,105 @@ type Props = {
 };
 
 async function getArticleAndRelated(slug: string) {
-  const articleRes = await fetch(
-    `${process.env.NEXT_PUBLIC_API_URL}/blog/${slug}`,
-    { next: { revalidate: 3600 } }
-  );
-  if (!articleRes.ok) {
-    throw new Error(
-      `Failed to fetch article with slug ${slug}: ${articleRes.statusText}`
+  try {
+
+    const articleRes = await fetch(
+      `${process.env.NEXT_PUBLIC_API_URL}/blog/${slug}`,
+      { next: { revalidate: 3600 } }
     );
-  }
-  const articleData = await articleRes.json();
-  const article: Article = articleData;
 
-  const relatedRes = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/blog?page=1&page_size=50`, {
-    next: { revalidate: 3600 },
-  });
-  if (!relatedRes.ok) {
-    throw new Error(
-      `Failed to fetch related articles: ${relatedRes.statusText}`
+    if (!articleRes.ok) {
+      if (articleRes.status === 404) {
+        notFound();
+      }
+      throw new Error(`Failed to fetch article: ${articleRes.statusText}`);
+    }
+
+    const articleData = await articleRes.json();
+    const article: Article = articleData;
+    const relatedRes = await fetch(
+      `${process.env.NEXT_PUBLIC_API_URL}/blog?page=1&page_size=50`,
+      { next: { revalidate: 3600 } }
     );
+
+    let related: Article[] = [];
+    if (relatedRes.ok) {
+      const relatedData = await relatedRes.json();
+      const articles: Article[] = relatedData.blogs || [];
+      related = articles
+        .filter(
+          (relatedArticle: Article) =>
+            relatedArticle.category === article.category &&
+            relatedArticle.slug !== article.slug
+        )
+        .slice(0, 3); // Take only first 3
+    }
+    return { article, related };
+  } catch (error) {
+    console.error(`Error fetching data for slug ${slug}:`, error);
+    throw error;
   }
-  const relatedData = await relatedRes.json();
-  const articles: Article[] = relatedData.blogs;
-
-  if (!Array.isArray(articles)) {
-    throw new Error("Expected articles to be an array");
-  }
-
-  const related: Article[] = articles.filter(
-    (related: Article) => related.category === article.category && related.slug !== article.slug
-  );
-
-  if (!related.length) notFound();
-
-  return { article, related: related.slice(0, 3) };
 }
 
 export async function generateStaticParams() {
-  const data = await fetch(
-    `${process.env.NEXT_PUBLIC_API_URL}/blog?page=1&page_size=50`,
-    { next: { revalidate: 3600 } }
-  ).then((res) => res.json());
-  const blogs: Article[] = data.blogs;
+  try {
+    const response = await fetch(
+      `${process.env.NEXT_PUBLIC_API_URL}/blog?page=1&page_size=50`,
+      { next: { revalidate: 3600 } }
+    );
 
-  return blogs.map((blog: Article) => ({ slug: blog.slug }));
+    if (!response.ok) {
+      console.warn(
+        `Failed to fetch blogs for static generation: ${response.statusText}`
+      );
+      return [];
+    }
+
+    const data = await response.json();
+    const blogs: Article[] = data.blogs || [];
+
+    return blogs.map((blog: Article) => ({ slug: blog.slug }));
+  } catch (error) {
+    console.error("Error in generateStaticParams:", error);
+    return [];
+  }
 }
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
-  const slug = (await params).slug;
-
   try {
-    const { article } = await getArticleAndRelated(slug);
+    const slug = (await params).slug;
+
+    // Fetch only the article for metadata, don't try to get related
+    const response = await fetch(
+      `${process.env.NEXT_PUBLIC_API_URL}/blog/${slug}`,
+      { next: { revalidate: 3600 } }
+    );
+
+    if (!response.ok) {
+      if (response.status === 404) {
+        return {
+          title: "Article Not Found - The Cypher Hub",
+          description: "The requested article could not be found.",
+        };
+      }
+      throw new Error(
+        `Failed to fetch article metadata: ${response.statusText}`
+      );
+    }
+
+    const article: Article = await response.json();
 
     if (!article) {
       return {
-        title: "Error",
-        description: "An error occurred while fetching metadata.",
+        title: "Error - The Cypher Hub",
+        description: "An error occurred while fetching article metadata.",
       };
     }
+
     return {
-      title: article?.title,
-      description: article?.description,
-      keywords: article?.keywords || [],
+      title: `${article.title} - The Cypher Hub`,
+      description: article.description || "Read this article on The Cypher Hub",
+      keywords: article.keywords || [],
       authors: [
         { name: "Tanyaradzwa Tanatswa Mushonga" },
         {
@@ -85,30 +123,38 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
         },
       ],
       publisher: "The Cypher Hub",
-      formatDetection: {
-        telephone: true,
-        email: true,
-        address: true,
-      },
       openGraph: {
-        images: [
-          {
-            url: article?.coverImgUrl,
-            width: 1200,
-            height: 630,
-            alt: article?.slug,
-          },
-        ],
+        title: article.title,
+        description: article.description || "",
+        type: "article",
+        publishedTime: article.createdAt,
+        authors: ["Tanyaradzwa Tanatswa Mushonga"],
+        images: article.coverImgUrl
+          ? [
+              {
+                url: article.coverImgUrl,
+                width: 1200,
+                height: 630,
+                alt: article.title,
+              },
+            ]
+          : [],
+      },
+      twitter: {
+        card: "summary_large_image",
+        title: article.title,
+        description: article.description || "",
+        images: article.coverImgUrl ? [article.coverImgUrl] : [],
       },
       alternates: {
-        canonical: `${process.env.NEXT_PUBLIC_BASE_URL}blog/${slug}`,
+        canonical: `${process.env.NEXT_PUBLIC_BASE_URL}/blog/${slug}`,
       },
     };
   } catch (error) {
-    console.error("Error fetching metadata:", error);
+    console.error("Error generating metadata:", error);
     return {
-      title: "Error",
-      description: "An error occurred while fetching metadata.",
+      title: "Error - The Cypher Hub",
+      description: "An error occurred while fetching article metadata.",
     };
   }
 }
@@ -118,22 +164,48 @@ export default async function Page({
 }: {
   params: Promise<{ slug: string }>;
 }) {
-  const slug = (await params).slug;
-  const { article, related } = await getArticleAndRelated(slug);
+  try {
+    const slug = (await params).slug;
+    const { article, related } = await getArticleAndRelated(slug);
 
-  return (
-    <div className="flex flex-row w-full gap-5 justify-end md:px-5">
-      <div className="xl:w-1/2 w-full p-5 mt-5 md:me-20">
-        <Suspense fallback={<ReadSkeleton />}>
-          <Read article={article} />
-          <Related related={related} />
-        </Suspense>
+    return (
+      <div className="flex flex-col lg:flex-row w-full gap-5 md:px-5">
+        <div className="lg:w-2/3 w-full p-4 md:p-5 mt-5">
+          <Suspense fallback={<ReadSkeleton />}>
+            <Read article={article} />
+            {related.length > 0 && <Related related={related} />}
+          </Suspense>
+        </div>
+        <div className="lg:w-1/3 lg:block mt-5 sticky top-20 h-fit">
+          <Suspense
+            fallback={
+              <div className="text-sm text-muted-foreground">
+                Loading table of contents...
+              </div>
+            }
+          >
+            <TableOfContents content={article?.content} />
+          </Suspense>
+        </div>
       </div>
-      <div className="hidden xl:block w-1/4 mt-5 sticky top-20 h-fit">
-        <Suspense fallback={<div>Loading...</div>}>
-          <TableOfContents content={article?.content} />
-        </Suspense>
+    );
+  } catch (error) {
+    console.error("Error rendering page:", error);
+    return (
+      <div className="flex flex-col items-center justify-center min-h-[70vh] px-4">
+        <div className="text-center max-w-md">
+          <h1 className="text-2xl font-bold mb-4">Something went wrong</h1>
+          <p className="text-muted-foreground mb-6">
+            We&apos;re having trouble loading this article. Please try again later.
+          </p>
+          <Link
+            href="/"
+            className="inline-flex items-center px-4 py-2 bg-primary text-primary-foreground rounded-md hover:bg-primary/90 transition-colors"
+          >
+            Back to Home
+          </Link>
+        </div>
       </div>
-    </div>
-  );
+    );
+  }
 }
