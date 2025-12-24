@@ -9,7 +9,14 @@ const nextConfig: NextConfig = {
     // Add any experimental features here
   },
   images: {
+    qualities: [25, 50, 75, 100],
     remotePatterns: [
+      {
+        protocol: "https",
+        hostname: "vhwltxiaz42mcyxk.public.blob.vercel-storage.com",
+        port: "",
+        pathname: "/**",
+      },
       {
         protocol: "https",
         hostname: "vhwltxiaz42mcyxk.public.blob.vercel-storage.com",

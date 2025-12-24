@@ -27,7 +27,7 @@ function Read({ article }: { article: Article }) {
             <div className="flex items-center gap-2">
               <div className="rounded-full">
                 <Image
-                  src="/profile.jfif"
+                  src="https://vhwltxiaz42mcyxk.public.blob.vercel-storage.com/profile.jpg"
                   width={28}
                   height={28}
                   alt="Author"
