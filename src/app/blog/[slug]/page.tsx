@@ -27,7 +27,7 @@ async function getArticleAndRelated(slug: string) {
   const articleData = await articleRes.json();
   const article: Article = articleData;
 
-  const relatedRes = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/blog`, {
+  const relatedRes = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/blog?page=1&page_size=50`, {
     next: { revalidate: 3600 },
   });
   if (!relatedRes.ok) {
@@ -43,7 +43,7 @@ async function getArticleAndRelated(slug: string) {
   }
 
   const related: Article[] = articles.filter(
-    (related: Article) => related.category === article.category
+    (related: Article) => related.category === article.category && related.slug !== article.slug
   );
 
   if (!related.length) notFound();
@@ -122,18 +122,18 @@ export default async function Page({
   const { article, related } = await getArticleAndRelated(slug);
 
   return (
-    <div className="flex flex-row w-full gap-5 justify-end md:px-10">
-      <div className="xl:w-1/2 w-full p-5 flex flex-col mt-5 md:me-20">
+    <div className="flex flex-row w-full gap-5 justify-end md:px-5">
+      <div className="xl:w-1/2 w-full p-5 mt-5 md:me-20">
         <Suspense fallback={<ReadSkeleton />}>
           <Read article={article} />
-        </Suspense>
-        <Suspense fallback={<ReadSkeleton />}>
           <Related related={related} />
         </Suspense>
       </div>
-      <Suspense fallback={<div>Loading...</div>}>
-        <TableOfContents content={article?.content} />
-      </Suspense>
+      <div className="hidden xl:block w-1/4 mt-5 sticky top-20 h-fit">
+        <Suspense fallback={<div>Loading...</div>}>
+          <TableOfContents content={article?.content} />
+        </Suspense>
+      </div>
     </div>
   );
 }
