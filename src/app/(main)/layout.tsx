@@ -39,7 +39,7 @@ function Layout({ children }: LayoutProps) {
     <div className="min-h-screen bg-background text-foreground flex flex-col">
       <NavBar />
       <main className="flex-1 ">
-        <div className="px-4 sm:px-6 py-8">{children}</div>
+        <div className="">{children}</div>
       </main>
 
       <Footer />
