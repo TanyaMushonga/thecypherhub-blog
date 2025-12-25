@@ -3,7 +3,7 @@
 import { useFetchArticles } from "@/hooks/useFetchArticles";
 import React from "react";
 import { ParallaxScroll } from "../ui/parallax-scroll";
-import { FaArrowLeft, FaArrowRight } from "react-icons/fa";
+import { ArrowLeft, ArrowRight } from "lucide-react";
 import { BlogSkeleton } from "./blogSkeleton";
 
 function PaginatedBlogs() {
@@ -39,7 +39,7 @@ function PaginatedBlogs() {
                 className="px-4 py-2 bg-blue-500 text-white rounded"
                 aria-label="Previous page"
               >
-                <FaArrowLeft />
+                <ArrowLeft />
               </button>
             </>
           )}
@@ -52,7 +52,7 @@ function PaginatedBlogs() {
                 className="px-4 py-2 bg-blue-500 text-white rounded"
                 aria-label="Next page"
               >
-                <FaArrowRight />
+                <ArrowRight />
               </button>
               <button
                 onClick={() => setPage(totalPages)}

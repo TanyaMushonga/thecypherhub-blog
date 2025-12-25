@@ -1,6 +1,6 @@
 import Image from "next/image";
 import React from "react";
-import { LuPin } from "react-icons/lu";
+import { Pin } from "lucide-react";
 import { formatDate, getRandomArticles } from "@/lib/utils";
 import MostPopularHeader from "./mostPopularHeader";
 import RouteLayout from "./routeLayout";
@@ -22,7 +22,7 @@ function Mostpopular({ mostPopular }: { mostPopular: Article[] }) {
               </p>
               <div className="flex flex-row items-center justify-between">
                 <div className="flex flex-row items-center">
-                  <LuPin className="text-slate-300 mr-2" />
+                  <Pin className="text-slate-300 mr-2" />
                   <p className="text-white">
                     {formatDate(new Date(article?.createdAt))}
                   </p>

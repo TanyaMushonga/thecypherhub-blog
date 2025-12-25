@@ -8,17 +8,21 @@ import { useCallback, useEffect, useRef, useState } from "react";
 
 interface ArticleListsProps {
   value: string;
+  initialArticles?: Article[];
 }
 
-function ArticleLists({ value }: ArticleListsProps) {
-  const [displayedArticles, setDisplayedArticles] = useState<Article[]>([]);
+function ArticleLists({ value, initialArticles }: ArticleListsProps) {
+  const [displayedArticles, setDisplayedArticles] = useState<Article[]>(
+    initialArticles || []
+  );
   const [hasMore, setHasMore] = useState(true);
   const [loadingMore, setLoadingMore] = useState(false);
   const observerTarget = useRef<HTMLDivElement>(null);
 
-  const itemsPerPage = 10;
+  const itemsPerPage = 12;
   const { setPage, articles, loading, totalCount, page } = useFetchArticles(
     value,
+    initialArticles
   );
 
   // Update displayed articles when new articles are fetched

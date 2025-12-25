@@ -1,6 +1,6 @@
 import Link from "next/link";
 import React, { Suspense } from "react";
-import { IoTerminal } from "react-icons/io5";
+import { Terminal } from "lucide-react";
 
 const Search = React.lazy(() => import("./search"));
 
@@ -34,7 +34,7 @@ export default async function Navbar() {
           <div className="relative group">
             <div className="absolute -inset-1 bg-linear-to-r from-primary/30 to-cyan-500/30 rounded-xl blur opacity-0 group-hover:opacity-70 transition duration-500" />
             <div className="relative bg-linear-to-br from-card to-gray-900 p-2 rounded-lg border border-gray-800 group-hover:border-primary/50 transition-all duration-300">
-              <IoTerminal className="w-6 h-6 text-primary group-hover:text-cyan-400/80 transition-colors duration-300" />
+              <Terminal className="w-6 h-6 text-primary group-hover:text-cyan-400/80 transition-colors duration-300" />
             </div>
           </div>
 

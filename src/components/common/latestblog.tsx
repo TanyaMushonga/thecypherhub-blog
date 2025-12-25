@@ -1,7 +1,6 @@
 import Image from "next/image";
 import React from "react";
-import { MdTimer } from "react-icons/md";
-import { LuCalendarDays } from "react-icons/lu";
+import { Timer, CalendarDays } from "lucide-react";
 import { formatDate } from "@/lib/utils";
 import RouteLayout from "./routeLayout";
  
@@ -49,11 +48,11 @@ function Latestblog({ latestBlog }: { latestBlog: Article }) {
 
         <div className="flex flex-wrap items-center gap-6 mt-4 text-sm text-slate-500 font-medium">
           <div className="flex items-center gap-2">
-            <MdTimer className="w-4 h-4" />
+            <Timer className="w-4 h-4" />
             <span>{latestBlog.readTime} read</span>
           </div>
           <div className="flex items-center gap-2">
-            <LuCalendarDays className="w-4 h-4" />
+            <CalendarDays className="w-4 h-4" />
             <span>{formatDate(new Date(latestBlog.createdAt))}</span>
           </div>
         </div>

@@ -3,13 +3,13 @@
 import { useSearchParams } from "next/navigation";
 import React, { useCallback, useEffect, useState } from "react";
 import {
-  LuLoaderCircle,
-  LuMailCheck,
-  LuArrowRight,
-  LuRefreshCw,
-} from "react-icons/lu";
-import { AiOutlineCheckCircle } from "react-icons/ai";
-import { FaCircleNotch } from "react-icons/fa";
+  LoaderCircle,
+  MailCheck,
+  ArrowRight,
+  RefreshCw,
+  CheckCircle,
+  Loader
+} from "lucide-react";
 import { useRouter } from "next/navigation";
 import { Button } from "../ui/button";
 import axios from "axios";
@@ -99,14 +99,14 @@ function NewVerificationForm() {
     switch (state) {
       case "loading":
         return (
-          <LuLoaderCircle className="w-16 h-16 text-primary animate-spin" />
+          <LoaderCircle className="w-16 h-16 text-primary animate-spin" />
         );
       case "success":
-        return <AiOutlineCheckCircle className="w-16 h-16 text-green-500" />;
+        return <CheckCircle className="w-16 h-16 text-green-500" />;
       case "error":
-        return <FaCircleNotch className="w-16 h-16 text-destructive" />;
+        return <Loader className="w-16 h-16 text-destructive" />;
       case "invalid":
-        return <LuMailCheck className="w-16 h-16 text-yellow-500" />;
+        return <MailCheck className="w-16 h-16 text-yellow-500" />;
       default:
         return null;
     }
@@ -253,7 +253,7 @@ function NewVerificationForm() {
                       variant="outline"
                       className="w-full h-12 border-primary text-primary hover:bg-primary/10"
                     >
-                      <LuRefreshCw
+                      <RefreshCw
                         className={`mr-2 h-5 w-5 ${
                           retryCount > 0 ? "animate-spin" : ""
                         }`}
@@ -279,7 +279,7 @@ function NewVerificationForm() {
                     className="w-full h-12 bg-linear-to-r from-primary to-secondary hover:opacity-90 text-primary-foreground font-semibold group"
                   >
                     {state === "success" ? "Go to Homepage" : "Back to Home"}
-                    <LuArrowRight className="ml-2 h-5 w-5 group-hover:translate-x-1 transition-transform" />
+                    <ArrowRight className="ml-2 h-5 w-5 group-hover:translate-x-1 transition-transform" />
                   </Button>
                 </motion.div>
               )}

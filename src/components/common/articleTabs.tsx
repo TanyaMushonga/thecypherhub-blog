@@ -20,7 +20,11 @@ const TabsTrigger = lazy(() =>
 
 const ArticleLists = lazy(() => import("./articleLists"));
 
-function ArticleTabs() {
+interface ArticleTabsProps {
+  initialArticles?: Article[];
+}
+
+function ArticleTabs({ initialArticles }: ArticleTabsProps) {
   return (
     <div className="w-full">
       <Tabs defaultValue="all" className="w-full">
@@ -55,7 +59,7 @@ function ArticleTabs() {
           }
         >
           <TabsContent value="all" className="mt-0">
-            <ArticleLists value="all" />
+            <ArticleLists value="all" initialArticles={initialArticles} />
           </TabsContent>
           <TabsContent value="system_design" className="mt-0">
             <ArticleLists value="system-design" />

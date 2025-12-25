@@ -78,7 +78,7 @@ export default async function Home() {
             </p>
           </div>
           <Suspense fallback={<BlogSkeleton />}>
-            <ArticleTabs />
+            <ArticleTabs initialArticles={articles} />
           </Suspense>
         </section>
       </div>

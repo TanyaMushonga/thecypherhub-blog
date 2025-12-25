@@ -1,7 +1,7 @@
 "use client"; // Error components must be Client Components
 
 import { useEffect } from "react";
-import { FaExclamationCircle } from "react-icons/fa";
+import { AlertCircle } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import Link from "next/link";
 
@@ -22,7 +22,7 @@ export default function Error({
       <div className="flex flex-col items-center max-w-md w-full space-y-6">
         {/* Icon with a subtle glow effect */}
         <div className="relative flex items-center justify-center w-24 h-24 rounded-full bg-destructive/10 mb-4">
-          <FaExclamationCircle className="text-5xl text-destructive" />
+          <AlertCircle className="text-5xl text-destructive" />
           <div className="absolute inset-0 rounded-full bg-destructive/20 blur-xl"></div>
         </div>
 

@@ -4,7 +4,7 @@ import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import * as z from "zod";
 import { Button } from "@/components/ui/button";
-import { MdSend } from "react-icons/md";
+import { Send } from "lucide-react";
 import { Form, FormControl, FormField, FormItem } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
 import { useTransition } from "react";
@@ -68,7 +68,7 @@ export default function WriteAcomment({
                 className="text-foreground hover:bg-transparent hover:text-foreground absolute right-0 -top-2"
                 variant={"ghost"}
               >
-                <MdSend className="w-8 h-8 text-white" />
+                <Send className="w-8 h-8 text-white" />
               </Button>
             </FormItem>
           )}

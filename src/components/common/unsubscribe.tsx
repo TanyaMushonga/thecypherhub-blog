@@ -18,8 +18,7 @@ import { Input } from "@/components/ui/input";
 import toast from "react-hot-toast";
 import { useState } from "react";
 import SUbscribe from "./Subscribe";
-import { LuMailMinus } from "react-icons/lu";
-import { FaCheckCircle } from "react-icons/fa";
+import { MailMinus, CheckCircle } from "lucide-react";
 const unsubscribeSchema = z.object({
   email: z.string().email("Please enter a valid email address"),
 });
@@ -80,7 +79,7 @@ export default function Unsubscribe() {
         <div className="flex flex-col gap-6">
           <div className="flex flex-col gap-2 text-center items-center">
             <div className="p-3 bg-destructive/10 rounded-full w-fit mb-2">
-              <LuMailMinus className="w-8 h-8 text-destructive" />
+              <MailMinus className="w-8 h-8 text-destructive" />
             </div>
             <h1 className="text-2xl font-bold tracking-tight text-foreground">
               Unsubscribe from Newsletter
@@ -131,7 +130,7 @@ export default function Unsubscribe() {
       ) : (
         <div className="flex flex-col gap-8 text-center items-center animate-in fade-in duration-500">
           <div className="p-4 bg-green-500/10 rounded-full">
-            <FaCheckCircle className="w-12 h-12 text-green-500" />
+            <CheckCircle className="w-12 h-12 text-green-500" />
           </div>
 
           <div className="space-y-2">

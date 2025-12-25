@@ -1,7 +1,7 @@
 import { Navitems } from "@/constants";
 import Link from "next/link";
 import React from "react";
-import { IoTerminal } from "react-icons/io5";
+import { Terminal } from "lucide-react";
 
 const Footer: React.FC = () => {
   return (
@@ -11,7 +11,7 @@ const Footer: React.FC = () => {
         <div className="flex flex-col gap-4">
           <Link href="/" className="flex items-center gap-2 group w-fit">
             <div className="bg-primary/10 p-2 rounded-lg group-hover:bg-primary/20 transition-colors border border-primary/20">
-              <IoTerminal className="w-5 h-5 text-primary" />
+              <Terminal className="w-5 h-5 text-primary" />
             </div>
             <span className="text-lg font-mono font-bold tracking-tight text-foreground group-hover:text-primary transition-colors">
               The Cypher Hub

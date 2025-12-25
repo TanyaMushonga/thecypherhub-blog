@@ -1,8 +1,7 @@
 "use client";
 import { subscribe } from "@/actions/subscribe";
 import React, { useState } from "react";
-import { IoMailOpenOutline } from "react-icons/io5";
-import { LuLoader } from "react-icons/lu";
+import { MailOpen, Loader2 } from "lucide-react";
 
 function SUbscribe() {
   const [email, setEmail] = useState<string>("");
@@ -43,7 +42,7 @@ function SUbscribe() {
 
       <div className="relative z-10 max-w-2xl">
         <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-indigo-500/20 text-indigo-300 text-sm font-medium mb-4">
-          <IoMailOpenOutline />
+          <MailOpen />
           <span>Newsletter</span>
         </div>
 
@@ -70,7 +69,7 @@ function SUbscribe() {
             className="px-6 py-3 rounded-lg bg-primary hover:bg-primary/90 text-white font-medium transition-colors disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center gap-2"
           >
             {loading ? (
-              <LuLoader className="animate-spin" />
+              <Loader2 className="animate-spin" />
             ) : (
               "Subscribe Free"
             )}

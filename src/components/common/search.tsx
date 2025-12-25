@@ -1,7 +1,7 @@
 "use client";
 
 import React, { useState } from "react";
-import { IoSearchOutline } from "react-icons/io5";
+import { Search as SearchIcon } from "lucide-react";
 import {
   Dialog,
   DialogContent,
@@ -26,7 +26,7 @@ function Search({ articles }: { articles: Article[] }) {
       {/* Desktop trigger */}
       <DialogTrigger asChild>
         <button className="hidden md:flex items-center gap-2 rounded-md bg-card px-4 py-2 text-muted-foreground">
-          <IoSearchOutline className="w-4 h-4" />
+          <SearchIcon className="w-4 h-4" />
           <span>Search…</span>
         </button>
       </DialogTrigger>
@@ -34,7 +34,7 @@ function Search({ articles }: { articles: Article[] }) {
       {/* Mobile trigger */}
       <DialogTrigger asChild>
         <button className="md:hidden p-2">
-          <IoSearchOutline className="w-6 h-6 text-white" />
+          <SearchIcon className="w-6 h-6 text-white" />
         </button>
       </DialogTrigger>
 
@@ -43,7 +43,7 @@ function Search({ articles }: { articles: Article[] }) {
           <DialogTitle className="sr-only">Search articles</DialogTitle>
 
           <div className="flex items-center gap-2">
-            <IoSearchOutline className="w-5 h-5 text-muted-foreground" />
+            <SearchIcon className="w-5 h-5 text-muted-foreground" />
             <input
               autoFocus
               value={search}

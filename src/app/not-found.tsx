@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { FaExclamationTriangle } from "react-icons/fa";
+import { TriangleAlert } from "lucide-react";
 import { Button } from "@/components/ui/button"; // Assuming you have this component based on previous context
 
 export default function NotFound() {
@@ -8,7 +8,7 @@ export default function NotFound() {
       <div className="flex flex-col items-center max-w-md w-full space-y-6">
         {/* Icon with a subtle glow effect */}
         <div className="relative flex items-center justify-center w-24 h-24 rounded-full bg-destructive/10 mb-4">
-          <FaExclamationTriangle className="text-5xl text-destructive" />
+          <TriangleAlert className="text-5xl text-destructive" />
           <div className="absolute inset-0 rounded-full bg-destructive/20 blur-xl"></div>
         </div>
 

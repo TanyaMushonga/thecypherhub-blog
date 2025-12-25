@@ -1,8 +1,7 @@
 import Image from "next/image";
 import { formatDate } from "@/lib/utils";
 import Link from "next/link";
-import { LuCalendarDays } from "react-icons/lu";
-import { MdTimer } from "react-icons/md";
+import { CalendarDays, Timer } from "lucide-react";
 import React from "react";
 import SUbscribe from "./Subscribe";
 import Comments from "./comments";
@@ -52,11 +51,11 @@ function Read({ article }: { article: Article }) {
 
           <div className="flex items-center gap-4 text-sm font-medium">
             <div className="flex items-center gap-2">
-              <MdTimer className="w-4 h-4" />
+              <Timer className="w-4 h-4" />
               <span>{article?.readTime}</span>
             </div>
             <div className="flex items-center gap-2">
-              <LuCalendarDays className="w-4 h-4" />
+              <CalendarDays className="w-4 h-4" />
               <span>{formatDate(new Date(article?.createdAt))}</span>
             </div>
           </div>

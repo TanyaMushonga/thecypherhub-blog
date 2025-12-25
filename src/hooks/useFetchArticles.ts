@@ -4,11 +4,11 @@ import { useEffect, useState, useCallback } from "react";
 const articleCache: { [key: string]: { articles: Article[]; total: number } } =
   {};
 
-export const useFetchArticles = (value: string) => {
-  const [articles, setArticles] = useState<Article[]>([]);
+export const useFetchArticles = (value: string, initialData?: Article[]) => {
+  const [articles, setArticles] = useState<Article[]>(initialData || []);
   const [loading, setLoading] = useState(false);
   const [page, setPage] = useState(1);
-  const [pageSize, setPageSize] = useState(10);
+  const [pageSize, setPageSize] = useState(12);
   const [totalCount, setTotalCount] = useState(0);
 
   const fetchArticles = useCallback(async () => {
