@@ -26,7 +26,7 @@ const Footer: React.FC = () => {
         {/* Socials */}
         <div className="flex flex-col gap-4 md:items-end">
           <h3 className="text-sm font-semibold text-foreground uppercase tracking-wider">
-            Connect
+            Connect with me on
           </h3>
           <div className="flex flex-wrap gap-4">
             {Navitems.map((social, index) => (

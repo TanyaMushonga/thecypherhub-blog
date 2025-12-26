@@ -1,4 +1,4 @@
-import { Terminal, Linkedin, Github, Newspaper } from "lucide-react";
+import { Terminal, Linkedin, Github } from "lucide-react";
 
 export const Navitems = [
   {
@@ -14,12 +14,8 @@ export const Navitems = [
   {
     name: "GitHub",
     link: "https://github.com/TanyaMushonga",
-    icon: <Github className="text-white w-10 h-10" />,
+    icon: <Github  className="text-white w-10 h-10" />,
   },
-  {
-    name: "Medium",
-    link: "https://medium.com/@tanyaradzwatmushonga",
-    icon: <Newspaper className="text-white w-10 h-10" />,
-  },
+  
 ];
 
