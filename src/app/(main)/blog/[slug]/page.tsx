@@ -5,6 +5,7 @@ import { notFound } from "next/navigation";
 import { Metadata } from "next";
 import TableOfContents from "@/components/common/tableOfContents";
 import Link from "next/link";
+import ScrollProgressBar from "@/components/common/ScrollProgressBar";
 
 const Read = React.lazy(() => import("@/components/common/read"));
 
@@ -17,7 +18,6 @@ type Props = {
 
 async function getArticleAndRelated(slug: string) {
   try {
-
     const articleRes = await fetch(
       `${process.env.NEXT_PUBLIC_API_URL}/blog/${slug}`,
       { next: { revalidate: 3600 } }
@@ -170,6 +170,7 @@ export default async function Page({
 
     return (
       <div className="flex flex-col lg:flex-row w-full gap-5 md:px-5">
+        <ScrollProgressBar />
         <div className="lg:w-2/3 w-full p-4 md:p-5 mt-5">
           <Suspense fallback={<ReadSkeleton />}>
             <Read article={article} />
@@ -196,7 +197,8 @@ export default async function Page({
         <div className="text-center max-w-md">
           <h1 className="text-2xl font-bold mb-4">Something went wrong</h1>
           <p className="text-muted-foreground mb-6">
-            We&apos;re having trouble loading this article. Please try again later.
+            We&apos;re having trouble loading this article. Please try again
+            later.
           </p>
           <Link
             href="/"
