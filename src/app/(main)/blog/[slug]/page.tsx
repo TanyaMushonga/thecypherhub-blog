@@ -6,6 +6,8 @@ import { Metadata } from "next";
 import TableOfContents from "@/components/common/tableOfContents";
 import Link from "next/link";
 import ScrollProgressBar from "@/components/common/ScrollProgressBar";
+import SubscribeModalTrigger from "@/components/common/SubscribeModalTrigger";
+
 
 const Read = React.lazy(() => import("@/components/common/read"));
 
@@ -171,6 +173,7 @@ export default async function Page({
     return (
       <div className="flex flex-col lg:flex-row w-full gap-5 md:px-5">
         <ScrollProgressBar />
+        <SubscribeModalTrigger slug={slug} />
         <div className="lg:w-2/3 w-full p-4 md:p-5 mt-5">
           <Suspense fallback={<ReadSkeleton />}>
             <Read article={article} />
