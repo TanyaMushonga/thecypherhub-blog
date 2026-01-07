@@ -24,7 +24,7 @@ async function getCollection(slug: string): Promise<Collection | null> {
   }
 
   const data = await res.json();
-
+  console.log(data);
   // Handle various API response formats
   let collection: Collection | null = null;
   if (data.collection) collection = data.collection;
@@ -32,7 +32,7 @@ async function getCollection(slug: string): Promise<Collection | null> {
   else collection = data;
 
   if (collection) {
-    collection.title = collection.title || "Untitled Series";
+    collection.name = collection.name || "Untitled Series";
     collection.articles = collection.articles || [];
     collection.createdAt = collection.createdAt || new Date().toISOString();
   }
@@ -53,10 +53,10 @@ export async function generateMetadata({
   }
 
   return {
-    title: `${collection.title} - The Cypher Hub`,
+    title: `${collection.name} - The Cypher Hub`,
     description: collection.description || "Learning series on The Cypher Hub",
     openGraph: {
-      title: collection.title,
+      title: collection.name,
       description: collection.description || "",
       images: collection.coverImgUrl ? [{ url: collection.coverImgUrl }] : [],
       type: "website",
@@ -81,7 +81,7 @@ export default async function SeriesRoadmapPage({ params }: SeriesPageProps) {
             {collection.coverImgUrl ? (
               <Image
                 src={collection.coverImgUrl}
-                alt={collection.title || "Series Cover Image"}
+                alt={collection.name || "Series Cover Image"}
                 fill
                 className="object-cover"
                 priority
@@ -95,8 +95,9 @@ export default async function SeriesRoadmapPage({ params }: SeriesPageProps) {
 
           <div className="space-y-6">
             <h1 className="text-3xl font-extrabold tracking-tight text-white md:text-4xl">
-              {collection.title}
+              {collection.name}
             </h1>
+
             <p className="text-slate-400 leading-relaxed md:text-lg">
               {collection.description}
             </p>
@@ -125,7 +126,7 @@ export default async function SeriesRoadmapPage({ params }: SeriesPageProps) {
             </p>
           </div>
 
-          <RoadmapList articles={collection.articles || []} />
+          <RoadmapList articles={collection.articles || []} seriesSlug={slug} />
         </main>
       </div>
     </div>
