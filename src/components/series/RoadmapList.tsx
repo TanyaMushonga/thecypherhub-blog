@@ -7,9 +7,13 @@ import { cn } from "@/lib/utils";
 
 interface RoadmapListProps {
   articles: Article[];
+  seriesSlug: string;
 }
 
-export default function RoadmapList({ articles }: RoadmapListProps) {
+export default function RoadmapList({
+  articles,
+  seriesSlug,
+}: RoadmapListProps) {
   if (!articles || articles.length === 0) {
     return (
       <div className="rounded-xl border border-dashed border-border/50 p-12 text-center">
@@ -24,12 +28,13 @@ export default function RoadmapList({ articles }: RoadmapListProps) {
       <div className="absolute left-[19px] top-2 bottom-2 w-0.5 bg-border/50 hidden md:block" />
 
       {articles.map((article, index) => {
-        const isPublished = article.status === "published";
         const publishDate = article.publishedAt
           ? new Date(article.publishedAt)
           : null;
-        const isFuture = publishDate && publishDate > new Date();
-        const showBadge = !isPublished || isFuture;
+
+        // Article is accessible if status is "published", ignoring the date check as per user request
+        const isAccessible = article.status === "published";
+        const showBadge = article.status === "unpublished"; // Only show badge if explicitly unpublished
 
         return (
           <div key={article.id} className="relative pl-0 md:pl-12 group">
@@ -41,17 +46,17 @@ export default function RoadmapList({ articles }: RoadmapListProps) {
             <div
               className={cn(
                 "block overflow-hidden transition-all duration-300",
-                !isPublished || isFuture
+                !isAccessible
                   ? "cursor-not-allowed opacity-80"
                   : "cursor-pointer"
               )}
             >
               <Link
                 href={
-                  isPublished && !isFuture ? `/article/${article.slug}` : "#"
+                  isAccessible ? `/series/${seriesSlug}/${article.slug}` : "#"
                 }
                 onClick={(e) => {
-                  if (!isPublished || isFuture) {
+                  if (!isAccessible) {
                     e.preventDefault();
                   }
                 }}
@@ -72,7 +77,7 @@ export default function RoadmapList({ articles }: RoadmapListProps) {
                           <>
                             <span className="h-1 w-1 rounded-full bg-border" />
                             <span className="px-2 py-0.5 rounded-full bg-yellow-500/10 text-yellow-500 text-[10px] font-bold uppercase">
-                              {isFuture && publishDate
+                              {publishDate
                                 ? `Available ${publishDate.toLocaleDateString(
                                     "en-US",
                                     {
@@ -97,12 +102,12 @@ export default function RoadmapList({ articles }: RoadmapListProps) {
                       <div
                         className={cn(
                           "flex h-10 w-10 items-center justify-center rounded-full transition-all",
-                          isPublished && !isFuture
+                          isAccessible
                             ? "bg-primary/10 text-primary group-hover:bg-primary group-hover:text-black"
                             : "bg-muted/20 text-muted-foreground"
                         )}
                       >
-                        {isPublished && !isFuture ? (
+                        {isAccessible ? (
                           <PlayCircle className="h-5 w-5" />
                         ) : (
                           <LockIcon className="h-4 w-4" />
