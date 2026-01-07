@@ -3,7 +3,7 @@ import { Metadata } from "next";
 import SeriesCard from "@/components/series/SeriesCard";
 import { BookOpen } from "lucide-react";
 
-export const revalidate = 3600; // Revalidate every hour
+// export const revalidate = 3600; // Revalidate every hour
 
 async function getCollections() {
   const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/collections`, {
