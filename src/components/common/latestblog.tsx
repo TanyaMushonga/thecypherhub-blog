@@ -3,7 +3,7 @@ import React from "react";
 import { Timer, CalendarDays } from "lucide-react";
 import { formatDate } from "@/lib/utils";
 import RouteLayout from "./routeLayout";
- 
+
 function Latestblog({ latestBlog }: { latestBlog: Article }) {
   if (!latestBlog) return null;
 
@@ -34,7 +34,7 @@ function Latestblog({ latestBlog }: { latestBlog: Article }) {
             Featured
           </span>
           <span className="px-3 py-1 rounded-full bg-secondary text-secondary-foreground text-xs font-medium uppercase tracking-wider">
-            {latestBlog.category || "Tech"}
+            Latest
           </span>
         </div>
 
@@ -53,7 +53,9 @@ function Latestblog({ latestBlog }: { latestBlog: Article }) {
           </div>
           <div className="flex items-center gap-2">
             <CalendarDays className="w-4 h-4" />
-            <span>{formatDate(new Date(latestBlog.createdAt))}</span>
+            <time suppressHydrationWarning>
+              {formatDate(new Date(latestBlog.createdAt))}
+            </time>
           </div>
         </div>
       </div>
