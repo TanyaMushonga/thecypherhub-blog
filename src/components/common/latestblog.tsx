@@ -31,9 +31,6 @@ function Latestblog({ latestBlog }: { latestBlog: Article }) {
       <div className="flex flex-col gap-4 w-full md:w-1/2 justify-center">
         <div className="inline-flex items-center gap-2">
           <span className="px-3 py-1 rounded-full bg-primary/10 text-primary text-xs font-semibold uppercase tracking-wider">
-            Featured
-          </span>
-          <span className="px-3 py-1 rounded-full bg-secondary text-secondary-foreground text-xs font-medium uppercase tracking-wider">
             Latest
           </span>
         </div>
