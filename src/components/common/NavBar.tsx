@@ -56,7 +56,7 @@ export default async function Navbar() {
             href="https://tanyaradzwatmushonga.me"
             target="_blank"
             rel="noopener noreferrer"
-            className="text-sm font-medium text-primary hover:text-primary transition-colors hidden md:block"
+            className="text-sm font-medium text-primary hover:text-primary/40 transition-colors hidden md:block"
           >
            My Portfolio
           </Link>
