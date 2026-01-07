@@ -45,11 +45,11 @@ export default async function Home() {
   ]);
 
   const latestBlog = articles[0] || null;
-  const featuredArticles = articles.slice(0, 3);
+  const featuredArticles = articles.slice(4, 7);
 
   return (
     <main className="min-h-screen pt-24 pb-20">
-      <div className="container max-w-7xl mx-auto px-4 md:px-6 flex flex-col gap-16">
+      <div className="container max-w-8xl mx-auto px-4 md:px-6 flex flex-col gap-16">
         {/* Hero Section - Featured Latest Blog */}
         {latestBlog && (
           <section>
