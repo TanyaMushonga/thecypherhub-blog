@@ -1,23 +1,25 @@
 declare interface Article {
   id: string;
+  authorId: string;
   coverImgUrl: string;
   title: string;
   description: string;
-  category: string;
+  category: string | null;
   createdAt: string;
   content: string;
   keywords: string[];
   readTime: string;
   slug: string;
   updatedAt: string;
-  comments: comments[];
   status: "published" | "unpublished" | "draft" | string;
-  publishedAt?: string;
+  publishedAt: string | null;
+  isDeleted: boolean;
+  collectionId?: string;
 }
 
 declare interface Collection {
   id: string;
-  title: string;
+  name: string;
   description: string;
   slug: string;
   coverImgUrl: string;
