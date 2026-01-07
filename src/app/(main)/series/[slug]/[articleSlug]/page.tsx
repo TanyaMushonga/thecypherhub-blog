@@ -121,15 +121,17 @@ export default async function SeriesArticleReaderPage({
 
       <div className="mx-auto flex flex-col lg:flex-row w-full gap-8 md:px-5 pt-24">
         <div className="lg:w-2/3 w-full p-4 md:p-5">
-          <Link
-            href={`/series/${seriesSlug}`}
-            className="group inline-flex items-center gap-2 text-sm font-semibold text-slate-400 hover:text-primary transition-colors mb-8"
-          >
-            <div className="flex h-8 w-8 items-center justify-center rounded-full bg-card/50 border border-border/50 group-hover:border-primary/50 transition-all">
-              <ArrowLeft className="h-4 w-4 transition-transform group-hover:-translate-x-1" />
-            </div>
-            Back to {collection?.name || "Series"}
-          </Link>
+          <div className="max-w-4xl mx-auto">
+            <Link
+              href={`/series/${seriesSlug}`}
+              className="group inline-flex items-center gap-2 text-sm font-semibold text-slate-400 hover:text-primary transition-colors mb-0"
+            >
+              <div className="flex h-8 w-8 items-center justify-center rounded-full bg-card/50 border border-border/50 group-hover:border-primary/50 transition-all">
+                <ArrowLeft className="h-4 w-4 transition-transform group-hover:-translate-x-1" />
+              </div>
+              Back to {collection?.name || "Series"}
+            </Link>
+          </div>
 
           <Suspense fallback={<ReadSkeleton />}>
             <Read article={article} />
