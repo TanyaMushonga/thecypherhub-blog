@@ -8,6 +8,7 @@ import ScrollProgressBar from "@/components/common/ScrollProgressBar";
 import Related from "@/components/common/related";
 import ReadSkeleton from "@/components/common/readSkeleton";
 import { ArrowLeft } from "lucide-react";
+import SubscribeModalTrigger from "@/components/common/SubscribeModalTrigger";
 
 interface NestedArticlePageProps {
   params: Promise<{ slug: string; articleSlug: string }>;
@@ -116,39 +117,41 @@ export default async function SeriesArticleReaderPage({
   const related = await getRelatedArticles(article.category, articleSlug);
 
   return (
-    <div className="flex flex-col w-full">
-      <ScrollProgressBar />
+    <main className="min-h-screen pb-20">
+      <div className="container max-w-8xl mx-auto px-4 md:px-6 flex flex-col gap-16">
+        <ScrollProgressBar />
+        <SubscribeModalTrigger slug={articleSlug} />
+        <div className="mx-auto flex flex-col lg:flex-row w-full gap-8 md:px-5 pt-24">
+          <div className="lg:w-2/3 w-full p-4 md:p-5">
+            <div className="max-w-4xl mx-auto">
+              <Link
+                href={`/series/${seriesSlug}`}
+                className="group inline-flex items-center gap-2 text-sm font-semibold text-slate-400 hover:text-primary transition-colors mb-0"
+              >
+                <div className="flex h-8 w-8 items-center justify-center rounded-full bg-card/50 border border-border/50 group-hover:border-primary/50 transition-all">
+                  <ArrowLeft className="h-4 w-4 transition-transform group-hover:-translate-x-1" />
+                </div>
+                Back to {collection?.name || "Series"}
+              </Link>
+            </div>
 
-      <div className="mx-auto flex flex-col lg:flex-row w-full gap-8 md:px-5 pt-24">
-        <div className="lg:w-2/3 w-full p-4 md:p-5">
-          <div className="max-w-4xl mx-auto">
-            <Link
-              href={`/series/${seriesSlug}`}
-              className="group inline-flex items-center gap-2 text-sm font-semibold text-slate-400 hover:text-primary transition-colors mb-0"
-            >
-              <div className="flex h-8 w-8 items-center justify-center rounded-full bg-card/50 border border-border/50 group-hover:border-primary/50 transition-all">
-                <ArrowLeft className="h-4 w-4 transition-transform group-hover:-translate-x-1" />
-              </div>
-              Back to {collection?.name || "Series"}
-            </Link>
+            <Suspense fallback={<ReadSkeleton />}>
+              <Read article={article} />
+              {related.length > 0 && <Related related={related} />}
+            </Suspense>
           </div>
 
-          <Suspense fallback={<ReadSkeleton />}>
-            <Read article={article} />
-            {related.length > 0 && <Related related={related} />}
-          </Suspense>
+          <aside className="lg:w-1/3 lg:block mt-5 sticky top-24 h-fit hidden">
+            <Suspense
+              fallback={
+                <div className="animate-pulse h-40 bg-muted/10 rounded-xl" />
+              }
+            >
+              <TableOfContents content={article.content} />
+            </Suspense>
+          </aside>
         </div>
-
-        <aside className="lg:w-1/3 lg:block mt-5 sticky top-24 h-fit hidden">
-          <Suspense
-            fallback={
-              <div className="animate-pulse h-40 bg-muted/10 rounded-xl" />
-            }
-          >
-            <TableOfContents content={article.content} />
-          </Suspense>
-        </aside>
       </div>
-    </div>
+    </main>
   );
 }
