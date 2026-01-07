@@ -43,7 +43,9 @@ function Article({
             {blog?.description}
           </p>
           <div className="flex items-center gap-4 mt-3 text-xs text-gray-500 flex-wrap">
-            <time>{formatDate(new Date(blog?.createdAt))}</time>
+            <time suppressHydrationWarning>
+              {formatDate(new Date(blog?.createdAt))}
+            </time>
             <span>•</span>
             <span>{blog?.readTime}</span>
             <span>•</span>
@@ -86,7 +88,9 @@ function Article({
           {blog?.description}
         </p>
         <div className="flex items-center justify-between text-xs text-slate-500">
-          <span>{formatDate(new Date(blog?.createdAt))}</span>
+          <span suppressHydrationWarning>
+            {formatDate(new Date(blog?.createdAt))}
+          </span>
           <span>{blog?.readTime}</span>
         </div>
         <div className="flex items-center gap-2 pt-2">
