@@ -9,9 +9,21 @@ declare interface Article {
   keywords: string[];
   readTime: string;
   slug: string;
-  keywords: string[];
   updatedAt: string;
   comments: comments[];
+  status: "published" | "unpublished" | "draft" | string;
+  publishedAt?: string;
+}
+
+declare interface Collection {
+  id: string;
+  title: string;
+  description: string;
+  slug: string;
+  coverImgUrl: string;
+  articles: Article[];
+  createdAt: string;
+  updatedAt: string;
 }
 
 declare interface comments {
