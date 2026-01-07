@@ -17,7 +17,7 @@ export default function SeriesCard({ collection }: SeriesCardProps) {
         {collection.coverImgUrl ? (
           <Image
             src={collection.coverImgUrl}
-            alt={collection.title || "Series Cover Image"}
+            alt={collection.name || "Series Cover Image"}
             fill
             className="object-cover transition-transform duration-500 group-hover:scale-105"
             sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
@@ -37,8 +37,9 @@ export default function SeriesCard({ collection }: SeriesCardProps) {
 
       <div className="flex flex-1 flex-col p-6">
         <h3 className="mb-2 text-xl font-bold text-white group-hover:text-primary transition-colors">
-          {collection.title}
+          {collection.name}
         </h3>
+
         <p className="mb-6 line-clamp-2 text-sm text-slate-400">
           {collection.description}
         </p>
