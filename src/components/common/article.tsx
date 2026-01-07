@@ -66,7 +66,7 @@ function Article({
       onClick={handleClick}
     >
       {showImage && blog?.coverImgUrl && (
-        <div className="relative w-full aspect-[3/2] overflow-hidden rounded-lg bg-gray-800">
+        <div className="relative w-full aspect-3/2 overflow-hidden rounded-lg bg-gray-800">
           <Image
             src={blog?.coverImgUrl}
             fill
@@ -95,7 +95,9 @@ function Article({
         </div>
         <div className="flex items-center gap-2 pt-2">
           <span className="px-2 py-1 text-xs rounded-full bg-cyan-900/30 text-cyan-300 border border-cyan-700/50">
-            {blog?.category?.toUpperCase()}
+            {blog?.category && blog.category !== "null"
+              ? blog.category.toUpperCase()
+              : "ARTICLE"}
           </span>
         </div>
       </div>
