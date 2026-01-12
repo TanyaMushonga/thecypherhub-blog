@@ -67,6 +67,25 @@ async function getRelatedArticles(
     .slice(0, 3);
 }
 
+export async function generateStaticParams() {
+  const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/collections`);
+  if (!res.ok) return [];
+  const collections: Collection[] = await res.json();
+
+  const paths: { slug: string; articleSlug: string }[] = [];
+
+  collections.forEach((collection) => {
+    collection.articles?.forEach((article) => {
+      paths.push({
+        slug: collection.slug,
+        articleSlug: article.slug,
+      });
+    });
+  });
+
+  return paths;
+}
+
 export async function generateMetadata({
   params,
 }: NestedArticlePageProps): Promise<Metadata> {
@@ -82,12 +101,20 @@ export async function generateMetadata({
   return {
     title: `${article.title} - The Cypher Hub`,
     description: article.description,
+    keywords:
+      article.keywords?.length > 0 ? article.keywords.join(", ") : undefined,
     openGraph: {
       title: article.title,
       description: article.description,
       type: "article",
       publishedTime: article.createdAt,
       images: article.coverImgUrl ? [{ url: article.coverImgUrl }] : [],
+    },
+    twitter: {
+      card: "summary_large_image",
+      title: article.title,
+      description: article.description,
+      images: article.coverImgUrl ? [article.coverImgUrl] : [],
     },
   };
 }
