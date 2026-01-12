@@ -70,9 +70,11 @@ export default function RoadmapList({
                           Module {index + 1}
                         </span>
                         <span className="h-1 w-1 rounded-full bg-border" />
-                        <span className="text-xs text-muted-foreground">
-                          {article.readTime || "5 min read"}
-                        </span>
+                        {isAccessible && (
+                          <span className="text-xs text-muted-foreground">
+                            {article.readTime || "5 min read"}
+                          </span>
+                        )}
                         {showBadge && (
                           <>
                             <span className="h-1 w-1 rounded-full bg-border" />
