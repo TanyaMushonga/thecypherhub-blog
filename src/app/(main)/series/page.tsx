@@ -3,7 +3,7 @@ import { Metadata } from "next";
 import SeriesCard from "@/components/series/SeriesCard";
 import { BookOpen } from "lucide-react";
 
-// export const revalidate = 3600; // Revalidate every hour
+export const revalidate = 3600; // Revalidate every hour
 
 async function getCollections() {
   const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/collections`, {
@@ -17,16 +17,30 @@ async function getCollections() {
   return res.json();
 }
 
-export const metadata: Metadata = {
-  title: "Learning Series - The Cypher Hub",
-  description:
-    "Explore our curated collections of articles and tutorials organized into easy-to-follow learning paths.",
-  openGraph: {
+export async function generateMetadata(): Promise<Metadata> {
+  const collections = await getCollections();
+  const firstCollection = collections[0];
+
+  return {
     title: "Learning Series - The Cypher Hub",
-    description: "Curated learning paths for modern developers.",
-    type: "website",
-  },
-};
+    description:
+      "Explore our curated collections of articles and tutorials organized into easy-to-follow learning paths.",
+    openGraph: {
+      title: "Learning Series - The Cypher Hub",
+      description: "Curated learning paths for modern developers.",
+      images: firstCollection?.coverImgUrl
+        ? [{ url: firstCollection.coverImgUrl }]
+        : [],
+      type: "website",
+    },
+    twitter: {
+      card: "summary_large_image",
+      title: "Learning Series - The Cypher Hub",
+      description: "Curated learning paths for modern developers.",
+      images: firstCollection?.coverImgUrl ? [firstCollection.coverImgUrl] : [],
+    },
+  };
+}
 
 export default async function SeriesListPage() {
   const collections: Collection[] = await getCollections();
