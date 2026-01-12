@@ -50,7 +50,9 @@ function Article({
             <span>{blog?.readTime}</span>
             <span>•</span>
             <span className="px-2 py-1 rounded-full text-cyan-400/70 bg-cyan-900/20 capitalize">
-              {blog?.category}
+              {blog?.category && blog.category !== "null"
+                ? blog.category
+                : "Article"}
             </span>
           </div>
         </div>
