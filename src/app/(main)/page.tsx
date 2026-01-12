@@ -45,7 +45,7 @@ export default async function Home() {
   ]);
 
   const latestBlog = articles[0] || null;
-  const featuredArticles = articles.slice(4, 7);
+  const featuredArticles = articles.slice(3, 6);
 
   return (
     <main className="min-h-screen pt-24 pb-20">
