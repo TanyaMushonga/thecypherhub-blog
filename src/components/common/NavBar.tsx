@@ -51,17 +51,28 @@ export default async function Navbar() {
           </div>
         </Link>
 
-        {/* Search Section */}
-        <Suspense
-          fallback={
-            <div className="flex items-center gap-2">
-              <div className="hidden md:block h-9 w-36 rounded-lg bg-linear-to-r from-gray-800 to-gray-900 animate-pulse border border-gray-800" />
-              <div className="md:hidden h-9 w-9 rounded-lg bg-gray-900 animate-pulse border border-gray-800" />
-            </div>
-          }
-        >
-          <Search articles={articles} />
-        </Suspense>
+        <div className="flex items-center gap-6">
+          <Link
+            href="https://tanyaradzwatmushonga.me"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="text-sm font-medium text-primary hover:text-primary/40 transition-colors hidden md:block"
+          >
+           My Portfolio
+          </Link>
+
+          {/* Search Section */}
+          <Suspense
+            fallback={
+              <div className="flex items-center gap-2">
+                <div className="hidden md:block h-9 w-36 rounded-lg bg-linear-to-r from-gray-800 to-gray-900 animate-pulse border border-gray-800" />
+                <div className="md:hidden h-9 w-9 rounded-lg bg-gray-900 animate-pulse border border-gray-800" />
+              </div>
+            }
+          >
+            <Search articles={articles} />
+          </Suspense>
+        </div>
       </div>
     </nav>
   );

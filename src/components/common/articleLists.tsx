@@ -2,8 +2,7 @@
 import { useFetchArticles } from "@/hooks/useFetchArticles";
 import Article from "./article";
 import { Skeleton } from "../ui/skeleton";
-import { Button } from "../ui/button";
-import { ChevronDown } from "lucide-react";
+ 
 import { useCallback, useEffect, useRef, useState } from "react";
 
 interface ArticleListsProps {
@@ -106,7 +105,7 @@ function ArticleLists({ value, initialArticles }: ArticleListsProps) {
             idx === displayedArticles.length - 1 ? "last:border-b-0" : ""
           }`}
         >
-          <div className="flex-shrink-0 w-10 text-right p-4">
+          <div className="shrink-0 w-10 text-right p-4">
             <span className="text-sm font-mono text-cyan-400/80">
               {String(idx + 1).padStart(2, "0")}
             </span>
@@ -114,7 +113,7 @@ function ArticleLists({ value, initialArticles }: ArticleListsProps) {
 
           <Article
             blog={article}
-            className="!bg-transparent !rounded-none !gap-0 !p-0"
+            className="bg-transparent! rounded-none! gap-0! p-0!"
             showImage={false}
             variant="compact"
           />
@@ -122,27 +121,13 @@ function ArticleLists({ value, initialArticles }: ArticleListsProps) {
       ))}
 
       {/* Load More Button or Infinite Scroll Trigger */}
-      <div ref={observerTarget} className="py-8 flex justify-center">
-        {hasMore && (
-          <Button
-            onClick={handleLoadMore}
-            disabled={loadingMore || loading}
-            className="bg-cyan-500 hover:bg-cyan-600 text-white font-semibold px-8 py-3 rounded-lg flex items-center gap-2 transition-all duration-200"
-          >
-            {loadingMore || loading ? (
-              <>
-                <span className="inline-block animate-spin">↻</span>
-                Loading...
-              </>
-            ) : (
-              <>
-                <span>Load More Articles</span>
-                <ChevronDown className="h-4 w-4" />
-              </>
-            )}
-          </Button>
-        )}
-        {!hasMore && displayedArticles.length > 0 && (
+      <div ref={observerTarget} className="py-8 flex justify-center w-full">
+        {hasMore || loadingMore || loading ? (
+          <div className="flex items-center gap-2 text-muted-foreground animate-pulse">
+            <span className="inline-block animate-spin">↻</span>
+            <span>Loading more articles...</span>
+          </div>
+        ) : (
           <p className="text-gray-500 text-sm">
             You&apos;ve reached the end of articles
           </p>

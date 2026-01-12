@@ -13,7 +13,9 @@ function Read({ article }: { article: Article }) {
       <header className="mb-10 text-left border-b border-border/50 pb-10">
         <div className="flex items-center gap-2 mb-6 justify-start">
           <span className="px-3 py-1 bg-primary/20 text-primary text-sm font-semibold rounded-full">
-            {article.category || "Article"}
+            {article.category && article.category !== "null"
+              ? article.category
+              : "Article"}
           </span>
         </div>
 

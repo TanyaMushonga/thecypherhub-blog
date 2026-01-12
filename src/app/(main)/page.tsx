@@ -2,12 +2,11 @@ import { Suspense } from "react";
 import dynamic from "next/dynamic";
 import { BlogSkeleton } from "@/components/common/blogSkeleton";
 import Article from "@/components/common/article";
+import Latestblog from "@/components/common/latestblog";
+import LatestSkeleton from "@/components/common/latestSkeleton";
+import SeriesHighlight from "@/components/series/SeriesHighlight";
 
 const ArticleTabs = dynamic(() => import("@/components/common/articleTabs"));
-const Latestblog = dynamic(() => import("@/components/common/latestblog"));
-const LatestSkeleton = dynamic(
-  () => import("@/components/common/latestSkeleton")
-);
 
 async function getArticles() {
   try {
@@ -26,14 +25,31 @@ async function getArticles() {
   }
 }
 
+async function getCollections() {
+  try {
+    const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/collections`, {
+      next: { revalidate: 3600 },
+    });
+    if (!res.ok) throw new Error("Failed to fetch collections");
+    return res.json();
+  } catch (error) {
+    console.error("Error fetching collections:", error);
+    return [];
+  }
+}
+
 export default async function Home() {
-  const articles: Article[] = await getArticles();
+  const [articles, collections] = await Promise.all([
+    getArticles(),
+    getCollections(),
+  ]);
+
   const latestBlog = articles[0] || null;
-  const featuredArticles = articles.slice(0, 3);
+  const featuredArticles = articles.slice(3, 6);
 
   return (
     <main className="min-h-screen pt-24 pb-20">
-      <div className="container max-w-7xl mx-auto px-4 md:px-6 flex flex-col gap-16">
+      <div className="container max-w-8xl mx-auto px-4 md:px-6 flex flex-col gap-16">
         {/* Hero Section - Featured Latest Blog */}
         {latestBlog && (
           <section>
@@ -64,6 +80,13 @@ export default async function Home() {
                 />
               ))}
             </div>
+          </section>
+        )}
+
+        {/* Series Highlights */}
+        {collections.length > 0 && (
+          <section>
+            <SeriesHighlight collections={collections} />
           </section>
         )}
 
