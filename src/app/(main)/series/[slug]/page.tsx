@@ -24,8 +24,6 @@ async function getCollection(slug: string): Promise<Collection | null> {
   }
 
   const data = await res.json();
-  console.log(data);
-  // Handle various API response formats
   let collection: Collection | null = null;
   if (data.collection) collection = data.collection;
   else if (data.series) collection = data.series;
@@ -40,6 +38,15 @@ async function getCollection(slug: string): Promise<Collection | null> {
   return collection;
 }
 
+export async function generateStaticParams() {
+  const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/collections`);
+  if (!res.ok) return [];
+  const collections: Collection[] = await res.json();
+  return collections.map((collection) => ({
+    slug: collection.slug,
+  }));
+}
+
 export async function generateMetadata({
   params,
 }: SeriesPageProps): Promise<Metadata> {
@@ -52,14 +59,26 @@ export async function generateMetadata({
     };
   }
 
+  // Consolidate unique keywords from all articles
+  const keywords = Array.from(
+    new Set(collection.articles?.flatMap((article) => article.keywords || []))
+  );
+
   return {
     title: `${collection.name} - The Cypher Hub`,
     description: collection.description || "Learning series on The Cypher Hub",
+    keywords: keywords.length > 0 ? keywords.join(", ") : undefined,
     openGraph: {
       title: collection.name,
       description: collection.description || "",
       images: collection.coverImgUrl ? [{ url: collection.coverImgUrl }] : [],
       type: "website",
+    },
+    twitter: {
+      card: "summary_large_image",
+      title: collection.name,
+      description: collection.description || "",
+      images: collection.coverImgUrl ? [collection.coverImgUrl] : [],
     },
   };
 }
