@@ -92,7 +92,7 @@ export default async function SeriesRoadmapPage({ params }: SeriesPageProps) {
   }
 
   return (
-    <div className="container mx-auto px-4 py-12 md:py-20">
+    <div className="container mx-auto px-4 py-20">
       <div className="flex flex-col lg:flex-row gap-12 lg:gap-20">
         {/* Sidebar / Info Section */}
         <aside className="lg:w-1/3 lg:sticky lg:top-24 h-fit">
