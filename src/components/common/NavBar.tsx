@@ -28,22 +28,22 @@ export default async function Navbar() {
         <Link
           prefetch={false}
           href="/"
-          className="group flex items-center gap-3 hover:opacity-90 transition-opacity"
+          className="group flex items-center gap-2 sm:gap-3 hover:opacity-90 transition-opacity"
         >
           {/* Animated terminal icon */}
           <div className="relative group">
             <div className="absolute -inset-1 bg-linear-to-r from-primary/30 to-cyan-500/30 rounded-xl blur opacity-0 group-hover:opacity-70 transition duration-500" />
-            <div className="relative bg-linear-to-br from-card to-gray-900 p-2 rounded-lg border border-gray-800 group-hover:border-primary/50 transition-all duration-300">
-              <Terminal className="w-6 h-6 text-primary group-hover:text-cyan-400/80 transition-colors duration-300" />
+            <div className="relative bg-linear-to-br from-card to-gray-900 p-1.5 sm:p-2 rounded-lg border border-gray-800 group-hover:border-primary/50 transition-all duration-300">
+              <Terminal className="w-5 h-5 sm:w-6 sm:h-6 text-primary group-hover:text-cyan-400/80 transition-colors duration-300" />
             </div>
           </div>
 
           <div className="flex flex-col leading-tight">
-            <span className="text-xl font-bold tracking-tight bg-linear-to-r from-gray-200 via-primary/25 to-cyan-400/80 bg-clip-text text-transparent group-hover:from-primary group-hover:via-cyan-300/80 group-hover:to-primary transition-all duration-300 font-mono">
+            <span className="text-lg sm:text-xl font-bold tracking-tight bg-linear-to-r from-gray-200 via-primary/25 to-cyan-400/80 bg-clip-text text-transparent group-hover:from-primary group-hover:via-cyan-300/80 group-hover:to-primary transition-all duration-300 font-mono">
               The Cypher Hub
             </span>
-            <span className="text-[10px] text-gray-400 font-medium tracking-[0.2em] uppercase font-mono">
-              {/* Code-related taglines */}
+            <span className="text-[10px] text-gray-400 font-medium tracking-[0.2em] uppercase font-mono hidden sm:block">
+              {/* Code-related taglines - Hidden on mobile to save space */}
               <span className="text-primary">{"<"} </span>
               Code • Tech • Insights
               <span className="text-primary"> {" />"}</span>
@@ -51,15 +51,36 @@ export default async function Navbar() {
           </div>
         </Link>
 
-        <div className="flex items-center gap-6">
+        <div className="flex items-center gap-3 sm:gap-5">
           <Link
             href="https://tanyaradzwatmushonga.me"
             target="_blank"
             rel="noopener noreferrer"
-            className="text-sm font-medium text-primary hover:text-primary/40 transition-colors hidden md:block"
+            className="group/btn relative hidden lg:inline-flex items-center gap-2.5 px-5 py-2 text-sm font-bold text-white transition-all duration-300"
           >
-           My Portfolio
+            {/* Glossy background effect */}
+            <div className="absolute inset-0 bg-linear-to-r from-indigo-600 to-purple-600 rounded-xl opacity-80 group-hover/btn:opacity-100 transition-opacity" />
+            <div className="absolute inset-0 bg-white/10 rounded-xl opacity-0 group-hover/btn:opacity-20 blur-sm transition-opacity" />
+
+            <span className="relative z-10">My Portfolio</span>
+            <div className="relative z-10 w-5 h-5 rounded-full bg-white/10 flex items-center justify-center group-hover/btn:bg-white/20 transition-colors">
+              <svg
+                viewBox="0 0 24 24"
+                className="w-3 h-3 text-white transition-transform group-hover/btn:translate-x-0.5 group-hover/btn:-translate-y-0.5"
+                fill="none"
+                stroke="currentColor"
+                strokeWidth="3"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+              >
+                <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6" />
+                <polyline points="15 3 21 3 21 9" />
+                <line x1="10" y1="14" x2="21" y2="3" />
+              </svg>
+            </div>
           </Link>
+
+          <div className="hidden lg:block h-8 w-px bg-white/10 mx-1" />
 
           {/* Search Section */}
           <Suspense
