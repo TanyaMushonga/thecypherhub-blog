@@ -28,6 +28,42 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     })
   );
 
+  // Fetch Collections (Series)
+  const collectionsResponse = await fetch(
+    `${process.env.NEXT_PUBLIC_API_URL}/collections`
+  );
+  const collections: Collection[] = await collectionsResponse.json();
+
+  const seriesEntries: MetadataRoute.Sitemap = [
+    {
+      url: `https://www.thecypherhub.tech/series`,
+      priority: 0.8,
+      changeFrequency: "weekly",
+    },
+  ];
+
+  if (Array.isArray(collections)) {
+    collections.forEach((collection) => {
+      seriesEntries.push({
+        url: `https://www.thecypherhub.tech/series/${collection.slug}`,
+        lastModified: new Date(collection.updatedAt).toISOString(),
+        priority: 0.8,
+        changeFrequency: "weekly",
+      });
+
+      collection.articles?.forEach((article) => {
+        if (article.status === "published") {
+          seriesEntries.push({
+            url: `https://www.thecypherhub.tech/series/${collection.slug}/${article.slug}`,
+            lastModified: new Date(article.updatedAt).toISOString(),
+            priority: 0.7,
+            changeFrequency: "weekly",
+          });
+        }
+      });
+    });
+  }
+
   return [
     {
       url: `https://www.thecypherhub.tech/`,
@@ -35,5 +71,6 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
       changeFrequency: "daily",
     },
     ...blogEntries,
+    ...seriesEntries,
   ];
 }
