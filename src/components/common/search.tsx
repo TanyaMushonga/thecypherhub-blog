@@ -1,12 +1,13 @@
 "use client";
 import React, { useState } from "react";
-import { Search as SearchIcon, Command } from "lucide-react";
+import { Search as SearchIcon, Command, X } from "lucide-react";
 import {
   Dialog,
   DialogContent,
   DialogHeader,
   DialogTitle,
   DialogTrigger,
+  DialogClose,
 } from "@/components/ui/dialog";
 import SearchList from "./SearchList";
 
@@ -41,19 +42,24 @@ function Search({ articles }: { articles: Article[] }) {
         </button>
       </DialogTrigger>
 
-      <DialogContent className="bg-slate-950/95 backdrop-blur-2xl border-white/10 max-w-2xl w-full h-[60vh] flex flex-col p-0 overflow-hidden shadow-2xl rounded-3xl">
-        <DialogHeader className="p-6 pb-4 border-b border-white/5">
+      <DialogContent className="bg-slate-950/95 backdrop-blur-2xl border-white/10 max-w-2xl w-full h-[60vh] flex flex-col p-0 overflow-hidden shadow-2xl rounded-3xl [&>button]:hidden">
+        <DialogHeader className="p-4 sm:p-6 pb-4 border-b border-white/5">
           <DialogTitle className="sr-only">Search articles</DialogTitle>
 
-          <div className="flex items-center gap-4 bg-white/5 px-4 py-3 rounded-2xl border border-white/5 focus-within:border-primary/50 transition-all duration-300">
-            <SearchIcon className="w-5 h-5 text-slate-500" />
+          <div className="flex items-center gap-3 sm:gap-4 bg-white/5 px-3 sm:px-4 py-2 sm:py-3 rounded-2xl border border-white/5 focus-within:border-primary/50 transition-all duration-300">
+            <SearchIcon className="w-4 h-4 sm:w-5 sm:h-5 text-slate-500" />
             <input
               autoFocus
               value={search}
               onChange={(e) => setSearch(e.target.value)}
               placeholder="What are you looking for?"
-              className="w-full bg-transparent outline-none text-white placeholder:text-slate-500 text-lg"
+              className="flex-1 bg-transparent outline-none text-white placeholder:text-slate-500 text-base sm:text-lg"
             />
+            <DialogClose asChild>
+              <button className="p-1 sm:p-1.5 rounded-lg hover:bg-white/10 text-slate-500 hover:text-white transition-colors">
+                <X className="w-4 h-4 sm:w-5 sm:h-5" />
+              </button>
+            </DialogClose>
           </div>
         </DialogHeader>
 

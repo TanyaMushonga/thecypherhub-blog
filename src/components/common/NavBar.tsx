@@ -39,11 +39,10 @@ export default async function Navbar() {
           </div>
 
           <div className="flex flex-col leading-tight">
-            <span className="text-lg sm:text-xl font-bold tracking-tight bg-linear-to-r from-gray-200 via-primary/25 to-cyan-400/80 bg-clip-text text-transparent group-hover:from-primary group-hover:via-cyan-300/80 group-hover:to-primary transition-all duration-300 font-mono">
+            <span className="text-base sm:text-xl font-bold tracking-tight bg-linear-to-r from-gray-200 via-primary/25 to-cyan-400/80 bg-clip-text text-transparent group-hover:from-primary group-hover:via-cyan-300/80 group-hover:to-primary transition-all duration-300 font-mono">
               The Cypher Hub
             </span>
-            <span className="text-[10px] text-gray-400 font-medium tracking-[0.2em] uppercase font-mono hidden sm:block">
-              {/* Code-related taglines - Hidden on mobile to save space */}
+            <span className="text-[8px] sm:text-[10px] text-gray-400 font-medium tracking-[0.1em] sm:tracking-[0.2em] uppercase font-mono">
               <span className="text-primary">{"<"} </span>
               Code • Tech • Insights
               <span className="text-primary"> {" />"}</span>
@@ -51,7 +50,29 @@ export default async function Navbar() {
           </div>
         </Link>
 
-        <div className="flex items-center gap-3 sm:gap-5">
+        <div className="flex items-center gap-2 sm:gap-5">
+          {/* Mobile Portfolio Icon */}
+          <Link
+            href="https://tanyaradzwatmushonga.me"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="lg:hidden p-2.5 rounded-xl bg-white/5 border border-white/10 active:scale-95 transition-all flex items-center justify-center text-primary"
+            title="My Portfolio"
+          >
+            <svg
+              viewBox="0 0 24 24"
+              className="w-5 h-5"
+              fill="none"
+              stroke="currentColor"
+              strokeWidth="2.5"
+              strokeLinecap="round"
+              strokeLinejoin="round"
+            >
+              <path d="M20 7h-3V5a2 2 0 0 0-2-2H9a2 2 0 0 0-2 2v2H4a2 2 0 0 0-2 2v11a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V9a2 2 0 0 0-2-2z" />
+              <path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16" />
+            </svg>
+          </Link>
+
           <Link
             href="https://tanyaradzwatmushonga.me"
             target="_blank"
@@ -80,7 +101,7 @@ export default async function Navbar() {
             </div>
           </Link>
 
-          <div className="hidden lg:block h-8 w-px bg-white/10 mx-1" />
+          <div className="h-6 w-px bg-white/20 mx-1" />
 
           {/* Search Section */}
           <Suspense
