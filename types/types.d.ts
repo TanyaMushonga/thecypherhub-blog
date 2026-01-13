@@ -15,6 +15,7 @@ declare interface Article {
   publishedAt: string | null;
   isDeleted: boolean;
   collectionId?: string;
+  comments: comments[];
 }
 
 declare interface Collection {
