@@ -8,9 +8,9 @@ import Comments from "./comments";
 
 function Read({ article }: { article: Article }) {
   return (
-    <div className="max-w-4xl mx-auto antialiased pt-8 pb-20 md:px-0 relative">
+    <div className="max-w-4xl mx-auto antialiased pt-4 md:pt-8 pb-20 md:px-0 relative">
       {/* Header Section */}
-      <header className="mb-10 text-left border-b border-border/50 pb-10">
+      <header className="mb-5 text-left border-b border-border/50 pb-2">
         <div className="flex items-center gap-2 mb-6 justify-start">
           <span className="px-3 py-1 bg-primary/20 text-primary text-sm font-semibold rounded-full">
             {article.category && article.category !== "null"
