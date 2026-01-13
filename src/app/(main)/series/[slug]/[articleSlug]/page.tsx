@@ -144,11 +144,11 @@ export default async function SeriesArticleReaderPage({
   const related = await getRelatedArticles(article.category, articleSlug);
 
   return (
-    <main className="min-h-screen pb-20">
-      <div className="container max-w-8xl mx-auto px-4 md:px-6 flex flex-col gap-16">
+    <main className="min-h-screen pb-16 md:pb-20">
+      <div className="container max-w-8xl mx-auto px-1 md:px-6 flex flex-col gap-16">
         <ScrollProgressBar />
         <SubscribeModalTrigger slug={articleSlug} />
-        <div className="mx-auto flex flex-col lg:flex-row w-full gap-8 md:px-5 pt-24">
+        <div className="mx-auto flex flex-col lg:flex-row w-full gap-8 md:px-5 pt-12 md:pt-24">
           <div className="lg:w-2/3 w-full p-4 md:p-5">
             <div className="max-w-4xl mx-auto">
               <Link
@@ -168,7 +168,7 @@ export default async function SeriesArticleReaderPage({
             </Suspense>
           </div>
 
-          <aside className="lg:w-1/3 lg:block mt-5 sticky top-24 h-fit hidden">
+          <aside className="lg:w-1/3 lg:block mt-5 sticky top-24 h-[calc(100vh-120px)] hidden">
             <Suspense
               fallback={
                 <div className="animate-pulse h-40 bg-muted/10 rounded-xl" />
