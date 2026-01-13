@@ -8,7 +8,6 @@ import Link from "next/link";
 import ScrollProgressBar from "@/components/common/ScrollProgressBar";
 import SubscribeModalTrigger from "@/components/common/SubscribeModalTrigger";
 
-
 const Read = React.lazy(() => import("@/components/common/read"));
 
 export const revalidate = 3600;
@@ -180,7 +179,7 @@ export default async function Page({
             {related.length > 0 && <Related related={related} />}
           </Suspense>
         </div>
-        <div className="lg:w-1/3 lg:block mt-5 sticky top-20 h-fit">
+        <div className="lg:w-1/3 lg:block mt-5 sticky top-20 h-[calc(100vh-100px)]">
           <Suspense
             fallback={
               <div className="text-sm text-muted-foreground">
