@@ -51,7 +51,9 @@ function Latestblog({ latestBlog }: { latestBlog: Article }) {
           <div className="flex items-center gap-2">
             <CalendarDays className="w-4 h-4" />
             <time suppressHydrationWarning>
-              {formatDate(new Date(latestBlog.createdAt))}
+              {formatDate(
+                new Date(latestBlog.publishedAt || latestBlog.updatedAt),
+              )}
             </time>
           </div>
         </div>
