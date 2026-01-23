@@ -58,7 +58,11 @@ function Read({ article }: { article: Article }) {
             </div>
             <div className="flex items-center gap-2">
               <CalendarDays className="w-4 h-4" />
-              <span>{formatDate(new Date(article?.createdAt))}</span>
+              <span>
+                {formatDate(
+                  new Date(article?.publishedAt || article?.updatedAt),
+                )}
+              </span>
             </div>
           </div>
         </div>
