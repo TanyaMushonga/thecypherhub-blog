@@ -24,7 +24,7 @@ function Mostpopular({ mostPopular }: { mostPopular: Article[] }) {
                 <div className="flex flex-row items-center">
                   <Pin className="text-slate-300 mr-2" />
                   <p className="text-white">
-                    {formatDate(new Date(article?.createdAt))}
+                    {formatDate(new Date(article?.updatedAt))}
                   </p>
                 </div>
               </div>
@@ -41,7 +41,6 @@ function Mostpopular({ mostPopular }: { mostPopular: Article[] }) {
               placeholder="blur"
               blurDataURL="/placeholderblur.png"
               style={{ aspectRatio: "3 / 1" }}
-               
             />
           </RouteLayout>
         ))}
