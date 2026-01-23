@@ -5,19 +5,19 @@ export function cn(...inputs: ClassValue[]) {
   return twMerge(clsx(inputs));
 }
 
-export const formatDate = (createdAt: Date) => {
+export const formatDate = (date: Date | string) => {
   const currentDate = new Date();
-  const createdAtDate = new Date(createdAt);
+  const dateObj = new Date(date);
 
   const timeDifferenceInSeconds = Math.floor(
-    (currentDate.getTime() - createdAtDate.getTime()) / 1000
+    (currentDate.getTime() - dateObj.getTime()) / 1000,
   );
   const timeDifferenceInMinutes = Math.floor(timeDifferenceInSeconds / 60);
   const timeDifferenceInHours = Math.floor(timeDifferenceInMinutes / 60);
   const timeDifferenceInDays = Math.floor(timeDifferenceInHours / 24);
 
   if (timeDifferenceInDays > 1) {
-    return createdAtDate.toLocaleDateString("en-US", {
+    return dateObj.toLocaleDateString("en-US", {
       month: "short",
       day: "numeric",
     });
@@ -34,7 +34,7 @@ export const formatDate = (createdAt: Date) => {
 
 export const getRandomArticles = (
   articles: Article[],
-  count: number
+  count: number,
 ): Article[] => {
   const shuffled = articles.sort(() => 0.5 - Math.random());
   return shuffled.slice(0, count);
