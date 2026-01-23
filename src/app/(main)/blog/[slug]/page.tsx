@@ -21,7 +21,7 @@ async function getArticleAndRelated(slug: string) {
   try {
     const articleRes = await fetch(
       `${process.env.NEXT_PUBLIC_API_URL}/blog/${slug}`,
-      { next: { revalidate: 3600 } }
+      { next: { revalidate: 3600 } },
     );
 
     if (!articleRes.ok) {
@@ -35,7 +35,7 @@ async function getArticleAndRelated(slug: string) {
     const article: Article = articleData;
     const relatedRes = await fetch(
       `${process.env.NEXT_PUBLIC_API_URL}/blog?page=1&page_size=50`,
-      { next: { revalidate: 3600 } }
+      { next: { revalidate: 3600 } },
     );
 
     let related: Article[] = [];
@@ -46,7 +46,7 @@ async function getArticleAndRelated(slug: string) {
         .filter(
           (relatedArticle: Article) =>
             relatedArticle.category === article.category &&
-            relatedArticle.slug !== article.slug
+            relatedArticle.slug !== article.slug,
         )
         .slice(0, 3); // Take only first 3
     }
@@ -61,12 +61,12 @@ export async function generateStaticParams() {
   try {
     const response = await fetch(
       `${process.env.NEXT_PUBLIC_API_URL}/blog?page=1&page_size=50`,
-      { next: { revalidate: 3600 } }
+      { next: { revalidate: 3600 } },
     );
 
     if (!response.ok) {
       console.warn(
-        `Failed to fetch blogs for static generation: ${response.statusText}`
+        `Failed to fetch blogs for static generation: ${response.statusText}`,
       );
       return [];
     }
@@ -88,7 +88,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
     // Fetch only the article for metadata, don't try to get related
     const response = await fetch(
       `${process.env.NEXT_PUBLIC_API_URL}/blog/${slug}`,
-      { next: { revalidate: 3600 } }
+      { next: { revalidate: 3600 } },
     );
 
     if (!response.ok) {
@@ -99,7 +99,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
         };
       }
       throw new Error(
-        `Failed to fetch article metadata: ${response.statusText}`
+        `Failed to fetch article metadata: ${response.statusText}`,
       );
     }
 
@@ -128,7 +128,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
         title: article.title,
         description: article.description || "",
         type: "article",
-        publishedTime: article.createdAt,
+        publishedTime: article.publishedAt || article.updatedAt,
         authors: ["Tanyaradzwa Tanatswa Mushonga"],
         images: article.coverImgUrl
           ? [
