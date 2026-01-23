@@ -32,7 +32,7 @@ async function getCollection(slug: string): Promise<Collection | null> {
     `${process.env.NEXT_PUBLIC_API_URL}/collections/${slug}`,
     {
       next: { revalidate: 3600 },
-    }
+    },
   );
 
   if (!res.ok) return null;
@@ -48,13 +48,13 @@ async function getCollection(slug: string): Promise<Collection | null> {
 
 async function getRelatedArticles(
   category: string,
-  currentSlug: string
+  currentSlug: string,
 ): Promise<Article[]> {
   const res = await fetch(
     `${process.env.NEXT_PUBLIC_API_URL}/blog?page=1&page_size=50`,
     {
       next: { revalidate: 3600 },
-    }
+    },
   );
 
   if (!res.ok) return [];
@@ -107,7 +107,7 @@ export async function generateMetadata({
       title: article.title,
       description: article.description,
       type: "article",
-      publishedTime: article.createdAt,
+      publishedTime: article.publishedAt || article.updatedAt,
       images: article.coverImgUrl ? [{ url: article.coverImgUrl }] : [],
     },
     twitter: {
