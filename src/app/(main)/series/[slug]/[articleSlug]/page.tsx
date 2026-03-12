@@ -15,7 +15,7 @@ interface NestedArticlePageProps {
 }
 
 async function getArticle(slug: string): Promise<Article | null> {
-  const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/blog/${slug}`, {
+  const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL || "https://api.tanyaradzwatmushonga.me/api"}/blog/${slug}`, {
     next: { revalidate: 3600 },
   });
 
@@ -29,7 +29,7 @@ async function getArticle(slug: string): Promise<Article | null> {
 
 async function getCollection(slug: string): Promise<Collection | null> {
   const res = await fetch(
-    `${process.env.NEXT_PUBLIC_API_URL}/collections/${slug}`,
+    `${process.env.NEXT_PUBLIC_API_URL || "https://api.tanyaradzwatmushonga.me/api"}/collections/${slug}`,
     {
       next: { revalidate: 3600 },
     },
@@ -51,7 +51,7 @@ async function getRelatedArticles(
   currentSlug: string,
 ): Promise<Article[]> {
   const res = await fetch(
-    `${process.env.NEXT_PUBLIC_API_URL}/blog?page=1&page_size=50`,
+    `${process.env.NEXT_PUBLIC_API_URL || "https://api.tanyaradzwatmushonga.me/api"}/blog?page=1&page_size=50`,
     {
       next: { revalidate: 3600 },
     },
@@ -68,7 +68,7 @@ async function getRelatedArticles(
 }
 
 export async function generateStaticParams() {
-  const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/collections`);
+  const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL || "https://api.tanyaradzwatmushonga.me/api"}/collections`);
   if (!res.ok) return [];
   const collections: Collection[] = await res.json();
 
@@ -94,12 +94,12 @@ export async function generateMetadata({
 
   if (!article) {
     return {
-      title: "Article Not Found - The Cypher Hub",
+      title: "Article Not Found - Tanya's Blog",
     };
   }
 
   return {
-    title: `${article.title} - The Cypher Hub`,
+    title: `${article.title} - Tanya's Blog`,
     description: article.description,
     keywords:
       article.keywords?.length > 0 ? article.keywords.join(", ") : undefined,

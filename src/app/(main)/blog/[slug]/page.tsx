@@ -20,7 +20,7 @@ type Props = {
 async function getArticleAndRelated(slug: string) {
   try {
     const articleRes = await fetch(
-      `${process.env.NEXT_PUBLIC_API_URL}/blog/${slug}`,
+      `${process.env.NEXT_PUBLIC_API_URL || "https://api.tanyaradzwatmushonga.me/api"}/blog/${slug}`,
       { next: { revalidate: 3600 } },
     );
 
@@ -34,7 +34,7 @@ async function getArticleAndRelated(slug: string) {
     const articleData = await articleRes.json();
     const article: Article = articleData;
     const relatedRes = await fetch(
-      `${process.env.NEXT_PUBLIC_API_URL}/blog?page=1&page_size=50`,
+      `${process.env.NEXT_PUBLIC_API_URL || "https://api.tanyaradzwatmushonga.me/api"}/blog?page=1&page_size=50`,
       { next: { revalidate: 3600 } },
     );
 
@@ -87,14 +87,14 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 
     // Fetch only the article for metadata, don't try to get related
     const response = await fetch(
-      `${process.env.NEXT_PUBLIC_API_URL}/blog/${slug}`,
+      `${process.env.NEXT_PUBLIC_API_URL || "https://api.tanyaradzwatmushonga.me/api"}/blog/${slug}`,
       { next: { revalidate: 3600 } },
     );
 
     if (!response.ok) {
       if (response.status === 404) {
         return {
-          title: "Article Not Found - The Cypher Hub",
+          title: "Article Not Found - Tanya's Blog",
           description: "The requested article could not be found.",
         };
       }
@@ -107,14 +107,14 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 
     if (!article) {
       return {
-        title: "Error - The Cypher Hub",
+        title: "Error - Tanya's Blog",
         description: "An error occurred while fetching article metadata.",
       };
     }
 
     return {
-      title: `${article.title} - The Cypher Hub`,
-      description: article.description || "Read this article on The Cypher Hub",
+      title: `${article.title} - Tanya's Blog`,
+      description: article.description || "Read this article on Tanya's Blog",
       keywords: article.keywords || [],
       authors: [
         { name: "Tanyaradzwa Tanatswa Mushonga" },
@@ -123,7 +123,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
           url: "https://www.tanyaradzwatmushonga.me/",
         },
       ],
-      publisher: "The Cypher Hub",
+      publisher: "Tanya's Blog",
       openGraph: {
         title: article.title,
         description: article.description || "",
@@ -154,7 +154,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   } catch (error) {
     console.error("Error generating metadata:", error);
     return {
-      title: "Error - The Cypher Hub",
+      title: "Error - Tanya's Blog",
       description: "An error occurred while fetching article metadata.",
     };
   }

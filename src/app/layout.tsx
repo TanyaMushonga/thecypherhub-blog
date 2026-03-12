@@ -21,11 +21,11 @@ export const viewport: Viewport = {
 
 export const metadata: Metadata = {
   title: {
-    template: "%s | The Cypher Hub",
-    default: "The Cypher Hub - Tech Insights & Programming Blog",
+    template: "%s | Tanya's Blog",
+    default: "Tanya's Blog - Tech Insights & Programming",
   },
   description:
-    "The Cypher Hub delivers in-depth programming tutorials, software engineering insights, and cutting-edge technology analysis. Stay ahead with expert guides on web development, cloud computing, DevOps, and modern tech stacks.",
+    "Tanya's Blog delivers in-depth programming tutorials, software engineering insights, and cutting-edge technology analysis. Stay ahead with expert guides on web development, cloud computing, DevOps, and modern tech stacks.",
   keywords: [
     "JavaScript",
     "TypeScript",
@@ -166,27 +166,27 @@ export const metadata: Metadata = {
     "digital transformation",
   ],
   authors: [
-    { name: "The Cypher Hub" },
+    { name: "Tanya's Blog" },
     {
       name: "Tanyaradzwa Tanatswa Mushonga",
       url: "https://www.tanyaradzwatmushonga.me/",
     },
   ],
-  creator: "The Cypher Hub",
-  publisher: "The Cypher Hub",
+  creator: "Tanya's Blog",
+  publisher: "Tanya's Blog",
   formatDetection: {
     email: false,
     address: false,
     telephone: false,
   },
-  metadataBase: new URL(process.env.NEXT_PUBLIC_BASE_URL!),
+  metadataBase: new URL(process.env.NEXT_PUBLIC_BASE_URL || "https://blog.tanyaradzwatmushonga.me"),
 
   openGraph: {
     type: "website",
     locale: "en_US",
-    url: "https://www.thecypherhub.tech/",
-    siteName: "The Cypher Hub",
-    title: "The Cypher Hub - Tech Insights & Programming Blog",
+    url: "https://blog.tanyaradzwatmushonga.me/",
+    siteName: "Tanya's Blog",
+    title: "Tanya's Blog - Tech Insights & Programming",
     description:
       "Expert programming tutorials, software engineering insights, and cutting-edge technology analysis.",
     images: [
@@ -194,18 +194,18 @@ export const metadata: Metadata = {
         url: "/og-image.png",
         width: 1200,
         height: 630,
-        alt: "The Cypher Hub - Tech Blog",
+        alt: "Tanya's Blog - Tech Blog",
       },
     ],
   },
   twitter: {
     card: "summary_large_image",
-    title: "The Cypher Hub - Tech Insights & Programming Blog",
+    title: "Tanya's Blog - Tech Insights & Programming",
     description:
       "Expert programming tutorials, software engineering insights, and cutting-edge technology analysis.",
     images: ["/og-image.png"],
-    creator: "@thecypherhub",
-    site: "@thecypherhub",
+    creator: "@TanyaMushonga_",
+    site: "@TanyaMushonga_",
   },
   robots: {
     index: true,
@@ -219,13 +219,13 @@ export const metadata: Metadata = {
     },
   },
   alternates: {
-    canonical: "https://www.thecypherhub.tech/",
+    canonical: "https://blog.tanyaradzwatmushonga.me/",
     languages: {
-      "en-US": "https://www.thecypherhub.tech/",
+      "en-US": "https://blog.tanyaradzwatmushonga.me/",
     },
   },
   category: "Technology",
-  applicationName: "The Cypher Hub",
+  applicationName: "Tanya's Blog",
   generator: "Next.js",
   referrer: "origin-when-cross-origin",
   verification: {
@@ -253,7 +253,7 @@ export const metadata: Metadata = {
   },
   appleWebApp: {
     capable: true,
-    title: "The Cypher Hub",
+    title: "Tanya's Blog",
     statusBarStyle: "black-translucent",
   },
 };
@@ -283,21 +283,21 @@ export default function RootLayout({
             __html: JSON.stringify({
               "@context": "https://schema.org",
               "@type": "WebSite",
-              name: "The Cypher Hub",
-              url: "https://www.thecypherhub.tech/",
+              name: "Tanya's Blog",
+              url: "https://blog.tanyaradzwatmushonga.me/",
               description:
                 "A programming blog and tech newsletter delivering expert insights on software development, cloud computing, and modern technology trends.",
               publisher: {
                 "@type": "Organization",
-                name: "The Cypher Hub",
+                name: "Tanya's Blog",
                 logo: {
                   "@type": "ImageObject",
-                  url: "https://www.thecypherhub.tech/logo.png",
+                  url: "https://blog.tanyaradzwatmushonga.me/logo.png",
                 },
               },
               mainEntityOfPage: {
                 "@type": "WebPage",
-                "@id": "https://www.thecypherhub.tech/",
+                "@id": "https://blog.tanyaradzwatmushonga.me/",
               },
             }),
           }}

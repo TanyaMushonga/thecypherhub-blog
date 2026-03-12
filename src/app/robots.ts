@@ -8,6 +8,6 @@ export default function robots(): MetadataRoute.Robots {
         allow: "/",
       },
     ],
-    sitemap: `https://www.thecypherhub.tech/sitemap.xml`,
+    sitemap: `https://blog.tanyaradzwatmushonga.me/sitemap.xml`,
   };
 }

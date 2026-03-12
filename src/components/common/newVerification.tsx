@@ -325,7 +325,7 @@ function NewVerificationForm() {
             </button>
           </p>
           <p className="text-xs text-muted-foreground mt-2">
-            © {new Date().getFullYear()} The Cypher Hub
+            © {new Date().getFullYear()} Tanya&apos;s Blog
           </p>
         </motion.div>
       </motion.div>

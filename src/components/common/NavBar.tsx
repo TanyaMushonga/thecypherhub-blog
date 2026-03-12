@@ -9,7 +9,7 @@ export default async function Navbar() {
 
   try {
     const res = await fetch(
-      `${process.env.NEXT_PUBLIC_API_URL}/blog?page=1&page_size=50`,
+      `${process.env.NEXT_PUBLIC_API_URL || "https://api.tanyaradzwatmushonga.me/api"}/blog?page=1&page_size=50`,
       { next: { revalidate: 3600 } }
     );
 
@@ -40,9 +40,9 @@ export default async function Navbar() {
 
           <div className="flex flex-col leading-tight">
             <span className="text-base sm:text-xl font-bold tracking-tight bg-linear-to-r from-gray-200 via-primary/25 to-cyan-400/80 bg-clip-text text-transparent group-hover:from-primary group-hover:via-cyan-300/80 group-hover:to-primary transition-all duration-300 font-mono">
-              The Cypher Hub
+              Tanya&apos;s Blog
             </span>
-            <span className="text-[8px] sm:text-[10px] text-gray-400 font-medium tracking-[0.1em] sm:tracking-[0.2em] uppercase font-mono">
+            <span className="text-[8px] sm:text-[10px] text-gray-400 font-medium tracking-widest sm:tracking-[0.2em] uppercase font-mono">
               <span className="text-primary">{"<"} </span>
               Code • Tech • Insights
               <span className="text-primary"> {" />"}</span>

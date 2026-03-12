@@ -1,6 +1,6 @@
 {
-  "name": "The Cypher Hub",
-  "short_name": "Cypher Hub",
+  "name": "Tanya's Blog",
+  "short_name": "Tanya's Blog",
   "description": "Tech blog for developers",
   "start_url": "/",
   "display": "standalone",

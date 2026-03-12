@@ -14,7 +14,7 @@ const Footer: React.FC = () => {
               <Terminal className="w-5 h-5 text-primary" />
             </div>
             <span className="text-lg font-mono font-bold tracking-tight text-foreground group-hover:text-primary transition-colors">
-              The Cypher Hub
+              Tanya&apos;s Blog
             </span>
           </Link>
           <p className="text-sm text-muted-foreground leading-relaxed max-w-sm">
@@ -50,7 +50,7 @@ const Footer: React.FC = () => {
 
       <div className="container mx-auto px-5 mt-12 pt-8 border-t border-border/30 flex flex-col md:flex-row justify-between items-center gap-4">
         <p className="text-xs text-muted-foreground">
-          &copy; {new Date().getFullYear()} The Cypher Hub. All rights reserved.
+          &copy; {new Date().getFullYear()} Tanya&apos;s Blog. All rights reserved.
         </p>
         <p className="text-xs text-muted-foreground">
           Built with ❤️ by{" "}

@@ -10,8 +10,8 @@ const Footer = dynamic(() => import("@/components/common/footer"));
 export const metadata: Metadata = {
   // This metadata will be merged with parent layout metadata
   title: {
-    template: "%s | The Cypher Hub",
-    default: "The Cypher Hub",
+    template: "%s | Tanya's Blog",
+    default: "Tanya's Blog",
   },
   description:
     "A coding blog for developers interested in technology trends and programming insights.",
@@ -25,8 +25,8 @@ export const metadata: Metadata = {
   openGraph: {
     type: "website",
     locale: "en_US",
-    url: "https://www.thecypherhub.tech",
-    siteName: "The Cypher Hub",
+    url: "https://blog.tanyaradzwatmushonga.me",
+    siteName: "Tanya's Blog",
   },
 };
 

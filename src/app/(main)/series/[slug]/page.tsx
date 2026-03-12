@@ -12,7 +12,7 @@ interface SeriesPageProps {
 
 async function getCollection(slug: string): Promise<Collection | null> {
   const res = await fetch(
-    `${process.env.NEXT_PUBLIC_API_URL}/collections/${slug}`,
+    `${process.env.NEXT_PUBLIC_API_URL || "https://api.tanyaradzwatmushonga.me/api"}/collections/${slug}`,
     {
       next: { revalidate: 3600 },
     }
@@ -39,7 +39,7 @@ async function getCollection(slug: string): Promise<Collection | null> {
 }
 
 export async function generateStaticParams() {
-  const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/collections`);
+  const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL || "https://api.tanyaradzwatmushonga.me/api"}/collections`);
   if (!res.ok) return [];
   const collections: Collection[] = await res.json();
   return collections.map((collection) => ({
@@ -55,7 +55,7 @@ export async function generateMetadata({
 
   if (!collection) {
     return {
-      title: "Series Not Found - The Cypher Hub",
+      title: "Series Not Found - Tanya's Blog",
     };
   }
 
@@ -65,8 +65,8 @@ export async function generateMetadata({
   );
 
   return {
-    title: `${collection.name} - The Cypher Hub`,
-    description: collection.description || "Learning series on The Cypher Hub",
+    title: `${collection.name} - Tanya's Blog`,
+    description: collection.description || "Learning series on Tanya's Blog",
     keywords: keywords.length > 0 ? keywords.join(", ") : undefined,
     openGraph: {
       title: collection.name,
