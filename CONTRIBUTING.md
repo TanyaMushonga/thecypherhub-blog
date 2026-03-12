@@ -1,4 +1,4 @@
-# Contributing to The CypherHub Blog
+# Contributing to Tanya's Blog
 
 First off, thanks for taking the time to contribute!
 
@@ -10,7 +10,7 @@ This project is open source and we welcome contributions from everyone. Please b
 
 ### Reporting Bugs
 
-This section guides you through submitting a bug report for The CypherHub Blog. Following these guidelines helps maintainers and the community understand your report, reproduce the behavior, and find related reports.
+This section guides you through submitting a bug report for Tanya's Blog. Following these guidelines helps maintainers and the community understand your report, reproduce the behavior, and find related reports.
 
 - **Use a clear and descriptive title** for the issue to identify the problem.
 - **Describe the steps to reproduce** the problem in as much detail as possible.

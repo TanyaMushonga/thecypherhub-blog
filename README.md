@@ -1,6 +1,6 @@
-# The CypherHub Blog
+# Tanya's Blog
 
-The CypherHub Blog is a modern, responsive blogging platform built with Next.js. It features a clean, dark-themed UI, an admin interface for managing content, and robust features for both readers and authors.
+Tanya's Blog is a modern, responsive blogging platform built with Next.js. It features a clean, dark-themed UI, an admin interface for managing content, and robust features for both readers and authors.
 
 ## 🚀 Tech Stack
 
@@ -26,8 +26,8 @@ The CypherHub Blog is a modern, responsive blogging platform built with Next.js.
 First, clone the repository:
 
 ```bash
-git clone https://github.com/TanyaMushonga/thecypherhub-blog.git
-cd thecypherhub-blog
+git clone https://github.com/TanyaMushonga/tanyas-blog.git
+cd tanyas-blog
 ```
 
 Install dependencies:
