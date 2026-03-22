@@ -28,22 +28,30 @@ async function getArticle(slug: string): Promise<Article | null> {
 }
 
 async function getCollection(slug: string): Promise<Collection | null> {
-  const res = await fetch(
-    `${process.env.NEXT_PUBLIC_API_URL || "https://console.tanyaradzwatmushonga.me/api"}/collections/${slug}`,
-    {
-      next: { revalidate: 3600 },
-    },
-  );
+  try {
+    const res = await fetch(
+      `${process.env.NEXT_PUBLIC_API_URL || "https://console.tanyaradzwatmushonga.me/api"}/collections/${slug}`,
+      {
+        next: { revalidate: 3600 },
+      },
+    );
 
-  if (!res.ok) return null;
-  const data = await res.json();
+    if (!res.ok) {
+      console.error(`Failed to fetch collection ${slug}: ${res.status} ${res.statusText}`);
+      return null;
+    }
+    const data = await res.json();
 
-  let collection: Collection | null = null;
-  if (data.collection) collection = data.collection;
-  else if (data.series) collection = data.series;
-  else collection = data;
+    let collection: Collection | null = null;
+    if (data.collection) collection = data.collection;
+    else if (data.series) collection = data.series;
+    else collection = data;
 
-  return collection;
+    return collection;
+  } catch (error) {
+    console.error(`Error in getCollection for slug ${slug}:`, error);
+    return null;
+  }
 }
 
 async function getRelatedArticles(
@@ -89,34 +97,41 @@ export async function generateStaticParams() {
 export async function generateMetadata({
   params,
 }: NestedArticlePageProps): Promise<Metadata> {
-  const resolvedParams = await params;
-  const article = await getArticle(resolvedParams.articleSlug);
+  try {
+    const resolvedParams = await params;
+    const article = await getArticle(resolvedParams.articleSlug);
 
-  if (!article) {
+    if (!article) {
+      return {
+        title: "Article Not Found - Tanya's Blog",
+      };
+    }
+
     return {
-      title: "Article Not Found - Tanya's Blog",
+      title: `${article.title} - Tanya's Blog`,
+      description: article.description,
+      keywords:
+        article.keywords?.length > 0 ? article.keywords.join(", ") : undefined,
+      openGraph: {
+        title: article.title,
+        description: article.description,
+        type: "article",
+        publishedTime: article.publishedAt || article.updatedAt,
+        images: article.coverImgUrl ? [{ url: article.coverImgUrl }] : [],
+      },
+      twitter: {
+        card: "summary_large_image",
+        title: article.title,
+        description: article.description,
+        images: article.coverImgUrl ? [article.coverImgUrl] : [],
+      },
+    };
+  } catch (error) {
+    console.error("Error generating metadata for series article page:", error);
+    return {
+      title: "Error - Tanya's Blog",
     };
   }
-
-  return {
-    title: `${article.title} - Tanya's Blog`,
-    description: article.description,
-    keywords:
-      article.keywords?.length > 0 ? article.keywords.join(", ") : undefined,
-    openGraph: {
-      title: article.title,
-      description: article.description,
-      type: "article",
-      publishedTime: article.publishedAt || article.updatedAt,
-      images: article.coverImgUrl ? [{ url: article.coverImgUrl }] : [],
-    },
-    twitter: {
-      card: "summary_large_image",
-      title: article.title,
-      description: article.description,
-      images: article.coverImgUrl ? [article.coverImgUrl] : [],
-    },
-  };
 }
 
 export default async function SeriesArticleReaderPage({

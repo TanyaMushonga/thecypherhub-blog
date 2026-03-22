@@ -11,31 +11,37 @@ interface SeriesPageProps {
 }
 
 async function getCollection(slug: string): Promise<Collection | null> {
-  const res = await fetch(
-    `${process.env.NEXT_PUBLIC_API_URL || "https://console.tanyaradzwatmushonga.me/api"}/collections/${slug}`,
-    {
-      next: { revalidate: 3600 },
+  try {
+    const res = await fetch(
+      `${process.env.NEXT_PUBLIC_API_URL || "https://console.tanyaradzwatmushonga.me/api"}/collections/${slug}`,
+      {
+        next: { revalidate: 3600 },
+      }
+    );
+
+    if (!res.ok) {
+      if (res.status === 404) return null;
+      console.error(`Failed to fetch collection ${slug}: ${res.status} ${res.statusText}`);
+      return null;
     }
-  );
 
-  if (!res.ok) {
-    if (res.status === 404) return null;
-    throw new Error("Failed to fetch collection");
+    const data = await res.json();
+    let collection: Collection | null = null;
+    if (data.collection) collection = data.collection;
+    else if (data.series) collection = data.series;
+    else collection = data;
+
+    if (collection) {
+      collection.name = collection.name || "Untitled Series";
+      collection.articles = collection.articles || [];
+      collection.createdAt = collection.createdAt || new Date().toISOString();
+    }
+
+    return collection;
+  } catch (error) {
+    console.error(`Error in getCollection for slug ${slug}:`, error);
+    return null;
   }
-
-  const data = await res.json();
-  let collection: Collection | null = null;
-  if (data.collection) collection = data.collection;
-  else if (data.series) collection = data.series;
-  else collection = data;
-
-  if (collection) {
-    collection.name = collection.name || "Untitled Series";
-    collection.articles = collection.articles || [];
-    collection.createdAt = collection.createdAt || new Date().toISOString();
-  }
-
-  return collection;
 }
 
 export async function generateStaticParams() {
@@ -50,37 +56,44 @@ export async function generateStaticParams() {
 export async function generateMetadata({
   params,
 }: SeriesPageProps): Promise<Metadata> {
-  const slug = (await params).slug;
-  const collection = await getCollection(slug);
+  try {
+    const slug = (await params).slug;
+    const collection = await getCollection(slug);
 
-  if (!collection) {
+    if (!collection) {
+      return {
+        title: "Series Not Found - Tanya's Blog",
+      };
+    }
+
+    // Consolidate unique keywords from all articles
+    const keywords = Array.from(
+      new Set(collection.articles?.flatMap((article) => article.keywords || []))
+    );
+
     return {
-      title: "Series Not Found - Tanya's Blog",
+      title: `${collection.name} - Tanya's Blog`,
+      description: collection.description || "Learning series on Tanya's Blog",
+      keywords: keywords.length > 0 ? keywords.join(", ") : undefined,
+      openGraph: {
+        title: collection.name,
+        description: collection.description || "",
+        images: collection.coverImgUrl ? [{ url: collection.coverImgUrl }] : [],
+        type: "website",
+      },
+      twitter: {
+        card: "summary_large_image",
+        title: collection.name,
+        description: collection.description || "",
+        images: collection.coverImgUrl ? [collection.coverImgUrl] : [],
+      },
+    };
+  } catch (error) {
+    console.error("Error generating metadata for series page:", error);
+    return {
+      title: "Error - Tanya's Blog",
     };
   }
-
-  // Consolidate unique keywords from all articles
-  const keywords = Array.from(
-    new Set(collection.articles?.flatMap((article) => article.keywords || []))
-  );
-
-  return {
-    title: `${collection.name} - Tanya's Blog`,
-    description: collection.description || "Learning series on Tanya's Blog",
-    keywords: keywords.length > 0 ? keywords.join(", ") : undefined,
-    openGraph: {
-      title: collection.name,
-      description: collection.description || "",
-      images: collection.coverImgUrl ? [{ url: collection.coverImgUrl }] : [],
-      type: "website",
-    },
-    twitter: {
-      card: "summary_large_image",
-      title: collection.name,
-      description: collection.description || "",
-      images: collection.coverImgUrl ? [collection.coverImgUrl] : [],
-    },
-  };
 }
 
 export default async function SeriesRoadmapPage({ params }: SeriesPageProps) {
