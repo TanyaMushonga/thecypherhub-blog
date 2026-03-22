@@ -106,7 +106,7 @@ function ArticleLists({ value, initialArticles }: ArticleListsProps) {
           }`}
         >
           <div className="shrink-0 w-10 text-right p-4">
-            <span className="text-sm font-mono text-cyan-400/80">
+            <span className="text-sm font-mono text-primary/80">
               {String(idx + 1).padStart(2, "0")}
             </span>
           </div>

@@ -19,7 +19,7 @@ export function InfiniteArticleList({ category }: InfiniteArticleListProps) {
 
   const pageSize = 12;
   const { articles, loading, totalCount, page, setPage } =
-    useFetchArticles(category, pageSize);
+    useFetchArticles(category);
 
   // Update displayed articles when new articles are fetched
   useEffect(() => {
@@ -108,7 +108,7 @@ export function InfiniteArticleList({ category }: InfiniteArticleListProps) {
         >
           <Article
             blog={article}
-            className="!bg-transparent !rounded-none !gap-0 !p-0"
+            className="bg-transparent! rounded-none! gap-0! p-0!"
             showImage={false}
             variant="compact"
           />
@@ -121,7 +121,7 @@ export function InfiniteArticleList({ category }: InfiniteArticleListProps) {
           <Button
             onClick={handleLoadMore}
             disabled={loadingMore || loading}
-            className="bg-cyan-500 hover:bg-cyan-600 text-white font-semibold px-8 py-3 rounded-lg flex items-center gap-2 transition-all duration-200"
+            className="bg-primary hover:bg-primary/90 text-white font-semibold px-8 py-3 rounded-lg flex items-center gap-2 transition-all duration-200"
           >
             {loadingMore || loading ? (
               <>

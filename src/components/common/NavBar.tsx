@@ -32,14 +32,14 @@ export default async function Navbar() {
         >
           {/* Animated terminal icon */}
           <div className="relative group">
-            <div className="absolute -inset-1 bg-linear-to-r from-primary/30 to-cyan-500/30 rounded-xl blur opacity-0 group-hover:opacity-70 transition duration-500" />
+            <div className="absolute -inset-1 bg-linear-to-r from-primary/30 to-primary/30 rounded-xl blur opacity-0 group-hover:opacity-70 transition duration-500" />
             <div className="relative bg-linear-to-br from-card to-gray-900 p-1.5 sm:p-2 rounded-lg border border-gray-800 group-hover:border-primary/50 transition-all duration-300">
-              <Terminal className="w-5 h-5 sm:w-6 sm:h-6 text-primary group-hover:text-cyan-400/80 transition-colors duration-300" />
+              <Terminal className="w-5 h-5 sm:w-6 sm:h-6 text-primary group-hover:text-primary/80 transition-colors duration-300" />
             </div>
           </div>
 
           <div className="flex flex-col leading-tight">
-            <span className="text-base sm:text-xl font-bold tracking-tight bg-linear-to-r from-gray-200 via-primary/25 to-cyan-400/80 bg-clip-text text-transparent group-hover:from-primary group-hover:via-cyan-300/80 group-hover:to-primary transition-all duration-300 font-mono">
+            <span className="text-base sm:text-xl font-bold tracking-tight bg-linear-to-r from-gray-200 via-primary/25 to-primary/80 bg-clip-text text-transparent group-hover:from-primary group-hover:via-primary/80 group-hover:to-primary transition-all duration-300 font-mono">
               Tanya&apos;s Blog
             </span>
             <span className="text-[8px] sm:text-[10px] text-gray-400 font-medium tracking-widest sm:tracking-[0.2em] uppercase font-mono">

@@ -36,7 +36,7 @@ function Article({
         onClick={handleClick}
       >
         <div className="flex-1 min-w-0">
-          <h3 className="text-lg font-semibold text-white group-hover:text-cyan-400 transition-colors duration-200 line-clamp-2">
+          <h3 className="text-lg font-semibold text-white group-hover:text-primary transition-colors duration-200 line-clamp-2">
             {blog?.title}
           </h3>
           <p className="text-gray-400 text-sm mt-2 line-clamp-2">
@@ -49,14 +49,14 @@ function Article({
             <span>•</span>
             <span>{blog?.readTime}</span>
             <span>•</span>
-            <span className="px-2 py-1 rounded-full text-cyan-400/70 bg-cyan-900/20 capitalize">
+            <span className="px-2 py-1 rounded-full text-primary/70 bg-primary/20 capitalize">
               {blog?.category && blog.category !== "null"
                 ? blog.category
                 : "Article"}
             </span>
           </div>
         </div>
-        <ArrowUpRight className="h-5 w-5 text-gray-600 group-hover:text-cyan-400 transition-all duration-200 shrink-0 mt-1" />
+        <ArrowUpRight className="h-5 w-5 text-gray-600 group-hover:text-primary transition-all duration-200 shrink-0 mt-1" />
       </div>
     );
   }
@@ -96,7 +96,7 @@ function Article({
           <span>{blog?.readTime}</span>
         </div>
         <div className="flex items-center gap-2 pt-2">
-          <span className="px-2 py-1 text-xs rounded-full bg-cyan-900/30 text-cyan-300 border border-cyan-700/50">
+          <span className="px-2 py-1 text-xs rounded-full bg-primary/30 text-primary border border-primary/50">
             {blog?.category && blog.category !== "null"
               ? blog.category.toUpperCase()
               : "ARTICLE"}
